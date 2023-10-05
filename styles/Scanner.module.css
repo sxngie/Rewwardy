@@ -1,0 +1,52 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem;
+    min-height: 100vh;
+  }
+  
+  .description {
+    display: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+    font-size: 0.85rem;
+    max-width: var(--max-width);
+    width: 100%;
+    z-index: 2;
+    font-family: var(--font-mono);
+  }
+
+.pinkButton {
+    position: center;
+    margin: 5%;
+    background-color: #F72585;
+    color: #FFFFFF;
+    font-family: 'arial';
+    font-size: 18;
+    width: 325px;
+    height: 42px;
+    border-radius: var(--border-radius);
+    border: white;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+    align-self: center;
+  }
+  
+  .pinkButton:hover {
+    background-color: #E3227A;
+  }
+  
+
+  .camera {
+    position: center;
+    background-color: #FFFFFF;
+    width: 322px;
+    height: 480px;
+    margin-left: 2%;
+    margin-top: 0%;
+    background-color: rgba(var(--callout-rgb), 0.90);
+    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+    border-radius: var(--border-radius);
+    align-items: center;
+  }
