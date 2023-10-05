@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import Link from "next/link";
+import { HeadTitle, Footer } from "../components";
+import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ['latin'] })
+
 
 export default function Home() {
   return (
@@ -14,100 +19,42 @@ export default function Home() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <img
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
+        <div className="row">
+          <HeadTitle/>
+            <HamburgerMenu className={styles.shapingBar}/>
         </div>
-
-        <div className={styles.center}>
+        <div className="row">
           <img
             className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
+            src="/Images/Rewwardy-Icon.png"
+            alt="Rewwardy Logo"
+            width={250}
+            height={200}
             priority
-          />
-        </div>
+          /> 
+          <div id = "SectionDiv" className = "column" >
+            <h2 className ={styles.sectionHead}>New Challenges</h2>
+            <div className={styles.rewardcard}>
+              <div className="row">
+                <rtitle>Free Muffin</rtitle>
+                <business>Friend's Cafe</business>
+              </div>
+              <div className="row">
+                <rdescription>Visit 4 times to get a free muffin.</rdescription>
+                <expdate>Valid Until: 10/23/2023</expdate>
+              </div>
+            </div>
+          </div>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+          <Link href="/scanner">
+            <button
+            className={styles.pinkButton}>
+              Scan QR
+            </button>
+          </Link>
         </div>
       </main>
+      <Footer></Footer>
     </>
   )
 }

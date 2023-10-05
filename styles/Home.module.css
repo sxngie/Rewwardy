@@ -5,6 +5,7 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  /* background-color: #552CB4; */
 }
 
 .description {
@@ -25,19 +26,75 @@
   gap: 0.5rem;
 }
 
-.description p {
-  position: relative;
+.description card {
+  position: left;
   margin: 0;
   padding: 1rem;
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
+  background-color: #FFFFFF;
+}
+
+h2.sectionHead {
+  color: #FFFFFF;
+  font-weight: lighter;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 24px;
+}
+
+.rewardcard {
+  position: center;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  width: 270px;
+  height: 100px;
+  padding: 2%;
+  padding-top: 2.5%;
+  background-color: rgba(var(--callout-rgb), 0.5);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  border-radius: var(--border-radius);
+  background-color: #FFFFFF;
+}
+
+.rewardcard rtitle {
+  position: left;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 18px;
+  color: #3A0CA3;
+}
+
+.rewardcard business {
+  position: right;
+  margin: 0;
+  padding: 1rem;
+  margin-bottom: 2%;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.rewardcard rdescription{
+  position: left;
+  padding: 1rem;
+  margin-top: 5%;
+  font-size: 14px;
+}
+
+.rewardcard expdate {
+  position: bottom-right;
+  padding: 1rem;
+  padding-top: 10%;
+  color: #F72585;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .code {
   font-weight: 700;
   font-family: var(--font-mono);
 }
+
 
 .grid {
   display: grid;
@@ -46,31 +103,11 @@
   width: 100%;
 }
 
-.card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
-}
-
 .card span {
   display: inline-block;
   transition: transform 200ms;
 }
 
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  margin: 0;
-  opacity: 0.6;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-width: 30ch;
-}
 
 .center {
   display: flex;
@@ -117,6 +154,26 @@
   .card:hover span {
     transform: translateX(4px);
   }
+}
+
+.pinkButton {
+  background-color: #F72585;
+  color: #FFFFFF;
+  font-family: 'arial';
+  font-size: 18;
+  width: 325px;
+  height: 42px;
+  border-radius: var(--border-radius);
+  border: white;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.pinkButton:hover {
+  background-color: #E3227A;
+}
+
+.pinkButton:focus {
+  background-color: #D1196D;
 }
 
 @media (prefers-reduced-motion) {
