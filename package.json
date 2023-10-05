@@ -11,7 +11,9 @@
   "dependencies": {
     "next": "^13.4.7",
     "react": "latest",
-    "react-dom": "latest"
+    "react-burger-menu": "^3.0.9",
+    "react-dom": "latest",
+    "sass": "^1.68.0"
   },
   "devDependencies": {
     "eslint": "latest",
