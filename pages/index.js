@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/login.module.css";
 import Link from "next/link";
-import { TopNavbar, Footer } from "../components";
+import { Footer } from "../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
