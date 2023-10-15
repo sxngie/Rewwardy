@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from "next/link";
-import { HeadTitle, Footer } from "../components";
+import { Footer } from "../components";
 import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
 import { useRouter } from "next/router";
 
@@ -20,7 +20,8 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className="row">
-          <HeadTitle/>
+            <h2 className={styles.header}>Home</h2>
+            <br/>
             <HamburgerMenu className={styles.shapingBar}/>
         </div>
         <div className="row">

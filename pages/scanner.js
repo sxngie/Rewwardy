@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Scanner.module.css'
-import { HeadTitle, Footer } from "../components";
+import { Footer } from "../components";
 import Link from "next/link";
 import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
 
@@ -18,7 +18,8 @@ export default function Scanner() {
           </Head>
         <main className={`${styles.main} ${inter.className}`}>
         <div className="row">
-            <HeadTitle/>
+            <h2 className={styles.header}>QR Scanner</h2>
+            <br/>
             <HamburgerMenu className={styles.shapingBar}/>
         </div>
             <div className={styles.camera}>
