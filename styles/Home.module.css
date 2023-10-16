@@ -8,6 +8,18 @@
   /* background-color: #552CB4; */
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  text-align: left;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 36px;
+  padding: 8%;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

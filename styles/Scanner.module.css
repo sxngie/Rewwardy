@@ -17,6 +17,18 @@
     z-index: 2;
     font-family: var(--font-mono);
   }
+  
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    text-align: left;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 36px;
+    padding: 8%;
+  }
 
 .pinkButton {
     position: center;
