@@ -6,7 +6,7 @@ const HamburgerMenu = () => (
     <div className={styles.shapingBar}>
         <Menu customBurgerIcon={<HamburgerIcon />} width={'auto'} className={styles.burgermenubar}>
             <div className={styles.listOfItems}>
-                <Link href="/" className={styles.menuItems}>Home</Link>
+                <Link href="/dashboard" className={styles.menuItems}>Home</Link>
                 <Link href="/reward" className={styles.menuItems}>Rewards</Link>
                 <Link href="/challenge" className={styles.menuItems}>Challenges</Link>
                 <Link href="/scanner" className={styles.menuItems}>QR Scanner</Link>
