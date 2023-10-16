@@ -2,12 +2,28 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Reward.module.css'
 import Link from "next/link";
-import { Footer } from "../components";
+import { HeadTitle, Footer } from "../components";
 import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
 import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ['latin'] })
 
+function CardEntity({ imageSrc, title, businessName, description, expDate }) {
+  return (
+      <div className={styles.cardEntity}>
+          <div className={styles.pictureFrame}><img src={imageSrc} className={styles.picture}/></div> {}
+          <h2 className={styles.sectionHead}>{title}</h2>
+          <h3 className={styles.business}>{businessName}</h3>
+          <div className={styles.description}>
+              <p>{description}</p>
+          </div>
+          <Link href="/">
+              <button className={styles.pinkButton}>Redeem</button>
+          </Link>
+          <div className={styles.expireDate}>{expDate}</div>
+      </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -26,27 +42,22 @@ export default function Home() {
         </div>
         <div className="row">
           <div id = "SectionDiv" className = "column" >
-          <div className={styles.pictureFrame}/>
-            <h2 className ={styles.sectionHead}>1 Free Muffin</h2>
-            <business className={styles.business}>Friend's Cafe</business>
-            <div className={styles.rewardcard}>
-              <div className="row">
-              </div>
-              <div className="row">
-                <rdescription>You visited the store 10 days in a row, spending $5 each day.</rdescription>
-              </div>
-            </div>
+            <div className='container'>
+              <div className={styles.scrollableContainer}>
+                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Friends Cafe' description='Free 8oz Latte' expDate='January 28th,2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/pizza.jpeg' title='Pizza Slice' businessName='Titos Pizza' description='Free Cheese Pizza Slice' expDate='January 28th,2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/toast.jpg' title='Toast' businessName='Cabra Tosta' description='Two warm toasts' expDate='January 28th,2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/icecream.jpg' title='Ice Cream Cone' businessName='Rex Cream' description='One regular soft cone.' expDate='January 28th,2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/cookie.jpeg' title='CC Cookie' businessName='Friends Cafe' description='Chocolate Chip Cookie' expDate='January 28th,2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/bubba.jpg' title='Bubba 8oz' businessName='Bubble Tea Yum' description='One Taro 8oz Bubba drink.' expDate='January 28th,2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Friends Cafe' description='Free 8oz Latte' expDate='January 28th,2024'></CardEntity>
+                </div>
           </div>
-
-          <Link href="/">
-            <button
-            className={styles.pinkButton}>
-              Reedem
-            </button>
-          </Link>
+          </div>
         </div>
       </main>
       <Footer></Footer>
     </>
   )
 }
+
