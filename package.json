@@ -1,5 +1,5 @@
 {
-  "name": "rewwardy",
+  "name": "rewwardy-capstone",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.13",
+    "@mui/material": "^5.14.13",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.1",
+    "cookies-next": "^4.0.0",
+    "firebase": "^10.5.0",
     "next": "^13.4.7",
     "react": "latest",
-    "react-dom": "latest"
+    "react-burger-menu": "^3.0.9",
+    "react-dom": "latest",
+    "sass": "^1.68.0",
+    "styled-components": "^6.0.9"
   },
   "devDependencies": {
     "eslint": "latest",

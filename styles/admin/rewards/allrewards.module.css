@@ -1,0 +1,50 @@
+.main {
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.headerbar {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.header {
+  color: #552cb4;
+  font-family: "Open Sans";
+  font-size: 36px;
+}
+
+.reward {
+  width: 326px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #552cb4;
+  color: white;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.rewardrow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  color: #f72585;
+  font-weight: bold;
+  font-size: 18px;
+}

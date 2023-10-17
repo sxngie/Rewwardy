@@ -1,0 +1,32 @@
+.main {
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  color: #552cb4;
+  font-family: 'Space Grotesk';
+}
+
+.button {
+  background-color: #552cb4;
+}
+
+.textbutton {
+  color: #552cb4;
+}
+
+.form {
+  width: 350px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 16px 0px;
+}
