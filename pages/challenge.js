@@ -8,6 +8,22 @@ import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ['latin'] })
 
+function CardEntity({ imageSrc, title, businessName, description, expDate }) {
+  return (
+      <div className={styles.cardEntity}>
+          <div className={styles.pictureFrame}><img src={imageSrc} className={styles.picture}/></div> {}
+          <h2 className={styles.sectionHead}>{title}</h2>
+          <h3 className={styles.business}>{businessName}</h3>
+          <div className={styles.description}>
+              <p>{description}</p>
+          </div>
+          <Link href="/">
+              <button className={styles.pinkButton}>Redeem</button>
+          </Link>
+          <div className={styles.expireDate}>{expDate}</div>
+      </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -25,19 +41,19 @@ export default function Home() {
             <HamburgerMenu className={styles.shapingBar}/>
         </div>
         <div className="row">
+        <div className="row">
           <div id = "SectionDiv" className = "column" >
-            <div className={styles.pictureFrame}/>
-            <h2 className ={styles.sectionHead}>Free Tequila Shot</h2>
-            <business className={styles.business}>Off the Wall</business>
-            <div className={styles.rewardcard}>
-              <div className="row">
-              </div>
-              <div className="row">
-                <rdescription>Visit the bar 10 separate days and spend more than $5 each visit.</rdescription>
-                <visits>Visits: 6/10</visits>
-              </div>
+            <div className='container'>
+              <div className={styles.scrollableContainer}>
+                <CardEntity imageSrc='Props_samples/latte.jpg' title='Dirty Chai' businessName='Friends Cafe' description='$15 worth of purchases.' expDate='January 28th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/toast.jpg' title='Toast' businessName='Cabra Tosta' description='Visit 5 times in a row!' expDate='February 15th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/medalla.jpg' title='Medalla' businessName='El Garabato' description='Visit 3 times to unlock!' expDate='January 28th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/pizza.jpeg' title='Pizza Slice' businessName='Jarana' description='With the eligible purchase.' expDate='January 28th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/tequila.jpg' title='Tequila' businessName='Off the Wall' description='Free with 5 visits.' expDate='December 28th, 2023'></CardEntity>
+                </div>
             </div>
           </div>
+        </div>
 
           <Link href="/">
             <button

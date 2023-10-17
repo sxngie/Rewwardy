@@ -121,19 +121,18 @@ h3.business {
   width: 94%;
   height: 20%;
   padding: 2%;
-  padding-top: 2.5%;
+  padding-top: 30px;
   background-color: rgba(var(--callout-rgb), 0.5);
   border-radius: var(--border-radius);
   background-color: #FFFFFF;
   align-self: center;
-  border: 2px solid #f7f25f;
 }
 
 .pinkButton {
   background-color: #F72585;
   color: #FFFFFF;
   font-family: 'arial';
-  font-size: 20px;
+  font-size: 16px;
   width: 84px;
   height: 42px;
   border-radius: var(--border-radius);

@@ -44,13 +44,13 @@ export default function Home() {
           <div id = "SectionDiv" className = "column" >
             <div className='container'>
               <div className={styles.scrollableContainer}>
-                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Friends Cafe' description='Free 8oz Latte' expDate='January 28th,2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/pizza.jpeg' title='Pizza Slice' businessName='Titos Pizza' description='Free Cheese Pizza Slice' expDate='January 28th,2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/toast.jpg' title='Toast' businessName='Cabra Tosta' description='Two warm toasts' expDate='January 28th,2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/icecream.jpg' title='Ice Cream Cone' businessName='Rex Cream' description='One regular soft cone.' expDate='January 28th,2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/cookie.jpeg' title='CC Cookie' businessName='Friends Cafe' description='Chocolate Chip Cookie' expDate='January 28th,2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/bubba.jpg' title='Bubba 8oz' businessName='Bubble Tea Yum' description='One Taro 8oz Bubba drink.' expDate='January 28th,2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Friends Cafe' description='Free 8oz Latte' expDate='January 28th,2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/bubba.jpg' title='8oz Taro Tea' businessName='Bubble Tea Yum' description='One 8oz Taro drink.' expDate='February 8th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/pizza.jpeg' title='Pizza Slice' businessName='Titos Pizza' description='Free cheese pizza slice.' expDate='January 10th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Friends Cafe' description='Free 8oz latte.' expDate='March 18th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/toast.jpg' title='Toast' businessName='Cabra Tosta' description='Two slices of toasts.' expDate='February 2nd, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/icecream.jpg' title='Ice Cream Cone' businessName='Rex Cream' description='One regular soft cone.' expDate='April 6th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/cookie.jpeg' title='CC Cookie' businessName='Friends Cafe' description='Chocolate chip cookie.' expDate='March 27th, 2024'></CardEntity>
+                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Shaktea' description='Free 8oz latte.' expDate='January 5th, 2024'></CardEntity>
                 </div>
           </div>
           </div>
