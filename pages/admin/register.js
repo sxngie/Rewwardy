@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/admin/register.module.css";
 import Link from "next/link";
-import { TopNavbar, Footer } from "../../components";
+import { TopNavbar, Footer, AdminFooter } from "../../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
@@ -90,10 +90,16 @@ export default function AdminLogin() {
             onChange={(e) => setBusinessName(e.target.value)}
           />
           <br />
-          <Button variant="contained" onClick={() => createBusinessAccount()}>Login</Button>
+          <Button
+            variant="contained"
+            className={styles.btn}
+            onClick={() => createBusinessAccount()}
+          >
+            Create Account
+          </Button>
         </div>
       </main>
-      <Footer />
+      <AdminFooter />
     </>
   );
 }

@@ -1,14 +1,16 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/admin/login.module.css'
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import styles from "@/styles/admin/dashboard.module.css";
 import Link from "next/link";
-import { TopNavbar, Footer } from "../../components";
+import { TopNavbar, AdminFooter } from "../../components";
 import { useRouter } from "next/router";
+import { Button } from "@mui/material";
 
-const inter = Inter({ subsets: ['latin'] })
-
+const inter = Inter({ subsets: ["latin"] });
 
 export default function AdminDashboard() {
+
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -17,11 +19,38 @@ export default function AdminDashboard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
-      <TopNavbar/>
-      <main className={`${styles.main} ${inter.className}`}>
-        <h2>Login Business</h2>
+      <TopNavbar />
+      <main className={`${styles.main}`}>
+        <div className={styles.box}>
+          <div className={styles.rewardsadded}>
+            <h3>Rewards Awarded</h3>
+            <div className={styles.data}>
+              <p>Rewards Awarded (Today)</p>
+              <h4>10</h4>
+              <p>Daily Recurring Customers</p>
+              <h4>25</h4>
+            </div>
+          </div>
+          <div className={styles.leaderboard}>
+            <p>Top Loyal Customers (Visits)</p>
+            <ol>
+              <li>Juan Matos (170)</li>
+              <li>Lucia Aires (155)</li>
+              <li>Carla Vives (148)</li>
+            </ol>
+            <p>Popular Rewards (Redeemed)</p>
+            <ol>
+              <li>Juan Matos (170)</li>
+              <li>Lucia Aires (155)</li>
+              <li>Carla Vives (148)</li>
+            </ol>
+          </div>
+          <div className={styles.btnrow}>
+            <Button variant="contained" className={styles.btn} onClick={() => router.push("/admin/rewards/create")}>Create Reward</Button>
+          </div>
+        </div>
       </main>
-      <Footer />
+      <AdminFooter />
     </>
-  )
+  );
 }

@@ -4,27 +4,36 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import Menu from '@mui/icons-material/Menu';
+import { MenuItem } from '@mui/material/MenuItem';
+import { useState } from 'react';
+
 
 export default function ButtonAppBar() {
+  const [show, setShow] = useState(false)
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{
+        bgcolor: '#fff',
+        color: '#552CB4'
+      }}>
         <Toolbar>
           
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Dashboard
           </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+          {/*  */}
+          <Menu
+            open={show}
+            onClose={() => setShow(false)}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
           >
-            <MenuIcon />
-          </IconButton>
+            <MenuItem>Create Reward</MenuItem>
+            <MenuItem>Manage Rewards</MenuItem>
+            <MenuItem>Logout</MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
     </Box>
