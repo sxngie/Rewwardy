@@ -10,89 +10,13 @@
   padding: 8%;
 }
 
-.rewardcard {
-    position: center;
-    margin-top: 5%;
-    margin-bottom: 10%;
-    width: 270px;
-    height: 100px;
-    padding: 2%;
-    padding-top: 2.5%;
-    background-color: rgba(var(--callout-rgb), 0.5);
-    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-    border-radius: var(--border-radius);
-    background-color: #FFFFFF;
-  }
-  
-  .rewardcard rtitle {
-    position: left;
-    padding: 1rem;
-    font-weight: bold;
-    font-size: 18px;
-    color: #3A0CA3;
-  }
-  
-  .business {
-    position: right;
-    margin: 0;
-    padding: 1rem;
-    margin-bottom: 5%;
-    margin-top: 5%;
-    font-size: 14px;
-    font-weight: bold;
-    color: #4CC9F0;
-  }
-  
-  .rewardcard rdescription{
-    position: left;
-    padding: 1rem;
-    margin-top: 5%;
-    font-size: 14px;
-  }
-  
-  .rewardcard visits {
-    position: bottom-right;
-    padding: 1rem;
-    padding-top: 10%;
-    color: #F72585;
-    font-weight: bold;
-    font-size: 14px;
-  }
-  
-
-.pinkButton {
-    background-color: #F72585;
-    color: #FFFFFF;
-    font-family: 'arial';
-    font-size: 18;
-    width: 325px;
-    height: 42px;
-    border-radius: var(--border-radius);
-    border: white;
-    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
-  }
-  
-  .pinkButton:hover {
-    background-color: #E3227A;
-  }
-  
-  .pinkButton:focus {
-    background-color: #D1196D;
-  }
-
   .grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(25%, auto));
     max-width: var(--max-width);
     width: 100%;
   }
-  
-  .card span {
-    display: inline-block;
-    transition: transform 200ms;
-  }
-  
-  
+
   .center {
     display: flex;
     justify-content: center;
@@ -110,50 +34,128 @@
     min-height: 100vh;
     /* background-color: #552CB4; */
   }
-  
-  .description {
-    display: inherit;
-    justify-content: inherit;
-    align-items: inherit;
-    font-size: 0.85rem;
-    max-width: var(--max-width);
-    width: 100%;
-    z-index: 2;
-    font-family: var(--font-mono);
+
+  .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-flow: center;
+    align-items: stretch;
+    gap: 10px;
   }
-  
-  .description a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .description card {
-    position: left;
-    margin: 0;
-    padding: 1rem;
-    background-color: rgba(var(--callout-rgb), 0.5);
-    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-    border-radius: var(--border-radius);
-    background-color: #FFFFFF;
-  }
-  
-  h2.sectionHead {
-    color: #FFFFFF;
-    font-weight: lighter;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 24px;
-  }
+
+  .scrollableContainer {
+    width: 1000px;       /* set to the desired width, can be in px, em, rem, %, etc. */
+    height: 1000px;    /* set to the desired height */
+    margin: 20px auto;/* optional: centers the box if it's smaller than its container */
+    padding: 10px;    /* optional: gives some space inside the scrollable box */
+    overflow-x: auto; /* allows horizontal scrolling */
+    overflow-y: hidden; /* prevents vertical scrolling */
+    white-space: nowrap;
+}
+
+  .cardEntity {
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+    height: 45%;
+    width: 25%;
+    text-align: center;
+    border-radius: 16px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+    /* Additional styling if needed */
+}
 
   .pictureFrame {
     position: center;
     background-color: #FFFFFF;
-    width: 322px;
-    height: 200px;
-    margin-bottom: 10%;
+    height: 30%;       /* set height to 40% of its container */
+    width: 56%;        /* set width to be the same as height */
+    margin: 0 auto;
+    margin-top: 18px;
     background-color: rgba(var(--callout-rgb), 0.90);
     border: 1px solid rgba(var(--callout-border-rgb), 0.3);
     border-radius: var(--border-radius);
     align-items: center;
+    object-fit: cover;
+    display: block;
   }
+
+  .picture {
+    position: center;
+    border-radius: 10px;
+    margin: 10px;
+    height: 110px;
+    width: 110px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+h2.sectionHead {
+  color: #FFFFFF;
+  font-weight: lighter;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 24px;
+  margin: 2px;
+}
+
+h3.business {
+  position: top;
+  padding: 0.5rem;
+  margin: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #e8f77e;
+}
+
+.description {
+  position: relative;
+  align-items: center;
+  margin: auto;
+  width: 94%;
+  height: 20%;
+  padding: 2%;
+  padding-top: 30px;
+  background-color: rgba(var(--callout-rgb), 0.5);
+  border-radius: var(--border-radius);
+  background-color: #FFFFFF;
+  align-self: center;
+}
+
+.pinkButton {
+  background-color: #F72585;
+  color: #FFFFFF;
+  font-family: 'arial';
+  font-size: 16px;
+  width: 84px;
+  height: 42px;
+  border-radius: var(--border-radius);
+  border: 1px solid white;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.pinkButton:hover {
+  background-color: #E3227A;
+}
+
+.pinkButton:focus {
+  background-color: #D1196D;
+}
+
+.expireDate {
+  color: #FFFFFF;
+  font-weight: lighter;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  margin: 10px;
+  word-wrap: break-word;
+}
