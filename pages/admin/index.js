@@ -1,17 +1,48 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import styles from "@/styles/admin/login.module.css";
 import Link from "next/link";
 import { TopNavbar, Footer } from "../../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
+import { Space_Grotesk } from "next/font/google";
+import { setCookie } from 'cookies-next';
+import { db } from "@/firebase";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  limit,
+} from "firebase/firestore";
 
-const inter = Inter({ subsets: ["latin"] });
+const space_grotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const login = async () => {
+    // Check if user exists
+    const q = query(
+      collection(db, "business"),
+      where("email", "==", email),
+      where("password", "==", password), limit(1)
+    );
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      setCookie('businessid', doc.id)
+      router.push("/admin/dashboard")
+    });
+
+    // await getDocs(q).then(data => console.log(data.data()))
+
+    // console.log(querySnapshot)
+  };
 
   return (
     <>
@@ -22,15 +53,40 @@ export default function AdminLogin() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       {/* <TopNavbar/> */}
-      <main className={`${styles.main} ${inter.className}`}>
-        <h2 className={styles.header}>Login Business</h2>
+      <main className={`${styles.main} `}>
+        <h2 className={`${styles.header} ${space_grotesk.className}`}>
+          Login Business
+        </h2>
         <div className={styles.form}>
-          <TextField id="standard-basic" label="Email" variant="standard" />
+          <TextField
+            id="standard-basic"
+            label="Email"
+            variant="standard"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <br />
-          <TextField id="standard-basic" label="Password" variant="standard" />
+          <TextField
+            id="standard-basic"
+            label="Password"
+            variant="standard"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <br />
-          <Button variant="contained">Login</Button>
+          <Button
+            variant="contained"
+            className={styles.button}
+            onClick={() => login()}
+          >
+            Login
+          </Button>
+          <br />
+          <Button variant="text" className={styles.textbutton}>
+            Create Account
+          </Button>
         </div>
+        <p className={styles.footer}>Rewwardy 2023</p>
       </main>
       <Footer />
     </>

@@ -10,7 +10,16 @@
 }
 
 .header {
-  color: #552CB4;
+  color: #552cb4;
+  font-family: 'Space Grotesk';
+}
+
+.button {
+  background-color: #552cb4;
+}
+
+.textbutton {
+  color: #552cb4;
 }
 
 .form {
@@ -19,4 +28,5 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin: 16px 0px;
 }

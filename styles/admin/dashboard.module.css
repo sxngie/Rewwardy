@@ -1,0 +1,77 @@
+.main {
+  background-color: white;
+  height: 100vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.box {
+  width: 100%;
+  padding: 24px;
+}
+
+.header {
+  color: #552CB4;
+  font-family: 'Open Sans';
+  font-size: 36px;
+}
+.rewardsadded h3 {
+  color: #552CB4;
+  font-size: 32px;
+  font-family: sans-serif;
+}
+
+.data {
+  background-color: #552CB4;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+.data p {
+  color: #fff;
+  font-size: 24px;
+  font-family: sans-serif;
+}
+.data h4 {
+  color: #F72585;
+  font-size: 42px;
+  margin-bottom: 1rem;
+}
+
+.leaderboard p {
+  color: #552CB4;
+  font-size: 24px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.leaderboard ol {
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.leaderboard li {
+  font-family: 'Open Sans';
+  font-size: 22px;
+}
+
+.btnrow {
+  display: flex;
+  width: 100%;
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+background-color: #552CB4;
+width: 100%;
+}
