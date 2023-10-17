@@ -6,17 +6,9 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { Space_Grotesk } from "next/font/google";
-import { setCookie } from 'cookies-next';
+import { setCookie } from "cookies-next";
 import { db } from "@/firebase";
-import {
-  collection,
-  addDoc,
-  query,
-  where,
-  getDocs,
-  getDoc,
-  limit,
-} from "firebase/firestore";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
 
 const space_grotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -29,14 +21,15 @@ export default function AdminLogin() {
     const q = query(
       collection(db, "business"),
       where("email", "==", email),
-      where("password", "==", password), limit(1)
+      where("password", "==", password),
+      limit(1)
     );
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       console.log(doc.id, " => ", doc.data());
-      setCookie('businessid', doc.id)
-      router.push("/admin/dashboard")
+      setCookie("businessid", doc.id);
+      router.push("/admin/dashboard");
     });
 
     // await getDocs(q).then(data => console.log(data.data()))
