@@ -4,11 +4,10 @@ import styles from '@/styles/Home.module.css'
 import Link from "next/link";
 import { Footer } from "../components";
 import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
-import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ['latin'] })
 
-function CardEntity({ imageSrc, title, businessName, description, expDate }) {
+function CardEntity({ title, businessName, description, expDate }) {
     return (
         <div className={styles.cardEntity}>
             <h3 className={styles.cardLabel}>{title}</h3>
