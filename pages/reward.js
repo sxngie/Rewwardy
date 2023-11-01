@@ -36,7 +36,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className="row">
-            <h2 className={styles.header}>Rewards</h2>
+            <h1 className={styles.header}>Rewards</h1>
             <br/>
             <HamburgerMenu className={styles.shapingBar}/>
         </div>

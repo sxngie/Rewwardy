@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/admin/login.module.css";
 import Link from "next/link";
-import { TopNavbar, Footer } from "../../components";
+import { TopNavbar, AdminFooter } from "../../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
@@ -47,12 +47,11 @@ export default function AdminLogin() {
       </Head>
       {/* <TopNavbar/> */}
       <main className={`${styles.main} `}>
-        <h2 className={`${styles.header} ${space_grotesk.className}`}>
+        <h1 className={`${styles.header} ${space_grotesk.className}`}>
           Login Business
-        </h2>
+        </h1>
         <div className={styles.form}>
           <TextField
-            id="standard-basic"
             label="Email"
             variant="standard"
             value={email}
@@ -60,7 +59,6 @@ export default function AdminLogin() {
           />
           <br />
           <TextField
-            id="standard-basic"
             label="Password"
             variant="standard"
             value={password}
@@ -75,13 +73,12 @@ export default function AdminLogin() {
             Login
           </Button>
           <br />
-          <Button variant="text" className={styles.textbutton}>
-            Create Account
+          <Button className={styles.textbutton} id="standard-basic" variant="standard">
+            Create an Account
           </Button>
         </div>
-        <p className={styles.footer}>Rewwardy 2023</p>
       </main>
-      <Footer />
+      <AdminFooter />
     </>
   );
 }

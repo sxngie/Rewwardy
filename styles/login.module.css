@@ -1,5 +1,5 @@
 .main {
-    background-color: #552CB4;
+    background-color: #463489;
     height: 100vh;
     width: 100%;
     margin: auto;
@@ -23,7 +23,7 @@
   }
 
   .pinkButton {
-    background-color: #F72585;
+    background-color: #9B2C6B;
     color: #FFFFFF;
     text-transform: none;
     font-size: 18;
@@ -48,7 +48,7 @@
 }
 
 .clickText {
-    color: #F72585;
+    color: #F9D7E3;
     font-size: 18;
     border: white;
     text-transform: none;

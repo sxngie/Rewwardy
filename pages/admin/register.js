@@ -44,24 +44,21 @@ export default function AdminLogin() {
       </Head>
       {/* <TopNavbar/> */}
       <main className={`${styles.main} ${inter.className}`}>
-        <h2 className={styles.header}>Create Business Account</h2>
+        <h1 className={styles.header}>Create Business Account</h1>
         <div className={styles.form}>
           <TextField
-            id="standard-basic"
             label="First Name"
             variant="standard"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
           <TextField
-            id="standard-basic"
             label="Last Name"
             variant="standard"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
           <TextField
-            id="standard-basic"
             label="Email"
             variant="standard"
             value={email}
@@ -75,7 +72,6 @@ export default function AdminLogin() {
             onChange={(e) => setPhone(e.target.value)}
           />
           <TextField
-            id="standard-basic"
             label="Password"
             variant="standard"
             type="password"
@@ -83,7 +79,6 @@ export default function AdminLogin() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <TextField
-            id="standard-basic"
             label="Business Name"
             variant="standard"
             value={businessName}

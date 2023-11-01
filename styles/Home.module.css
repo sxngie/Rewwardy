@@ -85,7 +85,7 @@ h3.business {
   margin-bottom: 15px;
   font-size: 14px;
   font-weight: bold;
-  color: #e8f77e;
+  color: #F9CDDE;
 }
 
 .description {
@@ -103,7 +103,7 @@ h3.business {
 }
 
 .pinkButton {
-  background-color: #F72585;
+  background-color: #9B2C6B;
   color: #FFFFFF;
   font-family: 'arial';
   font-size: 16px;
@@ -111,7 +111,7 @@ h3.business {
   height: 42px;
   border-radius: var(--border-radius);
   border: 1px solid white;
-  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   position: relative;
   margin: auto;
   margin-top: 20px;
