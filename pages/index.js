@@ -22,12 +22,12 @@ export default function UserLogin() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <h2 className={styles.header}>Login</h2>
+        <h1 className={styles.header}>Login</h1>
         <br/>
         <div className={styles.form}>
-          <TextField className={styles.inputField} id="standard-basic" label="Email" variant="standard" />
+          <TextField className={styles.inputField}  label="Email" variant="standard" />
           <br />
-          <TextField className={styles.inputField} id="standard-basic" label="Password" variant="standard" />
+          <TextField className={styles.inputField} label="Password" variant="standard" />
           <br />
           <Button className={styles.clickText} id="standard-basic" variant="standard">Forgot password?</Button>
           <br />

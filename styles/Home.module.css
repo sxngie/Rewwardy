@@ -54,6 +54,7 @@
 }
 
   .cardEntity {
+    background-color: #FFFFFF;
     flex-grow: 1;
     flex-shrink: 1;
     align-self: auto;
@@ -72,20 +73,29 @@
 h2.sectionHead {
   color: #FFFFFF;
   font-weight: lighter;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 24px;
   margin: 2px;
   padding-top: 30px;
 }
 
-h3.business {
+h3.cardLabel {
+  color: #3A0CA3;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 2px;
+  padding-top: 40px;
+}
+
+h4.business {
   position: top;
   padding: 0.5rem;
   margin: 5px;
   margin-bottom: 15px;
   font-size: 14px;
   font-weight: bold;
-  color: #e8f77e;
+  color: #a32e6e;
 }
 
 .description {
@@ -93,9 +103,9 @@ h3.business {
   align-items: center;
   margin: auto;
   width: 94%;
-  height: 20%;
+  height: 80px;
   padding: 2%;
-  padding-top: 23px;
+  padding-top: 25px;
   background-color: rgba(var(--callout-rgb), 0.5);
   border-radius: var(--border-radius);
   background-color: #FFFFFF;
@@ -103,15 +113,15 @@ h3.business {
 }
 
 .pinkButton {
-  background-color: #F72585;
+  background-color: #a32e6e;
   color: #FFFFFF;
   font-family: 'arial';
   font-size: 16px;
   width: 84px;
   height: 42px;
   border-radius: var(--border-radius);
-  border: 1px solid white;
-  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  border: white;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
   position: relative;
   margin: auto;
   margin-top: 20px;
@@ -126,10 +136,11 @@ h3.business {
 }
 
 .expireDate {
-  color: #FFFFFF;
+  color: #AD0051;
   font-weight: lighter;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-size: 12px;
-  margin: 10px;
+  font-weight: bold;
+  margin: 20px;
   word-wrap: break-word;
 }
