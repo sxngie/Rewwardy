@@ -25,6 +25,7 @@
 .form {
   display: flex;
   flex-direction: column;
+  max-width: 1160px;
   width: 100%;
 }
 

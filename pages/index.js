@@ -23,17 +23,41 @@ export default function UserLogin() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <h2 className={styles.header}>Login</h2>
-        <br/>
+        <br />
         <div className={styles.form}>
-          <TextField className={styles.inputField} id="standard-basic" label="Email" variant="standard" />
+          <TextField
+            className={styles.inputField}
+            id="standard-basic"
+            label="Email"
+            variant="standard"
+          />
           <br />
-          <TextField className={styles.inputField} id="standard-basic" label="Password" variant="standard" />
+          <TextField
+            className={styles.inputField}
+            id="standard-basic"
+            label="Password"
+            variant="standard"
+          />
           <br />
-          <Button className={styles.clickText} id="standard-basic" variant="standard">Forgot password?</Button>
+          <Button
+            className={styles.clickText}
+            id="standard-basic"
+            variant="standard"
+          >
+            Forgot password?
+          </Button>
           <br />
-          <Button className={styles.pinkButton} variant="contained">Submit</Button>
+          <Button className={styles.pinkButton} variant="contained">
+            Submit
+          </Button>
           <br />
-          <Button className={styles.clickText} id="standard-basic" variant="standard">Create an Account</Button>
+          <Button
+            className={styles.clickText}
+            id="standard-basic"
+            variant="standard"
+          >
+            Create an Account
+          </Button>
         </div>
       </main>
       <Footer />

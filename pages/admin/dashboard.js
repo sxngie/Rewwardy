@@ -9,7 +9,6 @@ import { Button } from "@mui/material";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function AdminDashboard() {
-
   const router = useRouter();
   return (
     <>
@@ -46,7 +45,21 @@ export default function AdminDashboard() {
             </ol>
           </div>
           <div className={styles.btnrow}>
-            <Button variant="contained" className={styles.btn} onClick={() => router.push("/admin/rewards/create")}>Create Reward</Button>
+            <Button
+              variant="contained"
+              className={styles.btn}
+              onClick={() => router.push("/admin/rewards/create")}
+            >
+              Create Reward
+            </Button>
+            <br/>
+            <Button
+              variant="contained"
+              className={styles.btn}
+              onClick={() => router.push("/admin/rewards")}
+            >
+              View All Rewards
+            </Button>
           </div>
         </div>
       </main>

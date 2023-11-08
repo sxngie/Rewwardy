@@ -9,25 +9,13 @@ import { Button, TextField } from "@mui/material";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { truncateString } from "@/utils/helpers";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export async function getServerSideProps({ req, res, context }) {
-//   const businessid = getCookie("businessid", { req, res, context });
-//   const q = query(
-//     collection(db, "business_rewards"),
-//     where("businessId", "==", businessid)
-//   );
-//   const querySnapshot = await getDocs(q);
-//   let rewards = [];
-//   querySnapshot.forEach((doc) => {
-//     rewards.push(doc);
-//   });
-//   return { props: { rewards } };
-// }
-
 export default function RewardLists() {
   const [rewards, setRewards] = useState([]);
+  const router = useRouter();
 
   const businessid = getCookie("businessid");
   console.log(businessid);
@@ -65,15 +53,19 @@ export default function RewardLists() {
             <div className={styles.reward} key={key}>
               <div className={styles.rewardrow}>
                 <p className={styles.name}>{reward.name}</p>
-                <p>Valid After: {reward.milestoneValue} {reward.milestoneType}</p>
+                <p>
+                  Valid After: {reward.milestoneValue} {reward.milestoneType}
+                </p>
               </div>
               <div className={styles.rewardrow}>
-                <p style={{ width: "60%" }}>{reward.description}</p>
+                <p style={{ width: "60%" }}>{truncateString(reward?.description, 50)}</p>
                 <p>Valid Until: {reward.validUntil}</p>
               </div>
             </div>
           ))}
         </div>
+        <br/>
+        <Button className={styles.btn} variant="contained" onClick={() => router.push("/admin/dashboard")}>Go to Dashboard</Button>
       </main>
       <AdminFooter />
     </>
