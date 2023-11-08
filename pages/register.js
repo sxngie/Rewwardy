@@ -43,12 +43,11 @@ export default function UserLogin() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <h2 className={styles.header}>Create an Account</h2>
+        <h1 className={styles.header}>Create an Account</h1>
         <br/>
         <div className={styles.form}>
           <TextField
             className={styles.inputField}
-            id="standard-basic"
             label="First Name"
             variant="standard"
             value={firstName}
@@ -57,7 +56,6 @@ export default function UserLogin() {
           <br/>
           <TextField
             className={styles.inputField}
-            id="standard-basic"
             label="Last Name"
             variant="standard"
             value={lastName}
@@ -66,7 +64,6 @@ export default function UserLogin() {
           <br/>
           <TextField
             className={styles.inputField}
-            id="standard-basic"
             label="Email"
             variant="standard"
             value={email}
@@ -75,7 +72,6 @@ export default function UserLogin() {
           <br/>
           <TextField
             className={styles.inputField}
-            id="standard-basic"
             label="Phone"
             variant="standard"
             value={phone}
@@ -84,7 +80,6 @@ export default function UserLogin() {
           <br/>
           <TextField
             className={styles.inputField}
-            id="standard-basic"
             label="Password"
             variant="standard"
             type="password"
@@ -94,7 +89,6 @@ export default function UserLogin() {
           <br/>
           <TextField
             className={styles.inputField}
-            id="standard-basic"
             label="Date of Birth"
             variant="standard"
             value={dateOfBirth}
@@ -103,7 +97,6 @@ export default function UserLogin() {
           <br/>
           <TextField
             className={styles.inputField}
-            id="standard-basic"
             label="Gender"
             variant="standard"
             value={gender}

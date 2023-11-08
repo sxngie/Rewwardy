@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ['latin'] })
 function CardEntity({ imageSrc, title, businessName, description, expDate }) {
   return (
       <div className={styles.cardEntity}>
-          <div className={styles.pictureFrame}><img src={imageSrc} className={styles.picture}/></div> {}
-          <h2 className={styles.sectionHead}>{title}</h2>
+          <div className={styles.pictureFrame}><img id="Reward image"  src={imageSrc} className={styles.picture}/></div> {}
+          <h2 className={styles.cardLabel}>{title}</h2>
           <h3 className={styles.business}>{businessName}</h3>
           <div className={styles.description}>
               <p>{description}</p>
@@ -36,7 +36,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className="row">
-            <h2 className={styles.header}>Rewards</h2>
+            <h1 className={styles.header}>Rewards</h1>
             <br/>
             <HamburgerMenu className={styles.shapingBar}/>
         </div>
