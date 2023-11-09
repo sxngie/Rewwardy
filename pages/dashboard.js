@@ -1,27 +1,32 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { Footer } from "../components";
-import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
+import HamburgerMenu, { Links } from "../components/HamburgerMenu.js";
+import { useRouter } from "next/router";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-function CardEntity({ title, businessName, description, expDate }) {
-    return (
-        <div className={styles.cardEntity}>
-            <h3 className={styles.cardLabel}>{title}</h3>
-            <h4 className={styles.business}>{businessName}</h4>
-            <div className={styles.description}>
-                <p>{description}</p>
-            </div>
-            <Link href="/">
-                <button className={styles.pinkButton}>Redeem</button>
-            </Link>
-            <div className={styles.expireDate}>{expDate}</div>
-        </div>
-    );
-  }
+function CardEntity({ imageSrc, title, businessName, description, expDate }) {
+  return (
+    <div className={styles.cardEntity}>
+      <div className={styles.pictureFrame}>
+        <img src={imageSrc} className={styles.picture} />
+      </div>{" "}
+      {}
+      <h2 className={styles.sectionHead}>{title}</h2>
+      <h3 className={styles.business}>{businessName}</h3>
+      <div className={styles.description}>
+        <p>{description}</p>
+      </div>
+      <Link href="/">
+        <button className={styles.pinkButton}>Redeem</button>
+      </Link>
+      <div className={styles.expireDate}>{expDate}</div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -88,5 +93,5 @@ export default function Home() {
       </main>
       <Footer></Footer>
     </>
-  )
+  );
 }
