@@ -20,6 +20,7 @@
     "react": "latest",
     "react-burger-menu": "^3.0.9",
     "react-dom": "latest",
+    "react-zxing": "^2.0.0",
     "sass": "^1.68.0",
     "styled-components": "^6.0.9"
   },

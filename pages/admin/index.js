@@ -42,10 +42,6 @@ export default function AdminLogin() {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-
-    // await getDocs(q).then(data => console.log(data.data()))
-
-    // console.log(querySnapshot)
   };
 
   return (

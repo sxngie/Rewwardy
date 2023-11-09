@@ -6,12 +6,34 @@ import { Footer } from "../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
+import { db } from "@/firebase";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { setCookie } from "cookies-next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const router = useRouter();
+
+  const login = async () => {
+    const auth = getAuth();
+
+    await signInWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        // Push to dashboard
+        setCookie("userid", user.uid);
+        router.push("/dashboard");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <>
@@ -30,6 +52,8 @@ export default function UserLogin() {
             id="standard-basic"
             label="Email"
             variant="standard"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <br />
           <TextField
@@ -37,6 +61,8 @@ export default function UserLogin() {
             id="standard-basic"
             label="Password"
             variant="standard"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <br />
           <Button
@@ -47,7 +73,11 @@ export default function UserLogin() {
             Forgot password?
           </Button>
           <br />
-          <Button className={styles.pinkButton} variant="contained">
+          <Button
+            className={styles.pinkButton}
+            variant="contained"
+            onClick={login}
+          >
             Submit
           </Button>
           <br />
@@ -55,6 +85,7 @@ export default function UserLogin() {
             className={styles.clickText}
             id="standard-basic"
             variant="standard"
+            onClick={() => router.push("/register")}
           >
             Create an Account
           </Button>
