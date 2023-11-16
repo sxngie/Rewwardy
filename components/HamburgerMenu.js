@@ -1,5 +1,3 @@
-import styles from "../styles/components/HamburgerMenu.module.scss";
-import { slide as Menu } from 'react-burger-menu'
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,24 +8,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
-
-
-/*const HamburgerMenu = () => (
-    <div className={styles.shapingBar}>
-        <Menu customBurgerIcon={<HamburgerIcon />} width={'auto'} className={styles.burgermenubar}>
-            <div className={styles.listOfItems}>
-                <Link href="/dashboard" className={styles.menuItems}>Home</Link>
-                <Link href="/reward" className={styles.menuItems}>Rewards</Link>
-                <Link href="/challenge" className={styles.menuItems}>Challenges</Link>
-                <Link href="/scanner" className={styles.menuItems}>QR Scanner</Link>
-            </div>
-        </Menu>
-    </div>)
-
-const HamburgerIcon = () => (<div className='p-1/2'><svg fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="white"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></div>)
-
-
-export default HamburgerMenu*/
 
 const HamburgerMenu = () => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -41,7 +21,7 @@ const HamburgerMenu = () => {
 
     return (
       <div>
-        <AppBar sx={{ bgcolor: '#9B2C6B' }}>
+        <AppBar sx={{ bgcolor: '#9B2C6B', mb: 1}}>
           <Toolbar>
           <div style={{ flexGrow: 1 }} />
             <IconButton
@@ -56,27 +36,31 @@ const HamburgerMenu = () => {
         </AppBar>
         <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer(false)}>
           <List>
-            <ListItem button onClick={toggleDrawer(false)}>
+            <ListItem onClick={toggleDrawer(false)}>
               <Link href="/dashboard">
                 <ListItemText primary="Home" sx={{ color: '#9B2C6B' }}/>
               </Link>
             </ListItem>
-            <ListItem button onClick={toggleDrawer(false)}>
+            <ListItem onClick={toggleDrawer(false)}>
               <Link href="/reward">
                 <ListItemText primary="Rewards" sx={{ color: '#9B2C6B' }}/>
               </Link>
             </ListItem>
-            <ListItem button onClick={toggleDrawer(false)}>
+            <ListItem onClick={toggleDrawer(false)}>
               <Link href="/challenge">
                 <ListItemText primary="Challenges" sx={{ color: '#9B2C6B' }}/>
               </Link>
             </ListItem>
-            <ListItem button onClick={toggleDrawer(false)}>
+            <ListItem onClick={toggleDrawer(false)}>
               <Link href="/scanner">
                 <ListItemText primary="QR Scanner" sx={{ color: '#9B2C6B' }}/>
               </Link>
             </ListItem>
-            {/* Repeat for each link*/}
+            <ListItem onClick={toggleDrawer(false)}>
+              <Link href="/">
+                <ListItemText primary="Logout" sx={{ color: '#9B2C6B' }}/>
+              </Link>
+            </ListItem>
           </List>
         </Drawer>
       </div>
