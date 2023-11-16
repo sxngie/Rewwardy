@@ -6,20 +6,20 @@ import Link from "next/link";
 import HamburgerMenu, { Links } from "../components/HamburgerMenu.js";
 import { useZxing } from "react-zxing";
 import { useState } from "react";
-import { getCookie } from "cookies-next"
+import { getCookie } from "cookies-next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const [result, setResult] = useState("");
-const { ref } = useZxing({
+export default function Scanner() {
+  const [result, setResult] = useState("");
+  const { ref } = useZxing({
     onDecodeResult(result) {
       setResult(result.getText());
     },
   });
 
-const userid = getCookie("userid")
+  const userid = getCookie("userid")
 
-export default function Scanner() {
   return (
     <>
       <Head>
@@ -28,16 +28,6 @@ export default function Scanner() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
-      <div className="row">
-          <HamburgerMenu className={styles.shapingBar}/>
-          <h1 className={styles.header}>QR Scanner</h1>
-          <br />
-        </div>
-      <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.camera}></div>
-        <Link href="scan">
-          <button className={styles.pinkButton}>Scan QR</button>
-        </Link>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.row}>
           <h1 className={styles.header}>QR Scanner</h1>
@@ -58,7 +48,8 @@ export default function Scanner() {
             await fetch(`${result}/${userid}`)
               .then((res) => console.log(res))
               .catch((err) => console.log(err));
-          }}>
+          }}
+        >
           Redeem
         </button>
       </main>
