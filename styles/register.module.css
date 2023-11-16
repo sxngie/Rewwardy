@@ -1,6 +1,6 @@
 .main {
     background-color: #463489;
-    height: 100vh;
+    /* height: 100vh; */
     width: 100%;
     margin: auto;
     display: flex;
@@ -16,7 +16,7 @@
   
   .form {
     width: 350px;
-    height: 200px;
+    /* height: 200px; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -45,6 +45,20 @@
     border-radius: var(--border-radius);
     border-color: #F72585;
 }
+
+.inputDateField {
+  background-color: white;
+  border-radius: var(--border-radius);
+  border-color: #F72585;
+  width: 350px;
+  height: 50px;
+}
+
+.label {
+  color: white;
+}
+
+
 
 .clickText {
     color: #F9D7E3;

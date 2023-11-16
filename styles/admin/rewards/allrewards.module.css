@@ -23,8 +23,8 @@
 }
 
 .reward {
-  width: 326px;
-  height: 120px;
+  width: 350px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,8 +43,16 @@
   align-items: center;
 }
 
+.rewardrow p {
+  margin-left: 4px;
+}
+
 .name {
   color: #f72585;
   font-weight: bold;
   font-size: 18px;
+}
+.btn {
+  background-color: #F72585;
+  width: 100%;
 }

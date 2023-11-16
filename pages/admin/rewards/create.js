@@ -104,6 +104,7 @@ export default function CreateReward() {
           >
             <MenuItem value={"money_spent"}>Money Spent</MenuItem>
             <MenuItem value={"visits"}>Visits</MenuItem>
+            <MenuItem value={"quanitity"}>Quantity</MenuItem>
           </Select>
           <br />
           <FormControl fullWidth sx={{ m: 1 }} variant="standard">

@@ -4,8 +4,20 @@ import styles from "@/styles/Scanner.module.css";
 import { Footer } from "../components";
 import Link from "next/link";
 import HamburgerMenu, { Links } from "../components/HamburgerMenu.js";
+import { useZxing } from "react-zxing";
+import { useState } from "react";
+import { getCookie } from "cookies-next"
 
 const inter = Inter({ subsets: ["latin"] });
+
+const [result, setResult] = useState("");
+const { ref } = useZxing({
+    onDecodeResult(result) {
+      setResult(result.getText());
+    },
+  });
+
+const userid = getCookie("userid")
 
 export default function Scanner() {
   return (
@@ -26,6 +38,29 @@ export default function Scanner() {
         <Link href="scan">
           <button className={styles.pinkButton}>Scan QR</button>
         </Link>
+      <main className={`${styles.main} ${inter.className}`}>
+        <div className={styles.row}>
+          <h1 className={styles.header}>QR Scanner</h1>
+          <br />
+          <HamburgerMenu className={styles.shapingBar} />
+        </div>
+        <div className={styles.camera}>
+          <video ref={ref} height={400} />
+          <p>
+            <span>Last result:</span>
+            <span>{result}/{userid}</span>
+          </p>
+        </div>
+
+        <button
+          className={styles.pinkButton}
+          onClick={async () => {
+            await fetch(`${result}/${userid}`)
+              .then((res) => console.log(res))
+              .catch((err) => console.log(err));
+          }}>
+          Redeem
+        </button>
       </main>
       <Footer></Footer>
     </>

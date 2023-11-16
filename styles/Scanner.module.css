@@ -31,34 +31,40 @@
   }
 
 .pinkButton {
-    position: center;
-    margin: 5%;
-    background-color: #9B2C6B;
-    color: #FFFFFF;
-    font-family: 'arial';
-    font-size: 18;
-    width: 325px;
-    height: 42px;
-    border-radius: var(--border-radius);
-    border: white;
-    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
-    align-self: center;
-  }
-  
-  .pinkButton:hover {
-    background-color: #E3227A;
-  }
-  
+  position: center;
+  margin: 5%;
+  background-color: #9b2c6b;
+  color: #ffffff;
+  font-family: "arial";
+  font-size: 18;
+  width: 325px;
+  height: 42px;
+  border-radius: var(--border-radius);
+  border: white;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  align-self: center;
+}
 
-  .camera {
-    position: center;
-    background-color: #FFFFFF;
-    width: 322px;
-    height: 480px;
-    margin-left: 2%;
-    margin-top: 0%;
-    background-color: rgba(var(--callout-rgb), 0.90);
-    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-    border-radius: var(--border-radius);
-    align-items: center;
-  }
+.pinkButton:hover {
+  background-color: #e3227a;
+}
+
+.camerabox {
+  background-color: #ffffff;
+}
+.camera {
+  width: 350px;
+  height: 460px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #ffffff;
+  padding: 8px;
+  /* margin-left: 2%; */
+}
+
+.row {
+  height: 100px;
+}
