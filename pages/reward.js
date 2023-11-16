@@ -5,6 +5,8 @@ import Link from "next/link";
 import { HeadTitle, Footer } from "../components";
 import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
 import { useRouter } from "next/router";
+import fs from 'fs';
+import path from 'path';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +27,7 @@ function CardEntity({ imageSrc, title, businessName, description, expDate }) {
   );
 }
 
-export default function Home() {
+export default function Home({ cards }) {
   return (
     <>
       <Head>
@@ -44,14 +46,9 @@ export default function Home() {
           <div id = "SectionDiv" className = "column" >
             <div className='container'>
               <div className={styles.scrollableContainer}>
-                <CardEntity imageSrc='Props_samples/bubba.jpg' title='8oz Taro Tea' businessName='Bubble Tea Yum' description='One 8oz Taro drink.' expDate='February 8th, 2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/pizza.jpeg' title='Pizza Slice' businessName='Titos Pizza' description='Free cheese pizza slice.' expDate='January 10th, 2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Friends Cafe' description='Free 8oz latte.' expDate='March 18th, 2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/toast.jpg' title='Toast' businessName='Cabra Tosta' description='Two slices of toasts.' expDate='February 2nd, 2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/icecream.jpg' title='Ice Cream Cone' businessName='Rex Cream' description='One regular soft cone.' expDate='April 6th, 2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/cookie.jpeg' title='CC Cookie' businessName='Friends Cafe' description='Chocolate chip cookie.' expDate='March 27th, 2024'></CardEntity>
-                <CardEntity imageSrc='Props_samples/latte.jpg' title='Latte' businessName='Shaktea' description='Free 8oz latte.' expDate='January 5th, 2024'></CardEntity>
-                </div>
+                { cards.map((card, index) => (
+                  <CardEntity key={index} {...card} />))}
+              </div>
           </div>
           </div>
         </div>
@@ -61,3 +58,14 @@ export default function Home() {
   )
 }
 
+export async function getStaticProps() {
+  const filePath = path.join(process.cwd(), 'public/data', 'cards.json');
+  const jsonData = fs.readFileSync(filePath);
+  const cards = JSON.parse(jsonData);
+
+  return {
+    props: {
+      cards,
+    },
+  };
+}
