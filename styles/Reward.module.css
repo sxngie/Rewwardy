@@ -1,6 +1,6 @@
 .header {
   position: fixed;
-  top: 0;
+  top: 5%;
   left: 0;
   width: auto;
   text-align: left;
@@ -15,6 +15,13 @@
     grid-template-columns: repeat(4, minmax(25%, auto));
     max-width: var(--max-width);
     width: 100%;
+  }
+
+  .row {
+    display: table-row;
+    max-width: var(--max-width);
+    width: 100%;
+    height: 100%;
   }
 
   .center {
@@ -41,17 +48,18 @@
     flex-wrap: wrap;
     flex-flow: center;
     align-items: stretch;
-    gap: 10px;
+    gap: 10%;
   }
 
   .scrollableContainer {
     width: 1000px;       /* set to the desired width, can be in px, em, rem, %, etc. */
-    height: 1000px;    /* set to the desired height */
+    height: 100%;    /* set to the desired height */
     margin: 20px auto;/* optional: centers the box if it's smaller than its container */
     padding: 10px;    /* optional: gives some space inside the scrollable box */
     overflow-x: auto; /* allows horizontal scrolling */
     overflow-y: hidden; /* prevents vertical scrolling */
     white-space: nowrap;
+    padding-top: 5%;
 }
 
   .cardEntity {

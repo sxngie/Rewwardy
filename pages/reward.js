@@ -35,14 +35,14 @@ export default function Home() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className="row">
+        <div className={styles.row}>
             <h1 className={styles.header}>Rewards</h1>
             <br/>
             <HamburgerMenu className={styles.shapingBar}/>
         </div>
         <div className="row">
           <div id = "SectionDiv" className = "column" >
-            <div className='container'>
+            <div className={styles.container}>
               <div className={styles.scrollableContainer}>
                 <CardEntity imageSrc='Props_samples/bubba.jpg' title='8oz Taro Tea' businessName='Bubble Tea Yum' description='One 8oz Taro drink.' expDate='February 8th, 2024'></CardEntity>
                 <CardEntity imageSrc='Props_samples/pizza.jpeg' title='Pizza Slice' businessName='Titos Pizza' description='Free cheese pizza slice.' expDate='January 10th, 2024'></CardEntity>
