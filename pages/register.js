@@ -117,7 +117,7 @@ export default function CreateUser() {
               <br />
             </label>
             <input
-              className={styles.inputDateField}
+              className={styles.dateinput}
               label="Date of Birth"
               type="date"
               variant="standard"
