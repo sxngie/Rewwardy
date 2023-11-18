@@ -51,7 +51,7 @@ export default function Home() {
                         <div className={styles.scrollableContainer}>
                             <CardEntity title='Free Cookie' businessName='Friends Cafe' description='Unlock with 4 visits!' expDate='January 20th, 2024'></CardEntity>
                             <CardEntity title='Bubble Tea 8oz' businessName='Bubble Tea Yum' description='Buy two, get one free!' expDate='April 29th, 2024'></CardEntity>
-                            <CardEntity title='1 Free Latte' businessName='Shaktea' description='Unlock after 3 visits! I miss you more than words can ever saaaaay so far away' expDate='March 12th, 2024'></CardEntity>
+                            <CardEntity title='1 Free Latte' businessName='Shaktea' description='Unlock after 3 visits!' expDate='March 12th, 2024'></CardEntity>
                             <CardEntity title='Half-Off Pizza' businessName='Papas Pizza' description='Spend $25 or more.' expDate='January 5th, 2024'></CardEntity>
                             <CardEntity title='Sweet Treat' businessName='Twin Rolls' description='Unlock after 8 visits!' expDate='February 10th, 2024'></CardEntity>
                         </div>
