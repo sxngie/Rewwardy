@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Challenge.module.css";
 import Link from "next/link";
 import { Footer } from "../components";
-import HamburgerMenu, { Links } from "../components/HamburgerMenu.js";
-import { useRouter } from "next/router";
+import HamburgerMenu from "../components/HamburgerMenu.js";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +14,7 @@ function CardEntity({ imageSrc, title, businessName, description, expDate }) {
         <img src={imageSrc} className={styles.picture} />
       </div>{" "}
       {}
-      <h2 className={styles.sectionHead}>{title}</h2>
+      <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
       <div className={styles.description}>
         <p>{description}</p>
