@@ -2,9 +2,8 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Reward.module.css'
 import Link from "next/link";
-import { HeadTitle, Footer } from "../components";
-import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
-import { useRouter } from "next/router";
+import { Footer } from "../components";
+import HamburgerMenu from '../components/HamburgerMenu.js'
 
 const inter = Inter({ subsets: ['latin'] })
 
