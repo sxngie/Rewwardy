@@ -1,13 +1,8 @@
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: auto;
-  text-align: left;
+  top: 8%;
   color: #FFFFFF;
   font-weight: bold;
   font-size: 36px;
-  padding: 8%;
 }
 
   .grid {
@@ -29,8 +24,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    padding: 6rem;
+    align-items: left;
+    padding-top: 7rem;
+    margin-left: 5%;
     min-height: 100vh;
     /* background-color: #552CB4; */
   }
@@ -44,10 +40,10 @@
   }
 
   .scrollableContainer {
-    width: 1000px;       /* set to the desired width, can be in px, em, rem, %, etc. */
+    width: auto;       /* set to the desired width, can be in px, em, rem, %, etc. */
     height: 400px;    /* set to the desired height */
     margin: 20px auto;/* optional: centers the box if it's smaller than its container */
-    padding: 10px;    /* optional: gives some space inside the scrollable box */
+    padding: 2%;    /* optional: gives some space inside the scrollable box */
     overflow-x: auto; /* allows horizontal scrolling */
     overflow-y: hidden; /* prevents vertical scrolling */
     white-space: nowrap;
@@ -55,19 +51,20 @@
 
   .cardEntity {
     background-color: #FFFFFF;
-    flex-grow: 1;
-    flex-shrink: 1;
-    align-self: auto;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
     height: 100%;
-    width: 25%;
+    width: fit-content;
     text-align: center;
     border-radius: 16px;
     overflow: hidden;
-    display: inline-block;
+    display: inline-block; /* necessary to have cards in horizontal scroll */
     vertical-align: top;
     margin-right: 20px;
     /* Additional styling if needed */
+    text-wrap: wrap;
+    padding-left: 5%;
+    padding-right: 5%;
+    max-width: 50%;
 }
 
 h2.sectionHead {
@@ -75,41 +72,47 @@ h2.sectionHead {
   font-weight: lighter;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 24px;
-  margin: 2%;
   padding-top: 5%;
 }
 
-h3.cardLabel {
+.cardLabel {
   color: #3A0CA3;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 22px;
   font-weight: bold;
-  margin: 2px;
-  padding-top: 40px;
+  margin-top: 10%;
+  display: inline-block; 
 }
 
-h4.business {
-  position: top;
-  padding: 0.5rem;
-  margin: 5px;
-  margin-bottom: 15px;
+.business {
+  margin: 0.5rem;
+  padding: 4%;
   font-size: 14px;
   font-weight: bold;
-  color: #a32e6e;
+  color: #a32e6e;  
+  height: 5%;
 }
 
 .description {
   position: relative;
-  align-items: center;
-  margin: auto;
-  width: 94%;
-  height: 80px;
-  padding: 2%;
-  padding-top: 25px;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border-radius: var(--border-radius);
-  background-color: #FFFFFF;
-  align-self: center;
+  margin: 1%;
+  width: 100%;
+  height: 30%;
+  text-wrap: wrap;
+  display: block; 
+  padding-top: 10%;
+}
+
+.expireDate {
+  color: #AD0051;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10%;
+  flex-wrap: wrap;
+  width: 100%;
+  position: center;
+  display: inline-block; 
 }
 
 .pinkButton {
@@ -118,13 +121,12 @@ h4.business {
   font-family: 'arial';
   font-size: 16px;
   width: 84px;
-  height: 42px;
+  height: 11%;
   border-radius: var(--border-radius);
   border: white;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  position: relative;
-  margin: auto;
-  margin-top: 20px;
+  vertical-align: baseline;
+  display: inline-block; 
 }
 
 .pinkButton:hover {
@@ -133,14 +135,4 @@ h4.business {
 
 .pinkButton:focus {
   background-color: #D1196D;
-}
-
-.expireDate {
-  color: #AD0051;
-  font-weight: lighter;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  margin: 20px;
-  word-wrap: break-word;
 }
