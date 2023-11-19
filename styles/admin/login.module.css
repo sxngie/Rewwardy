@@ -19,6 +19,14 @@
   background-color: #552cb4;
 }
 
+.button:hover {
+  background-color: #4C27A2;
+}
+
+.button:focus {
+  background-color: #442390;
+}
+
 .textbutton {
   color: #552cb4;
 }

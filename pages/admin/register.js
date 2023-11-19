@@ -81,7 +81,7 @@ export default function AdminLogin() {
         <h1 className={styles.header}>Create Business Account</h1>
         <div className={styles.form}>
           <br />
-          <h2>Admin User Info</h2>
+          <h2 className={styles.subheader}>Admin User Info</h2>
           <TextField
             label="First Name"
             variant="standard"
@@ -119,7 +119,7 @@ export default function AdminLogin() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <h2>Business Info</h2>
+          <h2 className={styles.subheader}>Business Info</h2>
           <TextField
             label="Business Name"
             variant="standard"

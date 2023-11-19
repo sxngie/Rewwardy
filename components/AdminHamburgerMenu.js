@@ -8,6 +8,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
+import { getAuth, signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 
 const AdminHamburgerMenu = () => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -18,6 +20,9 @@ const AdminHamburgerMenu = () => {
       }
       setDrawerOpen(open);
     };
+
+    const auth = getAuth();
+    const router = useRouter();
 
     return (
       <div>
@@ -52,9 +57,15 @@ const AdminHamburgerMenu = () => {
               </Link>
             </ListItem>
             <ListItem onClick={toggleDrawer(false)}>
-              <Link href="/admin">
-                <ListItemText primary="Logout" sx={{ color: '#9B2C6B' }}/>
-              </Link>
+            <ListItemText
+              primary="Logout"
+              sx={{ color: "#9B2C6B" }}
+              onClick={() => {
+                signOut(auth)
+                  .then(() => router.push("/admin"))
+                  .catch((err) => alert(err.message));
+              }}
+              />
             </ListItem>
           </List>
         </Drawer>
