@@ -1,0 +1,48 @@
+.burgerbutton {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    left: 10px;
+  }
+
+/* styling next link component so that will be a column list of links*/
+  .menuItems{
+    position: right;
+    display: flex;
+    flex-direction: column;
+    color: #F9D7E3;
+    padding-top: 25%;
+    width: auto;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition-property: initial;
+  }
+
+  .menuItems:hover {
+    color: #F72585;
+  }
+
+  .menuItems:focus {
+    color: #D1196D;
+  }
+  
+  .burgermenubar {
+    position: right;
+    padding-left: 10%;
+    transform: translateX(5%);
+    transition: left 300ms ease-in;
+  }
+  
+  .shapingBar{
+    align-items: right;
+    width: 80px;
+    height: 100px;
+    position: relative;
+    justify-content: right;
+    left: 450%;
+  }
+
+    .listOfItems {
+        display: flex;
+    }
+  

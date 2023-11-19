@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/admin/dashboard.module.css";
-import { TopNavbar, AdminFooter } from "../../components";
+import { AdminHamburgerMenu, AdminFooter, TopNavbar } from "../../components";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import { getCookie } from "cookies-next";
@@ -44,20 +44,22 @@ export default function AdminDashboard() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
-      <TopNavbar />
-      <main className={`${styles.main}`}>
+      <main className={`${styles.main} ${inter.className}`}>
+        <div className="row">
+          <h1 className={styles.header}>Home</h1>
+          <br/>
+          <AdminHamburgerMenu className={styles.shapingBar}/>
+        </div>
         <div className={styles.box}>
-          <div className={styles.rewardsadded}>
-            <h1>Rewards Awarded</h1>
             <div className={styles.data}>
               <h2>Rewards Awarded (Today)</h2>
               <h3>10</h3>
               <h2>Daily Recurring Customers</h2>
               <h3>25</h3>
             </div>
-          </div>
-          <div className={styles.leaderboard}>
-            <h4>Top Loyal Customers (Visits)</h4>
+        </div>
+        <div className={styles.leaderboard}>
+          <h4>Top Loyal Customers (Visits)</h4>
             <ol>
               <li>Juan Matos (170)</li>
               <li>Lucia Aires (155)</li>
@@ -87,7 +89,6 @@ export default function AdminDashboard() {
               View All Rewards
             </Button>
           </div>
-        </div>
       </main>
       <AdminFooter />
     </>
