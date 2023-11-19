@@ -1,15 +1,41 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/admin/dashboard.module.css";
-import Link from "next/link";
 import { TopNavbar, AdminFooter } from "../../components";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
+import { getCookie } from "cookies-next";
+import { db } from "@/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function AdminDashboard() {
+export default function AdminDashboard() {  
   const router = useRouter();
+
+  const [rewards, setRewards] = useState([]);
+
+
+  const businessid = getCookie("businessId");
+
+  useEffect(() => {
+    async function getData() {
+      const q = query(
+        collection(db, "business_rewards"),
+        where("businessId", "==", businessid)
+      );
+      const querySnapshot = await getDocs(q);
+      let rewards = [];
+      querySnapshot.forEach((doc) => {
+        rewards.push(doc.data());
+      });
+      setRewards(rewards);
+    }
+
+    getData();
+  }, [businessid]);
+
   return (
     <>
       <Head>

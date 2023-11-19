@@ -17,8 +17,8 @@ export default function RewardLists() {
   const [rewards, setRewards] = useState([]);
   const router = useRouter();
 
-  const businessid = getCookie("businessid");
-  console.log(businessid);
+  const businessid = getCookie("businessId");
+  console.log(businessid)
   useEffect(() => {
     async function getData() {
       const q = query(
@@ -34,7 +34,8 @@ export default function RewardLists() {
     }
 
     getData();
-  }, []);
+  }, [rewards]);
+
   return (
     <>
       <Head>
