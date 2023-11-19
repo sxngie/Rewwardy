@@ -12,7 +12,7 @@ import {
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import { inputLabelClasses } from "@mui/material/InputLabel";
-import { AdminFooter } from "@/components";
+import { AdminHamburgerMenu, AdminFooter } from "@/components";
 import InputAdornment from "@mui/material/InputAdornment";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
@@ -57,8 +57,10 @@ export default function CreateReward() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.headerbar}>
-          <h1>Create Reward</h1>
+        <div className="row">
+          <h1 className={styles.headerbar}>Create Reward</h1>
+          <br/>
+          <AdminHamburgerMenu className={styles.shapingBar}/>
         </div>
         <div className={styles.form}>
           <TextField

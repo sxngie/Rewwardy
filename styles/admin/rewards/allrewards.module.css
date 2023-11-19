@@ -5,9 +5,10 @@
   margin: auto;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
   padding: 24px;
+  padding-top: 5rem;
 }
 
 .headerbar {
@@ -19,6 +20,7 @@
 .header {
   color: #552cb4;
   font-size: 36px;
+  padding-top: 1%;
 }
 
 .reward {
@@ -52,6 +54,7 @@
   font-size: 18px;
 }
 .btn {
-  background-color: #F72585;
-  width: 100%;
+  background-color: #9B1250;
+  width: 80%;
+  margin-left: 5%;
 }
