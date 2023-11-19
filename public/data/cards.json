@@ -1,0 +1,44 @@
+[
+    {
+      "imageSrc": "Props_samples/bubba.jpg",
+      "title": "8oz Taro Tea",
+      "businessName": "Bubble Tea Yum",
+      "description": "One 8oz Taro drink.",
+      "expDate": "February 8th, 2024"
+    },
+    {
+      "imageSrc": "Props_samples/pizza.jpeg",
+      "title": "Pizza Slice",
+      "businessName": "Titos Pizza",
+      "description": "Free cheese pizza slice.",
+      "expDate": "January 10th, 2024"
+    },
+    {
+        "imageSrc": "Props_samples/latte.jpg",
+        "title": "Latte",
+        "businessName": "Friends Cafe",
+        "description": "Free 8oz latte.",
+        "expDate": "March 18th, 2024"
+    },
+    {
+        "imageSrc": "Props_samples/toast.jpg",
+        "title": "Crispy Toast",
+        "businessName": "Cafetería Rico",
+        "description": "Hot toasts with creamy butter",
+        "expDate": "Feb 2, 2024"
+    },
+    {
+        "imageSrc": "Props_samples/icecream.jpg",
+        "title": "Ice Cream Cone",
+        "businessName": "Rex Ice",
+        "description": "Single flavor cone.",
+        "expDate": "Dec 24, 2024"
+    },
+    {
+        "imageSrc": "Props_samples/cookie.jpeg",
+        "title": "Pizza Slice",
+        "businessName": "Titos Pizza",
+        "description": "Free cheese pizza slice.",
+        "expDate": "June 3, 2024"
+    }
+  ]

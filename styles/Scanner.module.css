@@ -1,64 +1,66 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6rem;
-    min-height: 100vh;
-  }
-  
-  .description {
-    display: inherit;
-    justify-content: inherit;
-    align-items: inherit;
-    font-size: 0.85rem;
-    max-width: var(--max-width);
-    width: 100%;
-    z-index: 2;
-    font-family: var(--font-mono);
-  }
-  
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: auto;
-    text-align: left;
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 36px;
-    padding: 8%;
-  }
+  display: flex;
+  flex-direction: column;
+  padding-top: 7rem;
+  margin-left: 5%;
+  min-height: 94vh;
+  align-items: center;
+}
+
+.description {
+  display: inherit;
+  justify-content: inherit;
+  align-items: inherit;
+  font-size: 0.85rem;
+  max-width: var(--max-width);
+  width: 100%;
+  z-index: 2;
+  font-family: var(--font-mono);
+}
+
+.header {
+  top: 8%;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 36px;
+  align-items: left;
+}
+
+.camerabox {
+  background-color: #ffffff;
+}
+.camera {
+  width: 350px;
+  height: 460px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #ffffff;
+  padding: 8px;
+  /* margin-left: 2%; */
+}
+
+.row {
+  height: 100px;
+}
 
 .pinkButton {
-    position: center;
-    margin: 5%;
-    background-color: #9B2C6B;
-    color: #FFFFFF;
-    font-family: 'arial';
-    font-size: 18;
-    width: 325px;
-    height: 42px;
-    border-radius: var(--border-radius);
-    border: white;
-    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
-    align-self: center;
-  }
-  
-  .pinkButton:hover {
-    background-color: #E3227A;
-  }
-  
+  position: center;
+  margin: 5%;
+  background-color: #9b2c6b;
+  color: #ffffff;
+  font-family: "arial";
+  font-size: 18;
+  width: 325px;
+  height: 42px;
+  border-radius: var(--border-radius);
+  border: white;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  align-self: center;
+}
 
-  .camera {
-    position: center;
-    background-color: #FFFFFF;
-    width: 322px;
-    height: 480px;
-    margin-left: 2%;
-    margin-top: 0%;
-    background-color: rgba(var(--callout-rgb), 0.90);
-    border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-    border-radius: var(--border-radius);
-    align-items: center;
-  }
+.pinkButton:hover {
+  background-color: #e3227a;
+}
