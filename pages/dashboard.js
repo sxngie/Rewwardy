@@ -39,15 +39,9 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className="row">
-<<<<<<< HEAD
-          <h2 className={styles.header}>Home</h2>
-          <br />
-          <HamburgerMenu className={styles.shapingBar} />
-=======
             <h1 className={styles.header}>Home</h1>
             <br/>
             <HamburgerMenu className={styles.shapingBar}/>
->>>>>>> 7a4e702f520715bb373cefbd2ec4bea6d4094313
         </div>
         <div className="row">
           <div id="SectionDiv" className="column">
