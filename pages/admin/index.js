@@ -31,9 +31,11 @@ export default function AdminLogin() {
         );
         // Set Cookie for businessid
         const querySnapshot = await getDocs(q);
+        console.log(querySnapshot)
+
         querySnapshot.forEach((doc) => {
           console.log(doc.id, " => ", doc.data());
-          setCookie("businessid", doc.id);
+          setCookie("businessId", doc.id);
         });
         // Push to dashboard
         router.push("/admin/dashboard");
@@ -81,7 +83,12 @@ export default function AdminLogin() {
             Login
           </Button>
           <br />
-          <Button className={styles.textbutton} id="standard-basic" variant="standard">
+          <Button
+            className={styles.textbutton}
+            id="standard-basic"
+            variant="standard"
+            onClick={() => router("/admin/register")}
+          >
             Create an Account
           </Button>
         </div>
