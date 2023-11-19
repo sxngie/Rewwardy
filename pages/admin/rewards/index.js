@@ -1,11 +1,10 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/admin/rewards/allrewards.module.css";
-import Link from "next/link";
-import { AdminFooter } from "@/components";
+import { AdminHamburgerMenu, AdminFooter } from "@/components";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
@@ -44,8 +43,10 @@ export default function RewardLists() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.headerbar}>
-          <h2 className={styles.header}>All Rewards</h2>
+        <div className="row">
+          <h1 className={styles.header}>Create Reward</h1>
+          <br/>
+          <AdminHamburgerMenu className={styles.shapingBar}/>
         </div>
         <br />
         <div className={styles.list}>
