@@ -5,20 +5,18 @@
   margin: auto;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: left;
   flex-direction: column;
   padding: 24px;
+  padding-top: 5rem;
 }
 
 .headerbar {
+  color: #552CB4;
   width: 100%;
   display: flex;
   flex-direction: row;
-}
-
-.headerbar h1 {
-  color: #552CB4;
-  font-size: 36px;
+  padding-top: 1%;
 }
 
 .form {
@@ -26,6 +24,7 @@
   flex-direction: column;
   max-width: 1160px;
   width: 100%;
+  padding-left: 5%;
 }
 
 .select {
