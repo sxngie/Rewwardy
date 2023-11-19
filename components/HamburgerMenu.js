@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "next/router";
+import { deleteCookie } from "cookies-next";
 
 const HamburgerMenu = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -70,7 +71,10 @@ const HamburgerMenu = () => {
               sx={{ color: "#9B2C6B" }}
               onClick={() => {
                 signOut(auth)
-                  .then(() => router.push("/"))
+                  .then(() => {
+                    deleteCookie("userid")
+                    router.push("/")
+                  })
                   .catch((err) => alert(err.message));
               }}
             />
