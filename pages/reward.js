@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Reward.module.css'
 import Link from "next/link";
-import { HeadTitle, Footer } from "../components";
-import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
+import { Footer } from "../components";
+import HamburgerMenu from '../components/HamburgerMenu.js'
 import { useRouter } from "next/router";
 import fs from 'fs';
 import path from 'path';
@@ -37,14 +37,14 @@ export default function Home({ cards }) {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className="row">
+        <div className={styles.row}>
             <h1 className={styles.header}>Rewards</h1>
             <br/>
             <HamburgerMenu className={styles.shapingBar}/>
         </div>
         <div className="row">
           <div id = "SectionDiv" className = "column" >
-            <div className='container'>
+            <div className={styles.container}>
               <div className={styles.scrollableContainer}>
                 { cards.map((card, index) => (
                   <CardEntity key={index} {...card} />))}

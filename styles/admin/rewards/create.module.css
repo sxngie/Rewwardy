@@ -16,9 +16,8 @@
   flex-direction: row;
 }
 
-.headerbar h2 {
+.headerbar h1 {
   color: #552CB4;
-  font-family: 'Open Sans';
   font-size: 36px;
 }
 

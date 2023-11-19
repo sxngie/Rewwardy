@@ -9,6 +9,7 @@ import {
   Input,
   FormControl,
 } from "@mui/material";
+import { Inter } from "next/font/google";
 import Head from "next/head";
 import { inputLabelClasses } from "@mui/material/InputLabel";
 import { AdminFooter } from "@/components";
@@ -17,6 +18,8 @@ import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function CreateReward() {
   const [name, setName] = useState("");
@@ -53,9 +56,9 @@ export default function CreateReward() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
-      <main className={styles.main}>
+      <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.headerbar}>
-          <h2>Create Reward</h2>
+          <h1>Create Reward</h1>
         </div>
         <div className={styles.form}>
           <TextField
