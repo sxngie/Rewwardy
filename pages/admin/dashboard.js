@@ -23,7 +23,6 @@ export default function AdminDashboard() {
           <br/>
           <AdminHamburgerMenu className={styles.shapingBar}/>
         </div>
-        <br/>
         <div className={styles.box}>
             <div className={styles.data}>
               <h2>Rewards Awarded (Today)</h2>
