@@ -1,6 +1,5 @@
 .bottombar {
-    position: fixed;
-    left: 0;
+    position: relative;
     bottom: 0;
     width: 100%;
     text-align: center;
@@ -9,17 +8,17 @@
     color: #FFFFFF;
     font-size: small;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: inline-block;
   }
 
   .adminbottombar {
-    position: fixed;
-    left: 0;
+    position: relative;
     bottom: 0;
     width: 100%;
     text-align: center;
     padding-top: 10px;
     padding: 2%;
-    color: #552CB4;
+    color: #FFFFFF; /* change to #552CB4 if decide to remove purple footer bar */
     font-size: small;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }

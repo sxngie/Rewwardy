@@ -44,51 +44,55 @@ export default function UserLogin() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <h2 className={styles.header}>Login</h2>
-        <br />
-        <div className={styles.form}>
-          <TextField
-            className={styles.inputField}
-            id="standard-basic"
-            label="Email"
-            variant="standard"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <div className={styles.row}>
+          <h1 className={styles.header}>Login</h1>
           <br />
-          <TextField
-            className={styles.inputField}
-            id="standard-basic"
-            label="Password"
-            variant="standard"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <Button
-            className={styles.clickText}
-            id="standard-basic"
-            variant="standard"
-          >
-            Forgot password?
-          </Button>
-          <br />
-          <Button
-            className={styles.pinkButton}
-            variant="contained"
-            onClick={login}
-          >
-            Submit
-          </Button>
-          <br />
-          <Button
-            className={styles.clickText}
-            id="standard-basic"
-            variant="standard"
-            onClick={() => router.push("/register")}
-          >
-            Create an Account
-          </Button>
+        </div>
+        <div className={styles.column}>
+          <div className={styles.form}>
+            <TextField
+              className={styles.inputField}
+              id="standard-basic"
+              label="Email"
+              variant="standard"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+            <TextField
+              className={styles.inputField}
+              id="standard-basic"
+              label="Password"
+              variant="standard"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <Button
+              className={styles.clickText}
+              id="standard-basic"
+              variant="standard"
+            >
+              Forgot password?
+            </Button>
+            <br />
+            <Button
+              className={styles.pinkButton}
+              variant="contained"
+              onClick={login}
+            >
+              Submit
+            </Button>
+            <br />
+            <Button
+              className={styles.clickText}
+              id="standard-basic"
+              variant="standard"
+              onClick={() => router.push("/register")}
+            >
+              Create an Account
+            </Button>
+          </div>
         </div>
       </main>
       <Footer />

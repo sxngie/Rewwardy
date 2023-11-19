@@ -2,12 +2,19 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/register.module.css";
 import { Footer } from "../components";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import { Button, Select, TextField, MenuItem } from "@mui/material";
+import {
+  Button,
+  Select,
+  TextField,
+  FormControl,
+  InputLabel,
+  MenuItem,
+} from "@mui/material";
 import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,95 +65,99 @@ export default function CreateUser() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <h1 className={styles.header}>Create an Account</h1>
-        <br />
-        <div className={styles.form}>
-          <TextField
-            className={styles.inputField}
-            label="First Name"
-            variant="standard"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
+        <div className={styles.row}>
+          <h1 className={styles.header}>Create an Account</h1>
           <br />
-          <TextField
-            className={styles.inputField}
-            label="Last Name"
-            variant="standard"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <br />
-          <TextField
-            className={styles.inputField}
-            label="Email"
-            variant="standard"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <TextField
-            className={styles.inputField}
-            label="Phone"
-            variant="standard"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <br />
-          <TextField
-            className={styles.inputField}
-            label="Password"
-            variant="standard"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <label className={styles.label}>
-            Date of Birth
+        </div>
+        <div className={styles.column}>
+          <div className={styles.form}>
+            <TextField
+              className={styles.inputField}
+              label="First Name"
+              variant="standard"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
             <br />
-          </label>
-          <input
-            className={styles.inputDateField}
-            label="Date of Birth"
-            type="date"
-            variant="standard"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-          />
-          <br />
-          <label className={styles.label}>
-            Gender
+            <TextField
+              className={styles.inputField}
+              label="Last Name"
+              variant="standard"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
             <br />
-          </label>
-          <Select
-            className={styles.inputField}
-            label="Gender"
-            variant="standard"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-          >
-            <MenuItem value={"Male"}>Male</MenuItem>
-            <MenuItem value={"Female"}>Female</MenuItem>
-            <MenuItem value={"Other"}>Other</MenuItem>
-            <MenuItem value={"Prefer not to say"}>Prefer not to say</MenuItem>
-          </Select>
-          <br />
-          <Button
-            className={styles.clickText}
-            id="standard-basic"
-            variant="standard"
-          >
-            Terms and Conditions
-          </Button>
-          <br />
-          <Button
-            className={styles.pinkButton}
-            variant="contained"
-            onClick={() => createUserAccount()}
-          >
-            Submit
-          </Button>
+            <TextField
+              className={styles.inputField}
+              label="Email"
+              variant="standard"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+            <TextField
+              className={styles.inputField}
+              label="Phone"
+              variant="standard"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <br />
+            <TextField
+              className={styles.inputField}
+              label="Password"
+              variant="standard"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <label className={styles.label}>
+              Date of Birth
+              <br />
+            </label>
+            <input
+              className={styles.dateinput}
+              label="Date of Birth"
+              type="date"
+              variant="standard"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+            />
+            <br />
+            <label className={styles.label}>
+              Gender
+              <br />
+            </label>
+            <Select
+              className={styles.inputField}
+              label="Gender"
+              variant="standard"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            >
+              <MenuItem value={"Male"}>Male</MenuItem>
+              <MenuItem value={"Female"}>Female</MenuItem>
+              <MenuItem value={"Other"}>Other</MenuItem>
+              <MenuItem value={"Prefer not to say"}>Prefer not to say</MenuItem>
+            </Select>
+            <br />
+            <Button
+              className={styles.clickText}
+              id="standard-basic"
+              variant="standard"
+            >
+              Terms and Conditions
+            </Button>
+            <br />
+            <Button
+              className={styles.pinkButton}
+              variant="contained"
+              onClick={() => createUserAccount()}
+            >
+              Submit
+            </Button>
+          </div>
         </div>
       </main>
       <Footer />
