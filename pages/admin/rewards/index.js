@@ -9,6 +9,7 @@ import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { truncateString } from "@/utils/helpers";
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RewardLists() {
   const router = useRouter();
 
   const businessid = getCookie("businessId");
-  console.log(businessid)
+
   useEffect(() => {
     async function getData() {
       const q = query(
@@ -27,14 +28,16 @@ export default function RewardLists() {
       const querySnapshot = await getDocs(q);
       let rewards = [];
       querySnapshot.forEach((doc) => {
-        rewards.push(doc.data());
+        let tempReward = doc.data();
+        tempReward.id = doc.id;
+        rewards.push(tempReward);
       });
       setRewards(rewards);
     }
 
     getData();
   }, [rewards]);
-
+  // console.log(rewards)
   return (
     <>
       <Head>
@@ -43,31 +46,42 @@ export default function RewardLists() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
+      <AdminHamburgerMenu className={styles.shapingBar} />
       <main className={`${styles.main} ${inter.className}`}>
-        <div className="row">
-          <h1 className={styles.header}>Create Reward</h1>
-          <br/>
-          <AdminHamburgerMenu className={styles.shapingBar}/>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <h1>View Rewards</h1>
+          </div>
+          <div className={styles.list}>
+            {rewards.map((reward, key) => (
+              <Link href={`/admin/rewards/${reward.id}`}>
+                <div className={styles.reward} key={key}>
+                  <div className={styles.rewardrow}>
+                    <p className={styles.name}>{reward.name}</p>
+                    <p>
+                      Valid After: {reward.milestoneValue}{" "}
+                      {reward.milestoneType}
+                    </p>
+                  </div>
+                  <div className={styles.rewardrow}>
+                    <p style={{ width: "60%" }}>
+                      {truncateString(reward?.description, 50)}
+                    </p>
+                    <p>Valid Until: {reward.validUntil}</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <br />
+          <Button
+            className={styles.btn}
+            variant="contained"
+            onClick={() => router.push("/admin/dashboard")}
+          >
+            Go to Dashboard
+          </Button>
         </div>
-        <br />
-        <div className={styles.list}>
-          {rewards.map((reward, key) => (
-            <div className={styles.reward} key={key}>
-              <div className={styles.rewardrow}>
-                <p className={styles.name}>{reward.name}</p>
-                <p>
-                  Valid After: {reward.milestoneValue} {reward.milestoneType}
-                </p>
-              </div>
-              <div className={styles.rewardrow}>
-                <p style={{ width: "60%" }}>{truncateString(reward?.description, 50)}</p>
-                <p>Valid Until: {reward.validUntil}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <br/>
-        <Button className={styles.btn} variant="contained" onClick={() => router.push("/admin/dashboard")}>Go to Dashboard</Button>
       </main>
       <AdminFooter />
     </>

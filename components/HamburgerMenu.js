@@ -11,6 +11,8 @@ import Link from "next/link";
 import { getAuth, signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
+import Typography from "@mui/material/Typography";
+import { auth } from "@/firebase";
 
 const HamburgerMenu = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -25,14 +27,15 @@ const HamburgerMenu = () => {
     setDrawerOpen(open);
   };
 
-  const auth = getAuth();
   const router = useRouter();
 
   return (
     <div>
       <AppBar sx={{ bgcolor: "#9B2C6B", mb: 1 }}>
         <Toolbar>
-          <div style={{ flexGrow: 1 }} />
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Rewwardy
+          </Typography>
           <IconButton
             edge="start"
             color="inherit"
@@ -72,8 +75,8 @@ const HamburgerMenu = () => {
               onClick={() => {
                 signOut(auth)
                   .then(() => {
-                    deleteCookie("userid")
-                    router.push("/")
+                    deleteCookie("userid");
+                    router.push("/");
                   })
                   .catch((err) => alert(err.message));
               }}
