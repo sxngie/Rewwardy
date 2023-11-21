@@ -4,7 +4,9 @@ export default function Footer() {
   return (
     <div className={styles.bottombar}>
       <div className={styles.row}>
-        <p>Rewwardy 2023</p>
+        <div className={styles.footing}>
+          <p>Rewwardy 2023</p>
+        </div>
       </div>
     </div>
   );

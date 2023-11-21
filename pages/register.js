@@ -64,7 +64,7 @@ export default function CreateUser() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={`${styles.main} ${inter.className}`} style={{overflow: 'scroll'}}>
         <div className={styles.row}>
           <h1 className={styles.header}>Create an Account</h1>
           <br />
