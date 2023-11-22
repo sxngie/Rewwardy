@@ -65,6 +65,11 @@ const HamburgerMenu = () => {
             </Link>
           </ListItem>
           <ListItem onClick={toggleDrawer(false)}>
+            <Link href="/profile_view">
+              <ListItemText primary="Profile Manager" sx={{ color: "#9B2C6B" }} />
+            </Link>
+          </ListItem>
+          <ListItem onClick={toggleDrawer(false)}>
             <ListItemText
               primary="Logout"
               sx={{ color: "#9B2C6B" }}
