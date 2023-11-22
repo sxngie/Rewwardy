@@ -51,6 +51,7 @@ export default function UserLogin() {
           <h1 className={styles.header} style={{ margin: "2% 0px 2% 0px" }}>
             Password Recovery
           </h1>
+          <br/>
           <div className={styles.form} style={{}}>
             <TextField
               className={styles.inputField}
@@ -68,7 +69,7 @@ export default function UserLogin() {
                 await sendPasswordResetEmail(auth, email)
                   .then(() => {
                     console.log("Reset Password Email sent successfully!");
-                    alert('Recovery email sent successfully');
+                    alert('Recovery email sent successfully.');
                   })
                   .catch((error) => {
                     console.error(error);
@@ -76,7 +77,7 @@ export default function UserLogin() {
                   })
               }
             >
-              Send Email!
+              Send Email
             </Button>
             <br />
             <Button

@@ -46,7 +46,7 @@ export default function UserLogin() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.row}>
           <h1 className={styles.header}>Login</h1>
-          <br />
+          <br/>
         </div>
         <div className={styles.column}>
           <div className={styles.form}>

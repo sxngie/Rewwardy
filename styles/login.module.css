@@ -47,7 +47,6 @@
 .column {
   display: table-column;
   max-width: var(--max-height);
-  padding-top: 10%;
 }
 
   .pinkButton {
