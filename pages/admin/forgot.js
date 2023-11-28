@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import styles from "@/styles/admin/login.module.css";
 import Link from "next/link";
 import { TopNavbar, AdminFooter } from "../../components";
@@ -12,7 +12,7 @@ import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "fir
 import { setCookie } from "cookies-next";
 import Script from "next/script";
 
- const space_grotesk = Space_Grotesk({ subsets: ["latin"] });
+ const inter = Inter({ subsets: ["latin"] });
 
  export default function UserLogin() {
    const [email, setEmail] = useState("");
@@ -47,7 +47,7 @@ import Script from "next/script";
          <link rel="icon" href="/Images/Rewwardy-Icon.png" />
        </Head>
        <main className={`${styles.main} `}>
-            <h1 className={`${styles.header} ${space_grotesk.className}`}>
+            <h1 className={`${styles.header}`}>
              Password Recovery
             </h1>
             <div className={styles.form}>
@@ -73,7 +73,7 @@ import Script from "next/script";
                    })
                }
              >
-               Send Email!
+               Send Email
              </Button>
              <br />
              <Button
