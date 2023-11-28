@@ -55,12 +55,12 @@ export default function RewardLists() {
                 <p>{reward?.milestoneValue}</p>
               </div>
               <div className={styles.pill}>
-                <h4>Milestone Type</h4>
-                <p>{reward?.milestoneType}</p>
+                <h4>Valid From</h4>
+                <p>{reward?.validFrom}</p>
               </div>
               <div className={styles.pill}>
-                <h4>Milestone Value</h4>
-                <p>{reward?.milestoneValue}</p>
+                <h4>Valid Until</h4>
+                <p>{reward?.validUntil}</p>
               </div>
             </div>
           </div>
