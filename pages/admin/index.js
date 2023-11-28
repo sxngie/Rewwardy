@@ -76,6 +76,14 @@ export default function AdminLogin() {
           />
           <br />
           <Button
+            className={styles.textbutton}
+            id="standard-basic"
+            variant="standard"
+          >
+            <Link href="/admin/forgot">Forgot password?</Link>
+          </Button>
+          <br />
+          <Button
             variant="contained"
             className={styles.button}
             onClick={() => login()}
