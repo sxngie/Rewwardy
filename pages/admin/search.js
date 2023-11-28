@@ -9,6 +9,7 @@ import { TextField, Button } from "@mui/material";
 import { db } from "@/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { getCookie } from "cookies-next";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function AdminSearch() {

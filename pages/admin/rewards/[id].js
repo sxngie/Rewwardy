@@ -41,25 +41,25 @@ export default function RewardLists() {
             <h1>{reward?.name}</h1>
           </div>
           <div className={styles.box}>
-            <h3>Description</h3>
+            <h2>Description</h2>
             <p>{reward?.description}</p>
             <br />
-            <h3>Information</h3>
+            <h2>Information</h2>
             <div className={styles.pillgrid}>
               <div className={styles.pill}>
-                <h4>Milestone Type</h4>
+                <h3>Milestone Type</h3>
                 <p>{reward?.milestoneType}</p>
               </div>
               <div className={styles.pill}>
-                <h4>Milestone Value</h4>
+                <h3>Milestone Value</h3>
                 <p>{reward?.milestoneValue}</p>
               </div>
               <div className={styles.pill}>
-                <h4>Valid From</h4>
+                <h3>Valid From</h3>
                 <p>{reward?.validFrom}</p>
               </div>
               <div className={styles.pill}>
-                <h4>Valid Until</h4>
+                <h3>Valid Until</h3>
                 <p>{reward?.validUntil}</p>
               </div>
             </div>

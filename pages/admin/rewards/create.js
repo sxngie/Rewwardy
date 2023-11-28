@@ -63,7 +63,6 @@ export default function CreateReward() {
         </div>
         <div className={styles.form}>
           <TextField
-            id="standard-basic"
             label="Name"
             variant="standard"
             value={name}
@@ -79,7 +78,6 @@ export default function CreateReward() {
           />
           <br />
           <TextField
-            id="standard-basic"
             label="Description"
             variant="standard"
             multiline
@@ -96,19 +94,17 @@ export default function CreateReward() {
             onChange={(e) => setDescription(e.target.value)}
           />
           <br />
-          <InputLabel>Milestone Type</InputLabel>
+          <InputLabel htmlFor="Milestone-type" >Milestone Type</InputLabel>
 
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
             value={milestoneType}
-            label="Milestone Type"
+            label="Select-Milestone-Type"
             className={styles.select}
             onChange={(e) => setMilestoneType(e.target.value)}
           >
-            <MenuItem value={"money_spent"}>Money Spent</MenuItem>
-            <MenuItem value={"visits"}>Visits</MenuItem>
-            <MenuItem value={"quanitity"}>Quantity</MenuItem>
+            <MenuItem label="Money Spent" value={"money_spent"}>Money Spent</MenuItem>
+            <MenuItem label="Visits" value={"visits"}>Visits</MenuItem>
+            <MenuItem label="Quantity " value={"quantity"}>Quantity</MenuItem>
           </Select>
           <br />
           <FormControl fullWidth sx={{ m: 1 }} variant="standard">

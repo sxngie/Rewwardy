@@ -50,7 +50,7 @@
 }
 
 .data h3 {
-  color: #f99fc8;
+  color:  #fab2d3;
   font-size: 28px;
   margin-bottom: 1rem;
   font-family: sans-serif;
@@ -58,7 +58,9 @@
 
 .data p {
   margin-bottom: 1rem;
+  font-family: sans-serif;
 }
+
 .inputField {
   background-color: white;
   border-radius: var(--border-radius);
@@ -66,14 +68,32 @@
 }
 
 .btn {
-  background-color: #f99fc8;
-  color: #000;
+  background-color: #fdebf4;
+  color: #180f14;
 }
+
+.btn:hover {
+  background-color: #fcd8e9  ;  
+}
+
+.btn:focus {
+  background-color: #FBC5DE;
+}
+
 
 .searchbtn { 
   width: 350px;
   background-color: #463489;
 }
+
+.searchbtn:hover {
+  background-color: #31245f;  
+}
+
+.searchbtn:focus {
+  background-color: #1c1436;
+}
+
 
 .searchbox {
   display: flex;
