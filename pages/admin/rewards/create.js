@@ -30,7 +30,7 @@ export default function CreateReward() {
   const [validUntil, setValidUntil] = useState("");
 
   const router = useRouter();
-  const businessid = getCookie("businessid");
+  const businessid = getCookie("businessId");
 
   const createReward = async () => {
     await addDoc(collection(db, "business_rewards"), {
@@ -56,11 +56,10 @@ export default function CreateReward() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
+      <AdminHamburgerMenu className={styles.shapingBar}/>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className="row">
-          <h1 className={styles.headerbar}>Create Reward</h1>
-          <br/>
-          <AdminHamburgerMenu className={styles.shapingBar}/>
+        <div className={styles.headerbar}>
+          <h1 >Create Reward</h1>
         </div>
         <div className={styles.form}>
           <TextField

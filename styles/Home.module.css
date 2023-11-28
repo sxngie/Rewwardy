@@ -1,5 +1,4 @@
 .header {
-  
   width: 100%;
 }
 
@@ -24,7 +23,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 6rem;
+  padding-top: 4rem;
   padding-left: 1rem;
   padding-right: 1rem;
   width: 100%;
@@ -41,8 +40,9 @@
 .scrollableContainer {
   display: flex;
   flex-direction: row;
-  height: 400px;
-  width: 350px; 
+  height: 420px;
+  min-width: 350px; 
+  width: 100%;
  /* set to the desired width, can be in px, em, rem, %, etc. */
   padding: 1rem 0rem; /* optional: gives some space inside the scrollable box */
   overflow-x: scroll; /* allows horizontal scrolling */
@@ -50,18 +50,14 @@
 }
 
 .cardEntity {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center; */
   background-color: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
   height: 375px; 
-  width: 275px!important;
+  min-width: 275px!important;
   text-align: center;
   border-radius: 16px;
-  /* display: inline-block; */
 }
+
 
 h2.sectionHead {
   color: #ffffff;
@@ -69,6 +65,7 @@ h2.sectionHead {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 24px;
   padding-top: 2rem;
+  font-weight: bold;
 }
 
 .cardLabel {
@@ -105,6 +102,25 @@ h2.sectionHead {
   flex-wrap: wrap;
   width: 100%;
   position: center;
+}
+
+.norewards {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  min-width: 350px; 
+  width: 100%;
+ /* set to the desired width, can be in px, em, rem, %, etc. */
+  padding: 1rem 0rem; /* optional: gives some space inside the scrollable box */
+  overflow-x: scroll; /* allows horizontal scrolling */
+  column-gap: 1rem;
+}
+
+.norewards p {
+  width: 100%;
+  font-size: 18px;
+  color: #b0b0b0;
+  text-align: center;
 }
 
 .pinkButton {

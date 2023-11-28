@@ -30,7 +30,6 @@ export default function CreateUser() {
   const router = useRouter();
 
   const createUserAccount = async () => {
-    console.log("HIT")
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
@@ -44,11 +43,14 @@ export default function CreateUser() {
           dateOfBirth: dateOfBirth,
           gender: gender,
           authId: user.uid,
+          visits: [],
+          moneySpent: [],
+          businesses: [],
           role: "USER",
           dateCreated: new Date(),
         })
           .then((data) => {
-            alert(`You hav3e created an account!\nAccount ID: ${data.id}`);
+            alert(`You have created an account!\nAccount ID: ${data.id}`);
             router.push("/");
           })
           .catch((err) => alert(err.message));

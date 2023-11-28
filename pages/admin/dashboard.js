@@ -45,7 +45,7 @@ export default function AdminDashboard() {
 
     getData();
   }, [businessid]);
-  console.log(business)
+
   return (
     <>
       <Head>

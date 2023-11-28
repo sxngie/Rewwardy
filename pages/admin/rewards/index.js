@@ -36,8 +36,8 @@ export default function RewardLists() {
     }
 
     getData();
-  }, [rewards]);
-  // console.log(rewards)
+  }, []);
+
   return (
     <>
       <Head>

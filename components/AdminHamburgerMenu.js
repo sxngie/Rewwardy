@@ -67,6 +67,11 @@ const AdminHamburgerMenu = () => {
             </Link>
           </ListItem>
           <ListItem onClick={toggleDrawer(false)}>
+            <Link href="/admin/search">
+              <ListItemText primary="Search Reward" sx={{ color: "#9B2C6B" }} />
+            </Link>
+          </ListItem>
+          <ListItem onClick={toggleDrawer(false)}>
             <ListItemText
               primary="Logout"
               sx={{ color: "#9B2C6B" }}
