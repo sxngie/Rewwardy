@@ -87,7 +87,7 @@ export default function AdminLogin() {
             className={styles.textbutton}
             id="standard-basic"
             variant="standard"
-            onClick={() => router("/admin/register")}
+            onClick={() => router.push("/admin/register")}
           >
             Create an Account
           </Button>
