@@ -2,23 +2,29 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-  align-items: left;
-  padding-top: 5rem;
-  min-height: 100vh;
-  padding-left: 5%;
+  align-items: center;
+  min-height: 90vh;
 }
 
-.box {
+.container {
   max-width: 1160px;
   width: 100%;
-  padding: 24px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .header {
+  padding-top: 4rem;
+  padding-bottom: 1rem;
+}
+
+.header h1 {
   color: #463489;
   font-size: 36px;
   font-weight: bold;
-  padding-top: 3%;
 }
 
 .data {
@@ -27,6 +33,7 @@
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .data h2 {
@@ -36,18 +43,18 @@
 }
 
 .data h3 {
-  color: #F99FC8;
+  color: #f99fc8;
   font-size: 42px;
   margin-bottom: 1rem;
   font-family: sans-serif;
 }
 
 .leaderboard h4 {
-  color: #552CB4;
+  color: #552cb4;
   font-size: 24px;
   font-family: sans-serif;
   font-weight: bold;
-  padding-left: 5%;
+  margin-bottom: 1rem;
 }
 
 .leaderboard ol {
@@ -57,29 +64,33 @@
 }
 
 .leaderboard li {
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 22px;
   font-family: sans-serif;
+}
+
+.lists {
+  padding-bottom: 1rem;
 }
 
 .btnrow {
   display: flex;
   width: 100%;
-  margin-top: 1rem;
+  padding-top: 2rem;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
 .btn {
-background-color: #9B1250;
-width: 80%;
+  background-color: #9b1250;
+  width: 100%;
 }
 
 .btn:hover {
-  background-color: #E3227A;
+  background-color: #e3227a;
 }
 
 .btn:focus {
-  background-color: #D1196D;
+  background-color: #d1196d;
 }

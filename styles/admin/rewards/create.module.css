@@ -1,11 +1,11 @@
 .main {
   background-color: white;
-  height: 100vh;
+  height: 90vh;
   width: 100%;
   margin: auto;
   display: flex;
   justify-content: flex-start;
-  align-items: left;
+  align-items: center;
   flex-direction: column;
   padding: 24px;
   padding-top: 5rem;
@@ -13,6 +13,8 @@
 
 .headerbar {
   color: #552CB4;
+  max-width: 600px;
+  min-width: 350px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -22,9 +24,9 @@
 .form {
   display: flex;
   flex-direction: column;
-  max-width: 1160px;
+  max-width: 600px;
+  min-width: 350px;
   width: 100%;
-  padding-left: 5%;
 }
 
 .select {
@@ -50,7 +52,18 @@
   margin-top: 3rem;
   width: 100%;
 }
+
 .btn {
-  background-color: #9B1250;
+  background-color: #9b1250;
   width: 100%;
+  color: #FFFFFF;
+  /* margin-left: 5%; */
+}
+
+.btn:hover {
+  background-color: #E3227A;
+}
+
+.btn:focus {
+  background-color: #D1196D;
 }

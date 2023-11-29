@@ -30,7 +30,7 @@ export default function CreateReward() {
   const [validUntil, setValidUntil] = useState("");
 
   const router = useRouter();
-  const businessid = getCookie("businessid");
+  const businessid = getCookie("businessId");
 
   const createReward = async () => {
     await addDoc(collection(db, "business_rewards"), {
@@ -56,15 +56,13 @@ export default function CreateReward() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
+      <AdminHamburgerMenu className={styles.shapingBar}/>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className="row">
-          <h1 className={styles.headerbar}>Create Reward</h1>
-          <br/>
-          <AdminHamburgerMenu className={styles.shapingBar}/>
+        <div className={styles.headerbar}>
+          <h1 >Create Reward</h1>
         </div>
         <div className={styles.form}>
           <TextField
-            id="standard-basic"
             label="Name"
             variant="standard"
             value={name}
@@ -80,7 +78,6 @@ export default function CreateReward() {
           />
           <br />
           <TextField
-            id="standard-basic"
             label="Description"
             variant="standard"
             multiline
@@ -97,19 +94,17 @@ export default function CreateReward() {
             onChange={(e) => setDescription(e.target.value)}
           />
           <br />
-          <InputLabel>Milestone Type</InputLabel>
+          <InputLabel htmlFor="Milestone-type" >Milestone Type</InputLabel>
 
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
             value={milestoneType}
-            label="Milestone Type"
+            label="Select-Milestone-Type"
             className={styles.select}
             onChange={(e) => setMilestoneType(e.target.value)}
           >
-            <MenuItem value={"money_spent"}>Money Spent</MenuItem>
-            <MenuItem value={"visits"}>Visits</MenuItem>
-            <MenuItem value={"quanitity"}>Quantity</MenuItem>
+            <MenuItem label="Money Spent" value={"money_spent"}>Money Spent</MenuItem>
+            <MenuItem label="Visits" value={"visits"}>Visits</MenuItem>
+            <MenuItem label="Quantity " value={"quantity"}>Quantity</MenuItem>
           </Select>
           <br />
           <FormControl fullWidth sx={{ m: 1 }} variant="standard">
