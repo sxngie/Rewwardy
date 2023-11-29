@@ -47,12 +47,14 @@ export default function UserLogin() {
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.column}>
-          <h1 className={styles.header} style={{ margin: "2% 0px 2% 0px" }}>
+        <div className={styles.row}>
+          <h1 className={styles.header} style={{ margin: "0% 0px 2% 0px" }}>
             Password Recovery
           </h1>
           <br/>
-          <div className={styles.form} style={{}}>
+        </div>
+        <div className={styles.column}>
+          <div className={styles.form}>
             <TextField
               className={styles.inputField}
               id="standard-basic"
