@@ -56,7 +56,7 @@ export default function AdminLogin() {
       </Head>
       {/* <TopNavbar/> */}
       <main className={`${styles.main} `}>
-        <h1 className={`${styles.header} ${space_grotesk.className}`}>
+        <h1 className={`${styles.header}`}>
           Login Business
         </h1>
         <div className={styles.form}>
