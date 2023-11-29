@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Reward.module.css'
 import Link from "next/link";
-import { Footer } from "../components";
-import HamburgerMenu from '../components/HamburgerMenu.js'
+import { Footer } from "../../components";
+import HamburgerMenu from '../../components/HamburgerMenu.js'
 import { useRouter } from "next/router";
 import fs from 'fs';
 import path from 'path';
