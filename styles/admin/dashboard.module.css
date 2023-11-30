@@ -34,6 +34,11 @@
   border-radius: 4px;
   margin-bottom: 1rem;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 5rem;
+  height: 270px;
 }
 
 .data h2 {
@@ -93,4 +98,16 @@
 
 .btn:focus {
   background-color: #d1196d;
+}
+
+@media (max-width: 640px) {
+  .data {
+    
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0rem;
+    height: 400px;
+  }
 }

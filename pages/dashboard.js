@@ -69,7 +69,9 @@ export default function Home() {
         // Snapshots
         const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
         businessRewardQuerySnapshot.forEach((doc) => {
-          rewards.push(doc.data());
+          let tempReward = doc.data();
+          tempReward.id = doc.id;
+          rewards.push(tempReward);
         });
       });
 
@@ -104,7 +106,7 @@ export default function Home() {
                     description={reward.description}
                     expDate={reward.validUntil}
                     action="Redeem"
-                    to={`/reward/redeem/${5}`}
+                    to={`/reward/redeem/${reward.id}`}
                   />
                 ))}
               </div>
@@ -125,6 +127,7 @@ export default function Home() {
                     description={challenge?.description}
                     expDate={challenge?.validUntil}
                     action="View Progress"
+                    to={`/reward/progress/${challenge.id}`}
                   />
                 ))}
               </div>

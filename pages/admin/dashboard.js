@@ -6,7 +6,14 @@ import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
-import { collection, query, where, getDocs, getDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,6 +28,8 @@ export default function AdminDashboard() {
   const [recurringCustomers, setRecurringCustomers] = useState(0);
   const [topCustomers, setTopCustomers] = useState([]);
   const [popularRewards, setPopularRewards] = useState([]);
+  const [todayScans, setTodayScans] = useState(0);
+  const [allScans, setAllScans] = useState(0);
 
   const businessid = getCookie("businessId");
 
@@ -61,10 +70,18 @@ export default function AdminDashboard() {
             <h1>Home - {business?.businessName}</h1>
           </div>
           <div className={styles.data}>
-            <h2>Rewards Awarded (Today)</h2>
-            <h3>{awardedToday}</h3>
-            <h2>Daily Recurring Customers</h2>
-            <h3>{recurringCustomers}</h3>
+            <div>
+              <h2>Rewards Awarded (Today)</h2>
+              <h3>{awardedToday}</h3>
+              <h2>Daily Recurring Customers</h2>
+              <h3>{recurringCustomers}</h3>
+            </div>
+            <div>
+              <h2>Scans (Today)</h2>
+              <h3>{todayScans}</h3>
+              <h2>Scans (All Time)</h2>
+              <h3>{allScans}</h3>
+            </div>
           </div>
           <div className={styles.leaderboard}>
             <h4>Top Loyal Customers (Visits)</h4>
@@ -90,6 +107,9 @@ export default function AdminDashboard() {
               </ol>
             ) : (
               <p className={styles.lists}>No rewards awarded yet!</p>
+              // <ol>
+              //   <li>Free Cookie (1)</li>
+              // </ol>
             )}
           </div>
           <div className={styles.btnrow}>
