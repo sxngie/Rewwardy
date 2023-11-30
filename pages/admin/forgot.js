@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { setCookie } from "cookies-next";
 import Script from "next/script";
 
@@ -19,23 +19,6 @@ import Script from "next/script";
    const [password, setPassword] = useState("");
 
    const router = useRouter();
-
-   const login = async () => {
-     const auth = getAuth();
-
-     await signInWithEmailAndPassword(auth, email, password)
-       .then(async (userCredential) => {
-         const user = userCredential.user;
-         // Push to dashboard
-         setCookie("userid", user.uid);
-         router.push("/admin/dashboard");
-       })
-       .catch((error) => {
-         const errorCode = error.code;
-         const errorMessage = error.message;
-       });
-   };
-
    const auth = getAuth();
 
    return (

@@ -19,23 +19,6 @@ export default function UserLogin() {
   const [password, setPassword] = useState("");
 
   const router = useRouter();
-
-  const login = async () => {
-    const auth = getAuth();
-
-    await signInWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        const user = userCredential.user;
-        // Push to dashboard
-        setCookie("userid", user.uid);
-        router.push("/dashboard");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-  };
-
   const auth = getAuth();
 
   return (
