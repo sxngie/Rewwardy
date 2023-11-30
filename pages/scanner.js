@@ -18,7 +18,7 @@ export default function Scanner() {
     },
   });
 
-  const userid = getCookie("userid")
+  const userid = getCookie("userid");
 
   return (
     <>
@@ -38,18 +38,13 @@ export default function Scanner() {
           <video ref={ref} height={400} />
           <p>
             <span>Last result:</span>
-            <span>{result}/{userid}</span>
+            <span>
+              {result}/{userid}
+            </span>
           </p>
         </div>
 
-        <button
-          className={styles.pinkButton}
-          onClick={async () => {
-            await fetch(`${result}/${userid}`)
-              .then((res) => console.log(res))
-              .catch((err) => console.log(err));
-          }}
-        >
+        <button className={styles.pinkButton} onClick={() => scanQRCode()}>
           Redeem
         </button>
       </main>
