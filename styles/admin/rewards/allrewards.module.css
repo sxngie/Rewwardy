@@ -42,7 +42,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #552cb4;
+  background-color: #463489;
   color: white;
   padding: 16px;
   border-radius: 4px;
@@ -63,12 +63,22 @@
 }
 
 .name {
-  color: #f72585;
+  color: #F9D7E3;
   font-weight: bold;
   font-size: 18px;
 }
+
 .btn {
   background-color: #9b1250;
   width: 100%;
+  color: #FFFFFF;
   /* margin-left: 5%; */
+}
+
+.btn:hover {
+  background-color: #E3227A;
+}
+
+.btn:focus {
+  background-color: #D1196D;
 }
