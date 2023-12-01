@@ -15,6 +15,7 @@ import {
 import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import TermsModal from "../components/terms";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +27,12 @@ export default function CreateUser() {
   const [password, setPassword] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [gender, setGender] = useState("");
+  const [showTermsModal, setShowTermsModal] = useState(false);
 
+  const toggleTermsModal = () => {
+    setShowTermsModal(!showTermsModal);
+  }
   const router = useRouter();
-
   const createUserAccount = async () => {
     const auth = getAuth();
     await createUserWithEmailAndPassword(auth, email, password)
@@ -148,9 +152,11 @@ export default function CreateUser() {
               className={styles.clickText}
               id="standard-basic"
               variant="standard"
+              onClick={toggleTermsModal}
             >
               Terms and Conditions
             </Button>
+            <TermsModal show={showTermsModal} onClose={toggleTermsModal} />
             <br />
             <Button
               className={styles.pinkButton}
