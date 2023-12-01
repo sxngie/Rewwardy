@@ -7,7 +7,7 @@ import { useState, useRef } from "react";
 import { Button } from "@mui/material";
 import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import QRCode from "react-qr-code";
+// import QRCode from "react-qr-code";
 import { getCookie } from "cookies-next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,20 +19,20 @@ export default function QRCodePage() {
 
   const businessId = getCookie("businessId");
 
-  let qrCodeRef = useRef();
+  // let qrCodeRef = useRef();
 
-  const downloadQRCode = () => {
-    const canvas = qrCodeRef.current.querySelector("canvas");
-    const pngUrl = canvas
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    let downloadLink = document.createElement("a");
-    downloadLink.href = pngUrl;
-    downloadLink.download = "QRCode.png";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  };
+  // const downloadQRCode = () => {
+  //   const canvas = qrCodeRef.current.querySelector("canvas");
+  //   const pngUrl = canvas
+  //     .toDataURL("image/png")
+  //     .replace("image/png", "image/octet-stream");
+  //   let downloadLink = document.createElement("a");
+  //   downloadLink.href = pngUrl;
+  //   downloadLink.download = "QRCode.png";
+  //   document.body.appendChild(downloadLink);
+  //   downloadLink.click();
+  //   document.body.removeChild(downloadLink);
+  // };
 
   return (
     <>
@@ -49,18 +49,18 @@ export default function QRCodePage() {
             <h1>Scan or Download QR Code</h1>
           </div>
           <div className={styles.box}>
-            {businessId ? (
+            {/* {businessId ? (
               <QRCode value={businessId} ref={qrCodeRef} />
             ) : (
               <p>Loading...</p>
-            )}
+            )} */}
           </div>
           <br />
           <div className={styles.btnrow}>
             <Button
               className={styles.btn}
               variant="contained"
-              onClick={() => downloadQRCode()}
+              // onClick={() => downloadQRCode()}
             >
               Download
             </Button>

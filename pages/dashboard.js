@@ -105,6 +105,7 @@ export default function Home() {
                     businessName={reward.businessName}
                     description={reward.description}
                     expDate={reward.validUntil}
+                    imageSrc={reward?.imageUrl}
                     action="Redeem"
                     to={`/reward/redeem/${reward.id}`}
                   />
@@ -126,6 +127,7 @@ export default function Home() {
                     businessName={challenge?.businessName}
                     description={challenge?.description}
                     expDate={challenge?.validUntil}
+                    imageSrc={challenge?.imageUrl}
                     action="View Progress"
                     to={`/reward/progress/${challenge.id}`}
                   />
@@ -149,6 +151,7 @@ export default function Home() {
                     businessName={challenge?.businessName}
                     description={challenge?.description}
                     expDate={challenge.validUntil}
+                    imageSrc={challenge?.imageUrl}
                     action="More Info"
                     to={`/reward/more-info/${5}`}
                   />
