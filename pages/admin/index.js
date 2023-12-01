@@ -59,6 +59,7 @@ export default function AdminLogin() {
         <h1 className={`${styles.header}`}>
           Login Business
         </h1>
+        <br/>
         <div className={styles.form}>
           <TextField
             label="Email"
@@ -74,6 +75,14 @@ export default function AdminLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <br />
+          <Button
+            className={styles.textbutton}
+            id="standard-basic"
+            variant="standard"
+          >
+            <Link href="/admin/forgot">Forgot password?</Link>
+          </Button>
           <br />
           <Button
             variant="contained"

@@ -52,7 +52,7 @@ export default function UserLogin() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.row}>
           <h1 className={styles.header}>Login</h1>
-          <br />
+          <br/>
         </div>
         <div className={styles.column}>
           <div className={styles.form}>
@@ -79,7 +79,7 @@ export default function UserLogin() {
               id="standard-basic"
               variant="standard"
             >
-              Forgot password?
+              <Link href="/forgot">Forgot password?</Link>
             </Button>
             <br />
             <Button
