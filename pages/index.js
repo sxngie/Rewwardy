@@ -6,9 +6,14 @@ import { Footer } from "../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
-import { db } from "@/firebase";
+import { auth } from "@/firebase";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { setCookie } from "cookies-next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,6 +21,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const router = useRouter();
 
@@ -46,7 +52,7 @@ export default function UserLogin() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.row}>
           <h1 className={styles.header}>Login</h1>
-          <br />
+          <br/>
         </div>
         <div className={styles.column}>
           <div className={styles.form}>
@@ -73,7 +79,7 @@ export default function UserLogin() {
               id="standard-basic"
               variant="standard"
             >
-              Forgot password?
+              <Link href="/forgot">Forgot password?</Link>
             </Button>
             <br />
             <Button
@@ -91,6 +97,31 @@ export default function UserLogin() {
               onClick={() => router.push("/register")}
             >
               Create an Account
+            </Button>
+            <Button
+              className={styles.clickText}
+              id="standard-basic"
+              variant="standard"
+              onClick={async () => {
+                setIsAuthenticating(true);
+                const provider = new GoogleAuthProvider();
+                try {
+                  await signInWithPopup(auth, provider);
+                  router.push("/dashboard");
+                } catch (error) {
+                  console.error("Error during Google authentication:", error);
+                  if (error.code === "auth/cancelled-popup-request") {
+                    alert("Authentication was cancelled. Please try again.");
+                  } else {
+                    alert(
+                      "An error occurred during authentication. Please try again."
+                    );
+                  }
+                }
+                setIsAuthenticating(false);
+              }}
+            >
+              Sign in with Google
             </Button>
           </div>
         </div>

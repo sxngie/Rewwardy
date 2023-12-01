@@ -5,13 +5,13 @@ import { TopNavbar, AdminFooter } from "../../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import { setCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-const space_grotesk = Space_Grotesk({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -56,9 +56,10 @@ export default function AdminLogin() {
       </Head>
       {/* <TopNavbar/> */}
       <main className={`${styles.main} `}>
-        <h1 className={`${styles.header} ${space_grotesk.className}`}>
+        <h1 className={`${styles.header}`}>
           Login Business
         </h1>
+        <br/>
         <div className={styles.form}>
           <TextField
             label="Email"
@@ -74,6 +75,14 @@ export default function AdminLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <br />
+          <Button
+            className={styles.textbutton}
+            id="standard-basic"
+            variant="standard"
+          >
+            <Link href="/admin/forgot">Forgot password?</Link>
+          </Button>
           <br />
           <Button
             variant="contained"

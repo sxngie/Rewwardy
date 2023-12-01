@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const space_grotesk = Space_Grotesk({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
