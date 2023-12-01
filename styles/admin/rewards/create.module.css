@@ -48,6 +48,16 @@
   font-family: sans-serif;
   font-size: 16px;
 }
+
+.image {
+  width: 100%;
+  padding: 16px 8px;
+  border: #552CB4 1px solid;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
 .btnrow {
   margin-top: 3rem;
   width: 100%;

@@ -227,7 +227,7 @@ export default function CreateReward() {
               type="file"
               accept={[".jpg", ".png", ".jpeg"]}
               placeholder="Choose Image"
-              className={styles.dateinput}
+              className={styles.image}
               onChange={(e) => setImageUpload(e.target.files[0])}
             />
           </label>
@@ -261,7 +261,7 @@ export default function CreateReward() {
           >
             <Alert
               onClose={handleErrorClose}
-              severity="danger"
+              severity="warning"
               sx={{ width: "100%" }}
             >
               {errorMessage}

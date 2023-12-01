@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import Image from "next/image"
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
