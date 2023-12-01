@@ -133,6 +133,25 @@ h3.business {
   display: inline-block; 
 }
 
+.norewards {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  min-width: 350px; 
+  width: 100%;
+ /* set to the desired width, can be in px, em, rem, %, etc. */
+  padding: 1rem 0rem; /* optional: gives some space inside the scrollable box */
+  overflow-x: scroll; /* allows horizontal scrolling */
+  column-gap: 1rem;
+}
+
+.norewards p {
+  width: 100%;
+  font-size: 18px;
+  color: #b0b0b0;
+  text-align: center;
+}
+
 .pinkButton {
   background-color: #a32e6e;
   color: #FFFFFF;

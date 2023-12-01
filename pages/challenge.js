@@ -4,23 +4,40 @@ import styles from "@/styles/Challenge.module.css";
 import Link from "next/link";
 import { Footer } from "../components";
 import HamburgerMenu from "../components/HamburgerMenu.js";
+import { useState, useEffect } from "react";
+import { getCookie } from "cookies-next";
+import { db } from "@/firebase";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
-function CardEntity({ imageSrc, title, businessName, description, expDate }) {
+function CardEntity({
+  imageSrc,
+  title,
+  businessName,
+  description,
+  expDate,
+  action,
+}) {
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
         <img src={imageSrc} className={styles.picture} />
-      </div>{" "}
-      {}
+      </div>
       <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
       <div className={styles.description}>
         <p>{description}</p>
       </div>
       <Link href="/">
-        <button className={styles.pinkButton}>Redeem</button>
+        <button className={styles.pinkButton}>{action}</button>
       </Link>
       <div className={styles.expireDate}>{expDate}</div>
     </div>
@@ -28,6 +45,42 @@ function CardEntity({ imageSrc, title, businessName, description, expDate }) {
 }
 
 export default function Home() {
+  const [user, setUser] = useState();
+  const [rewards, setRewards] = useState([]);
+  const [challenges, setChallenges] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
+
+  const userid = getCookie("userid");
+
+  useEffect(() => {
+    async function getData() {
+      // Fetch User
+      const userDocRef = doc(db, "users", userid);
+      const userDocSnap = await getDoc(userDocRef);
+      let userInfo = userDocSnap.data();
+      setUser(userInfo);
+      let rewards = [];
+      userInfo?.businesses.map(async (businessId) => {
+        // Queries
+        const businessRewardQuery = query(
+          collection(db, "business_rewards"),
+          where("businessId", "==", businessId)
+        );
+        // Snapshots
+        const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
+        businessRewardQuerySnapshot.forEach((doc) => {
+          let tempReward = doc.data();
+          tempReward.id = doc.id;
+          rewards.push(tempReward);
+        });
+      });
+
+      setRewards(rewards);
+    }
+
+    getData();
+  }, [userid]);
+
   return (
     <>
       <Head>
@@ -42,51 +95,32 @@ export default function Home() {
           <br />
           <HamburgerMenu className={styles.shapingBar} />
         </div>
-        <div className="row">
           <div className="row">
             <div id="SectionDiv" className="column">
               <div className="container">
+                {inProgress.length > 0 ? (
                 <div className={styles.scrollableContainer}>
-                  <CardEntity
-                    imageSrc="Props_samples/latte.jpg"
-                    title="Dirty Chai"
-                    businessName="Friends Cafe"
-                    description="$15 worth of purchases."
-                    expDate="January 28th, 2024"
-                  ></CardEntity>
-                  <CardEntity
-                    imageSrc="Props_samples/toast.jpg"
-                    title="Toast"
-                    businessName="Cabra Tosta"
-                    description="Visit 5 times in a row!"
-                    expDate="February 15th, 2024"
-                  ></CardEntity>
-                  <CardEntity
-                    imageSrc="Props_samples/medalla.jpg"
-                    title="Medalla"
-                    businessName="El Garabato"
-                    description="Visit 3 times to unlock!"
-                    expDate="January 28th, 2024"
-                  ></CardEntity>
-                  <CardEntity
-                    imageSrc="Props_samples/pizza.jpeg"
-                    title="Pizza Slice"
-                    businessName="Jarana"
-                    description="With the eligible purchase."
-                    expDate="January 28th, 2024"
-                  ></CardEntity>
-                  <CardEntity
-                    imageSrc="Props_samples/tequila.jpg"
-                    title="Tequila"
-                    businessName="Off the Wall"
-                    description="Free with 5 visits."
-                    expDate="December 28th, 2023"
-                  ></CardEntity>
+                  {challenges.map((challenge) => (
+                    <CardEntity
+                      title={challenge?.name}
+                      businessName={challenge?.businessName}
+                      description={challenge?.description}
+                      expDate={challenge.validUntil}
+                      action="More Info"
+                      to={`/reward/more-info/${5}`}
+                    />
+                  ))}
                 </div>
+              ) : (
+                <div className={styles.norewards}>
+                  <p>
+                    Still haven't started a challenge? Go visit you local shop.
+                  </p>
+                </div>
+              )}
               </div>
             </div>
           </div>
-        </div>
       </main>
       <Footer></Footer>
     </>
