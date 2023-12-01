@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { truncateString } from "@/utils/helpers";
+import Image from "next/image"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,6 +41,9 @@ export default function RewardLists() {
             <h1>{reward?.name}</h1>
           </div>
           <div className={styles.box}>
+            <div className={styles.imgcanvas}>
+              <Image src={reward?.imageUrl} height={275} width={275}/>
+            </div>
             <h2>Description</h2>
             <p>{reward?.description}</p>
             <br />

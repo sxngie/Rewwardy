@@ -24,7 +24,8 @@
     "react-qr-code": "^2.0.12",
     "react-zxing": "^2.0.0",
     "sass": "^1.68.0",
-    "styled-components": "^6.0.9"
+    "styled-components": "^6.0.9",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/firebase": "^3.2.1",
