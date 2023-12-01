@@ -7,27 +7,83 @@ import HamburgerMenu from '../../components/HamburgerMenu.js'
 import { useRouter } from "next/router";
 import fs from 'fs';
 import path from 'path';
+import { useState, useEffect } from "react";
+import { getCookie } from "cookies-next";
+import { db } from "@/firebase";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-function CardEntity({ imageSrc, title, businessName, description, expDate }) {
+function CardEntity({
+  imageSrc,
+  title,
+  businessName,
+  description,
+  expDate,
+  action,
+}) {
   return (
-      <div className={styles.cardEntity}>
-          <div className={styles.pictureFrame}><img id="Reward image"  src={imageSrc} className={styles.picture}/></div> {}
-          <h2 className={styles.cardLabel}>{title}</h2>
-          <h3 className={styles.business}>{businessName}</h3>
-          <div className={styles.description}>
-              <p>{description}</p>
-          </div>
-          <Link href="/">
-              <button className={styles.pinkButton}>Redeem</button>
-          </Link>
-          <div className={styles.expireDate}>{expDate}</div>
+    <div className={styles.cardEntity}>
+      <div className={styles.pictureFrame}>
+        <img src={imageSrc} className={styles.picture} />
       </div>
+      <h2 className={styles.cardLabel}>{title}</h2>
+      <h3 className={styles.business}>{businessName}</h3>
+      <div className={styles.description}>
+        <p>{description}</p>
+      </div>
+      <Link href="/">
+        <button className={styles.pinkButton}>{action}</button>
+      </Link>
+      <div className={styles.expireDate}>{expDate}</div>
+    </div>
   );
 }
 
 export default function Home({ cards }) {
+  const [user, setUser] = useState();
+  const [rewards, setRewards] = useState([]);
+  const [challenges, setChallenges] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
+
+  const userid = getCookie("userid");
+
+  useEffect(() => {
+    async function getData() {
+      // Fetch User
+      const userDocRef = doc(db, "users", userid);
+      const userDocSnap = await getDoc(userDocRef);
+      let userInfo = userDocSnap.data();
+      setUser(userInfo);
+      let rewards = [];
+      userInfo?.businesses.map(async (businessId) => {
+        // Queries
+        const businessRewardQuery = query(
+          collection(db, "business_rewards"),
+          where("businessId", "==", businessId)
+        );
+        // Snapshots
+        const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
+        businessRewardQuerySnapshot.forEach((doc) => {
+          let tempReward = doc.data();
+          tempReward.id = doc.id;
+          rewards.push(tempReward);
+        });
+      });
+
+      setRewards(rewards);
+    }
+
+    getData();
+  }, [userid]);
+
   return (
     <>
       <Head>
@@ -45,11 +101,25 @@ export default function Home({ cards }) {
         <div className="row">
           <div id = "SectionDiv" className = "column" >
             <div className={styles.container}>
-              <div className={styles.scrollableContainer}>
-                { cards.map((card, index) => (
-                  <CardEntity key={index} {...card} />))}
-              </div>
-          </div>
+              {rewards.length > 0 ? (
+                <div className={styles.scrollableContainer}>
+                  {rewards.map((reward) => (
+                    <CardEntity
+                      title={reward.name}
+                      businessName={reward.businessName}
+                      description={reward.description}
+                      expDate={reward.validUntil}
+                      action="Redeem"
+                      to={`/reward/redeem/${reward.id}`}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.norewards}>
+                  <p>Still no rewards. Go visit you local shop.</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </main>
