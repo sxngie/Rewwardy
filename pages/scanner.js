@@ -2,7 +2,6 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Scanner.module.css";
 import { Footer } from "../components";
-import Link from "next/link";
 import HamburgerMenu from "../components/HamburgerMenu.js";
 import { useZxing } from "react-zxing";
 import { useState } from "react";
@@ -49,7 +48,7 @@ export default function Scanner() {
           Redeem
         </button>
       </main>
-      <Footer></Footer>
+      <Footer/>
     </>
   );
 }
