@@ -36,12 +36,9 @@ export default function Scanner() {
         </div>
         <div className={styles.camera}>
           <video ref={ref} height={400} />
-            <div>
-              <span>Last result: </span>
-              <span>{result}/{userid}</span>
-            </div>
+              {/* <span>Last result: </span>
+            <span>{result}/{userid}</span> */}
         </div>
-
         <button
           className={styles.pinkButton}
           onClick={async () => {
