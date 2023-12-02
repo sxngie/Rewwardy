@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Scanner.module.css";
 import { Footer } from "../components";
 import Link from "next/link";
-import HamburgerMenu, { Links } from "../components/HamburgerMenu.js";
+import HamburgerMenu from "../components/HamburgerMenu.js";
 import { useZxing } from "react-zxing";
 import { useState } from "react";
 import { getCookie } from "cookies-next";
@@ -36,15 +36,19 @@ export default function Scanner() {
         </div>
         <div className={styles.camera}>
           <video ref={ref} height={400} />
-          <p>
-            <span>Last result:</span>
-            <span>
-              {result}/{userid}
-            </span>
-          </p>
+            <div>
+              <span>Last result: </span>
+              <span>{result}/{userid}</span>
+            </div>
         </div>
 
-        <button className={styles.pinkButton} onClick={() => scanQRCode()}>
+        <button
+          className={styles.pinkButton}
+          onClick={async () => {
+            await fetch(`${result}/${userid}`)
+              .then((result) => console.log(result))
+              .catch((err) => console.log(err));
+          }}>
           Redeem
         </button>
       </main>
