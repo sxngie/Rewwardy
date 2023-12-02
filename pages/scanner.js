@@ -46,7 +46,7 @@ export default function Scanner() {
           className={styles.pinkButton}
           onClick={async () => {
             await fetch(`${result}/${userid}`)
-              .then((result) => console.log(result))
+              .then((res) => console.log(res))
               .catch((err) => console.log(err));
           }}>
           Redeem
