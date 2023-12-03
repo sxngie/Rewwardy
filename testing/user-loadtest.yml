@@ -1,15 +1,15 @@
 config:
   target: "http://localhost:3000"
   phases:
-    - duration: 30
+    - duration: 10
       arrivalRate: 1
       name: "Warming up"
-    - duration: 15
+    - duration: 22
       arrivalRate: 1
       rampTo: 2
       name: "Ramping up"
-    - duration: 4
-      arrivalRate: 10
+    - duration: 15
+      arrivalRate: 3
       name: "Sustained load"
   processor: "./processor.js"
  

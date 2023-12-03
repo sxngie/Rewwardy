@@ -14,25 +14,35 @@ config:
   processor: "./processor.js"
  
 scenarios:
-  - name: "Sign up flow"
+  - name: "Create an Account flow"
     flow:
       - get:
-          url: "/"
+          url: "/admin/"
       - think: 1
       - get:
-          url: "/forgot"
+          url: "/admin/forgot"
       - think: 2
       - get:
-          url: "/register"
+          url: "/admin/register"
       - think: 3
       - post:
-          url: "/register"
-          beforeRequest: generateSignupData
+          url: "/admin/register"
+          beforeRequest: generateAdminCreateAccData
           json:
             firstName: "{{ firstName }}"
             lastName: "{{ lastName }}"
             email: "{{ email }}"
             phone: "{{ phone }}"
             password: "{{ password }}"
-            dateOfBirth: "{{ dateOfBirth }}"
-            gender: "{{ gender }}"
+            businessName: "{{ businessName }}"
+            businessType: "{{ businessType }}"
+            municipality: "{{ municipality }}"
+      # - get:
+      #     url: "/admin/"
+      # - think: 3
+      # - post:
+      #     url: "/admin/"
+      #     beforeRequest: generateLoginData
+      #     json: 
+      #     email: "{{ email }}"
+      #     password: "{{ password }}"

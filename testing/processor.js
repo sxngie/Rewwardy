@@ -16,9 +16,25 @@ function generateSignupData(requestParams, ctx, ee, next) {
 function generateLoginData(requestParams, ctx, ee, next) {
     ctx.vars["email"] = f.randEmail();
     ctx.vars["password"] = f.randPassword(10);
+
+    return next();
+}
+
+function generateAdminCreateAccData(requestParams, ctx, ee, next) {
+    ctx.vars["firstName"] = f.randFirstName();
+    ctx.vars["lastName"] = f.randLastName();
+    ctx.vars["email"] = f.randEmail();
+    ctx.vars["phone"] = f.randPhoneNumber();
+    ctx.vars["password"] = f.randPassword(10);
+    ctx.vars["businessName"] = f.randCompanyName();
+    ctx.vars["businessType"] = "Coffee Shop";
+    ctx.vars["municipality"] = "Mayagüez";
+
+    return next();
 }
 
 module.exports = {
   generateSignupData,
   generateLoginData,
+  generateAdminCreateAccData,
 };
