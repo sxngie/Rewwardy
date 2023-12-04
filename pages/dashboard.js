@@ -50,7 +50,7 @@ export default function Home() {
   const [inProgress, setInProgress] = useState([]);
 
   const userid = getCookie("userid");
-
+ 
   useEffect(() => {
     async function getData() {
       // Fetch User
@@ -73,7 +73,7 @@ export default function Home() {
           let tempReward = doc.data();
           tempReward.id = doc.id;
           rewards_.push(tempReward);
-          // console.log(doc.data());
+          // console.log(doc.data()); 
         });
         setRewards(rewards_);
       });
@@ -110,7 +110,7 @@ export default function Home() {
                     action="Redeem"
                     to={`/reward/redeem/${reward?.id}`}
                   />
-                ))}
+                ))} 
               </div>
             ) : (
               <div className={styles.norewards}>
@@ -120,13 +120,13 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>In Progress</h2>
-            {rewards.length > 0 ? (
+            {rewards.length > 1 ? (
               <div className={styles.scrollableContainer}>
                 {rewards.map((challenge) => (
                   <CardEntity
                     title={challenge?.challengeName}
                     businessName={challenge?.businessName}
-                    description={challenge?.description}
+                    description={challenge?.description} 
                     expDate={challenge?.validUntil}
                     action="View Progress"
                     to={`/reward/progress/${challenge.id}`}
@@ -140,17 +140,17 @@ export default function Home() {
                 </p>
               </div>
             )}
-          </div>
+          </div> 
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>New Challenges</h2>
-            {inProgress.length > 0 ? (
+            {rewards.length == 1 ? (
               <div className={styles.scrollableContainer}>
-                {challenges.map((challenge) => (
+                {rewards.map((challenge) => (
                   <CardEntity
-                    title={challenge?.name}
+                    title={challenge?.challengeName}
                     businessName={challenge?.businessName}
-                    description={challenge?.description}
-                    expDate={challenge.validUntil}
+                    description={challenge?.description} 
+                    expDate={challenge?.validUntil}
                     action="More Info"
                     to={`/reward/more-info/${5}`}
                   />

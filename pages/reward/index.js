@@ -16,28 +16,30 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
 function CardEntity({
-  imageSrc,
+  imageUrl,
   title,
   businessName,
   description,
   expDate,
   action,
-}) {
+  to
+}) { 
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <img className={styles.picture} src={imageSrc} />
+        <Image className={styles.picture} alt="Reward image">{imageUrl}</Image>
       </div>
       <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
       <div className={styles.description}>
         <p>{description}</p>
       </div>
-      <Link href="/">
+      <Link href={to}>
         <button className={styles.pinkButton}>{action}</button>
       </Link>
       <div className={styles.expireDate}>{expDate}</div>
@@ -46,7 +48,7 @@ function CardEntity({
 }
 
 export default function RewardsPage() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(); 
   const [rewards, setRewards] = useState([]);
 
   const userid = getCookie("userid");
@@ -54,7 +56,7 @@ export default function RewardsPage() {
   useEffect(() => {
     async function getData() {
       // Fetch User
-      const user_query = query(collection(db, "users"), where('authId', '==', userid));
+      const user_query = query(collection(db, "users"), where('authId', '==', userid)); 
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
         // console.log(doc_.data());
@@ -70,13 +72,14 @@ export default function RewardsPage() {
         // Snapshots
         const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
         businessRewardQuerySnapshot.forEach((doc) => {
-          rewards_.push(doc.data());
+          let tempReward = doc.data();
+          tempReward.id = doc.id;
+          rewards_.push(tempReward);
           // console.log(doc.data());
         });
         setRewards(rewards_);
       });
       });
-      // setUser(userInfo);
     }
 
     getData();
@@ -103,13 +106,13 @@ export default function RewardsPage() {
                 <div className={styles.scrollableContainer}>
                   {rewards.map((reward) => (
                     <CardEntity
-                      imageSrc={reward?.imageUrl}
-                      title={reward?.name}
+                      imageUrl={reward?.imageUrl}
+                      title={reward?.challengeName}
                       businessName={reward?.businessName}
                       description={reward?.description}
                       expDate={reward?.validUntil}
                       action="Redeem"
-                      to={`/reward/redeem/${reward.id}`}
+                      to={`/reward/redeem/${reward?.id}`}
                     />
                   ))}
                 </div>

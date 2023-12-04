@@ -66,7 +66,7 @@ export default function RewardLists() {
             <p>
               Visits: (
               {scanCount < reward?.milestoneGoal
-                ? scanCount
+                ? scanCount - 1
                 : reward?.milestoneGoal}
               /{reward?.milestoneGoal})
             </p>
