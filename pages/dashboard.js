@@ -12,8 +12,6 @@ import {
   query,
   where,
   getDocs,
-  getDoc,
-  doc,
 } from "firebase/firestore";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,7 +27,7 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <img src={imageSrc} className={styles.picture} />
+        <img className={styles.picture}>{imageSrc}</img>
       </div>
       <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
@@ -55,13 +53,15 @@ export default function Home() {
   useEffect(() => {
     async function getData() {
       // Fetch User
-      const userDocRef = doc(db, "users", userid);
-      const userDocSnap = await getDoc(userDocRef);
-      let userInfo = userDocSnap.data();
-      setUser(userInfo);
-      let rewards = [];
-      userInfo?.businesses.map(async (businessId) => {
+      const user_query = query(collection(db, "users"), where('authId', '==', userid));
+      const userDoc = await getDocs(user_query);
+      userDoc.forEach((doc_) => {
+        // console.log(doc_.data());
+        setUser(doc_.data());
+        let rewards_ = [];
+        doc_.data()?.businesses.map(async (businessId) => {
         // Queries
+        // console.log(businessId);
         const businessRewardQuery = query(
           collection(db, "business_rewards"),
           where("businessId", "==", businessId)
@@ -69,13 +69,13 @@ export default function Home() {
         // Snapshots
         const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
         businessRewardQuerySnapshot.forEach((doc) => {
-          let tempReward = doc.data();
-          tempReward.id = doc.id;
-          rewards.push(tempReward);
+          rewards_.push(doc.data());
+          // console.log(doc.data());
         });
+        setRewards(rewards_);
       });
-
-      setRewards(rewards);
+      });
+      // setUser(userInfo);
     }
 
     getData();
@@ -105,9 +105,8 @@ export default function Home() {
                     businessName={reward.businessName}
                     description={reward.description}
                     expDate={reward.validUntil}
-                    imageSrc={reward?.imageUrl}
                     action="Redeem"
-                    to={`/reward/redeem/${reward.id}`}
+                    to={`/reward/redeem/${5}`}
                   />
                 ))}
               </div>
@@ -127,9 +126,7 @@ export default function Home() {
                     businessName={challenge?.businessName}
                     description={challenge?.description}
                     expDate={challenge?.validUntil}
-                    imageSrc={challenge?.imageUrl}
                     action="View Progress"
-                    to={`/reward/progress/${challenge.id}`}
                   />
                 ))}
               </div>
@@ -151,7 +148,6 @@ export default function Home() {
                     businessName={challenge?.businessName}
                     description={challenge?.description}
                     expDate={challenge.validUntil}
-                    imageSrc={challenge?.imageUrl}
                     action="More Info"
                     to={`/reward/more-info/${5}`}
                   />
