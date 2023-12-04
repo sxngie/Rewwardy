@@ -59,7 +59,7 @@ export default function Home() {
       userDoc.forEach((doc_) => {
         // console.log(doc_.data());
         setUser(doc_.data());
-        let rewards_ = [];
+
         doc_.data()?.businesses.map(async (businessId) => {
         // Queries
         // console.log(businessId);
@@ -69,11 +69,12 @@ export default function Home() {
         );
         // Snapshots
         const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
+        let rewards_ = [];
         businessRewardQuerySnapshot.forEach((doc) => {
           let tempReward = doc.data();
           tempReward.id = doc.id;
           rewards_.push(tempReward);
-          // console.log(doc.data()); 
+          // console.log(doc.data());  
         });
         setRewards(rewards_);
       });
