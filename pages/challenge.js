@@ -62,7 +62,7 @@ export default function Challenge() {
         // Queries
         // console.log(businessId);
         const businessRewardQuery = query(
-          collection(db, "business_rewards"),
+          collection(db, "business_challenges"),
           where("businessId", "==", businessId)
         );
         // Snapshots
