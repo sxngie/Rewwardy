@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import styles from "@/styles/admin/rewards/editreward.module.css";
+import styles from "@/styles/inprogress.module.css";
 import { HamburgerMenu, Footer } from "@/components";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -60,9 +60,10 @@ export default function RewardLists() {
           </div>
           <div className={styles.box}>
             <div className={styles.imgcanvas}>
-              <Image src={reward?.imageUrl} height={275} width={275}/>
+              <Image alt="Reward image" src={reward?.imageUrl} height={275} width={275} />
             </div>
-            <h3>Progress</h3>
+            <div className={styles.info}>
+            <h2>Progress</h2>
             <p>
               Visits: (
               {scanCount < reward?.milestoneGoal
@@ -71,12 +72,13 @@ export default function RewardLists() {
               /{reward?.milestoneGoal})
             </p>
             <br/>
-            <h3>Description</h3>
+            <h2>Description</h2>
             <p>{reward?.description}</p>
             <br />
-            <h3>Valid Until</h3>
+            <h2>Valid Until</h2>
             <p>{reward?.validUntil}</p>
             <br />
+            </div>
           </div>
         </div>
       </main>
