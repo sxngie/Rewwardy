@@ -57,9 +57,9 @@ export default function RewardLists() {
               <Link href={`/admin/rewards/${reward.id}`}>
                 <div className={styles.reward} key={key}>
                   <div className={styles.rewardrow}>
-                    <h2 className={styles.name}>{reward.name}</h2>
+                    <h2 className={styles.name}>{reward.challengeName}</h2>
                     <p>
-                      Valid After: {reward.milestoneValue}{" "}
+                      Valid After: {reward.milestoneGoal}{" "}
                       {reward.milestoneType}
                     </p>
                   </div>

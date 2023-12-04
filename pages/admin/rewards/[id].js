@@ -55,7 +55,7 @@ export default function RewardLists() {
               </div>
               <div className={styles.pill}>
                 <h3>Milestone Value</h3>
-                <p>{reward?.milestoneValue}</p>
+                <p>{reward?.milestoneGoal}</p>
               </div>
               <div className={styles.pill}>
                 <h3>Valid From</h3>
