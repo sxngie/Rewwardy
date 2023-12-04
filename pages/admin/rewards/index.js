@@ -22,7 +22,7 @@ export default function RewardLists() {
   useEffect(() => {
     async function getData() {
       const q = query(
-        collection(db, "business_rewards"),
+        collection(db, "business_challenges"),
         where("businessId", "==", businessid)
       );
       const querySnapshot = await getDocs(q);

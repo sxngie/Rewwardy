@@ -2,11 +2,27 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Scanner.module.css";
 import { Footer } from "../components";
-import Link from "next/link";
-import HamburgerMenu, { Links } from "../components/HamburgerMenu.js";
+import HamburgerMenu from "../components/HamburgerMenu.js";
 import { useZxing } from "react-zxing";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import { db } from "@/firebase";
+import {
+  getDoc,
+  getDocs,
+  doc,
+  collection,
+  updateDoc,
+  arrayUnion,
+  collectionGroup,
+  where, 
+  query,
+  getFirestore,
+} from "firebase/firestore";
+import {
+  getAuth,
+} from "firebase/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +34,26 @@ export default function Scanner() {
     },
   });
 
+  const router = useRouter();
   const userid = getCookie("userid");
+
+  const logBusinessInfo = async () => {
+    const user = getAuth().currentUser.uid;
+    console.log(getAuth());
+    const businessId = result;
+    const user_query = query(collection(db, "users"), where('authId', '==', user));
+    const userDoc = await getDocs(user_query);
+    userDoc.forEach((doc_) => {
+      console.log(doc_.ref);
+      updateDoc(doc_.ref, {businesses: arrayUnion(businessId)})
+      .then((data) => {
+        alert(`You logged a new business! View challenge available now.`);
+        router.push("/challenge");
+      })
+      .catch((err) => alert(err.message));
+    })
+
+  };
 
   return (
     <>
@@ -36,19 +71,20 @@ export default function Scanner() {
         </div>
         <div className={styles.camera}>
           <video ref={ref} height={400} />
-          <p>
-            <span>Last result:</span>
-            <span>
-              {result}/{userid}
-            </span>
-          </p>
+              {/* <span>Last result: </span>
+            <span>{result}/{userid}</span> */}
         </div>
-
-        <button className={styles.pinkButton} onClick={() => scanQRCode()}>
+        <button
+          className={styles.pinkButton}
+          onClick={async () => {
+            await fetch(`${result}/${userid}`)
+              .then((res) => logBusinessInfo())
+              .catch((err) => console.log(err));
+          }}>
           Redeem
         </button>
       </main>
-      <Footer></Footer>
+      <Footer/>
     </>
   );
 }

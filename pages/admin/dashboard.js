@@ -37,7 +37,7 @@ export default function AdminDashboard() {
     async function getData() {
       // Queries
       const businessRewardQuery = query(
-        collection(db, "business_rewards"),
+        collection(db, "business_rewards"), /* Change this to business_challenges!! new DB */
         where("businessId", "==", businessid)
       );
       const businessDocRef = doc(db, "business", businessid);

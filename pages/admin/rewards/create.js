@@ -34,10 +34,10 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function CreateReward() {
-  const [name, setName] = useState("");
+  const [challengeName, setChallengeName] = useState("");
   const [description, setDescription] = useState("");
   const [milestoneType, setMilestoneType] = useState("");
-  const [milestoneValue, setMilestoneValue] = useState(0);
+  const [milestoneGoal, setMilestoneGoal] = useState(0);
   const [validFrom, setValidFrom] = useState("");
   const [validUntil, setValidUntil] = useState("");
   const [imageUpload, setImageUpload] = useState(null);
@@ -49,6 +49,9 @@ export default function CreateReward() {
 
   const router = useRouter();
   const businessid = getCookie("businessId");
+  /* Create for businessName  
+  const businessName  
+    that is able to get the businessName and pass it to the challenge info, similar to businessid*/
 
   // Handle Closing the Snackbar
   const handleSuccessClose = (event, reason) => {
@@ -98,14 +101,15 @@ export default function CreateReward() {
       return;
     }
 
-    await addDoc(collection(db, "business_rewards"), {
-      name: name,
+    await addDoc(collection(db, "business_challenges"), {
+      challengeName: challengeName,
       description: description,
       milestoneType: milestoneType,
-      milestoneValue: milestoneValue,
+      milestoneGoal: milestoneGoal,
       validFrom: validFrom,
       validUntil: validUntil,
       businessId: businessid,
+      businessName: businessName, /* Parse the businessName! */
       imageUrl: url,
     })
       .then((data) => {
@@ -135,8 +139,8 @@ export default function CreateReward() {
           <TextField
             label="Name"
             variant="standard"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={challengeName}
+            onChange={(e) => setChallengeName(e.target.value)}
             InputLabelProps={{
               sx: {
                 color: "#552CB4",
@@ -192,8 +196,8 @@ export default function CreateReward() {
                   <InputAdornment position="start">$</InputAdornment>
                 )
               }
-              value={milestoneValue}
-              onChange={(e) => setMilestoneValue(e.target.value)}
+              value={milestoneGoal}
+              onChange={(e) => setMilestoneGoal(e.target.value)}
             />
           </FormControl>
 
