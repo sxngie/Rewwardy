@@ -60,7 +60,7 @@ export default function Home() {
 
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
-          // console.log(businessId);
+          // Get Challenges
           const businessRewardQuery = query(
             collection(db, "business_challenges"),
             where("businessId", "==", businessId)
@@ -70,12 +70,47 @@ export default function Home() {
             businessRewardQuery
           );
 
+          // Get In Progress
+          const inProgressQuery = query(
+            collection(db, "user_challenges"),
+            where("userId", "==", userid)
+          );
+          // Snapshots
+          const inProgressQuerySnapshot = await getDocs(inProgressQuery);
+
+          // Get Rewards
+          const rewardsQuery = query(
+            collection(db, "user_challenges"),
+            where("userId", "==", userid)
+          );
+          // Snapshots
+          const rewardsQuerySnapshot = await getDocs(rewardsQuery);
+
+          // Fill up lists
           let rewards_ = [];
+          let inProgress_ = [];
+          let challenges_ = [];
+          // Challenges
           businessRewardQuerySnapshot.forEach((doc) => {
+            let tempChallenges = doc.data();
+            tempChallenges.id = doc.id;
+            challenges_.push(tempChallenges);
+          });
+          // In Progress
+          inProgressQuerySnapshot.forEach((doc) => {
+            let tempProgress = doc.data();
+            tempProgress.id = doc.id;
+            inProgress_.push(tempProgress);
+          });
+          // Rewards
+          rewardsQuerySnapshot.forEach((doc) => {
             let tempReward = doc.data();
             tempReward.id = doc.id;
             rewards_.push(tempReward);
           });
+
+          setChallenges(challenges_);
+          setInProgress(inProgress_);
           setRewards(rewards_);
         });
       });
@@ -121,16 +156,16 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>In Progress</h2>
-            {rewards.length > 1 ? (
+            {inProgress.length > 1 ? (
               <div className={styles.scrollableContainer}>
-                {rewards.map((challenge) => (
+                {inProgress.map((progress) => (
                   <CardEntity
-                    title={challenge?.challengeName}
-                    businessName={challenge?.businessName}
-                    description={challenge?.description}
-                    expDate={challenge?.validUntil}
+                    title={progress?.challengeName}
+                    businessName={progress?.businessName}
+                    description={progress?.description}
+                    expDate={progress?.validUntil}
                     action="View Progress"
-                    to={`/reward/progress/${challenge.id}`}
+                    to={`/reward/progress/${progress.id}`}
                   />
                 ))}
               </div>
@@ -144,16 +179,16 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>New Challenges</h2>
-            {rewards.length == 1 ? (
+            {challenges.length == 1 ? (
               <div className={styles.scrollableContainer}>
-                {rewards.map((challenge) => (
+                {challenges.map((challenge) => (
                   <CardEntity
                     title={challenge?.challengeName}
                     businessName={challenge?.businessName}
                     description={challenge?.description}
                     expDate={challenge?.validUntil}
                     action="More Info"
-                    to={`/reward/more-info/${5}`}
+                    to={`/reward/more-info/${challenge.id}`}
                   />
                 ))}
               </div>
