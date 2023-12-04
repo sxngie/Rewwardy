@@ -56,8 +56,8 @@ export default function Scanner() {
       console.log(doc_.ref);
       updateDoc(doc_.ref, {businesses: arrayUnion(businessId)})
       .then((data) => {
-        alert(`You logged a new business! View challenge available now.`);
-        router.push("/challenge");
+        alert(`Successfully scanned QR Code! Redirecting to Dashboard.`);
+        router.push("/dashboard");
       })
       .catch((err) => alert(err.message));
     })
