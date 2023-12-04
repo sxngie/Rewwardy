@@ -22,7 +22,7 @@ export default function AdminSearch() {
   // Fetch for Reward
   const searchForReward = async () => {
     // Fetch User Reward
-    const rewardDocRef = doc(db, "user_rewards", rewardCode);
+    const rewardDocRef = doc(db, "user_challenges", rewardCode);
     const rewardDocSnap = await getDoc(rewardDocRef);
     const rewardResult = rewardDocSnap.data();
 
@@ -37,7 +37,7 @@ export default function AdminSearch() {
   // Change Status to Redeemed
   const redeemReward = async () => {
     // Reward Reference
-    const rewardDocRef = doc(db, "user_rewards", rewardCode);
+    const rewardDocRef = doc(db, "user_challenges", rewardCode);
     // Update Status
     await updateDoc(rewardDocRef, { status: "redeemed", awardedAt: new Date() })
       .then(() => alert("Reward Redeemed!"))

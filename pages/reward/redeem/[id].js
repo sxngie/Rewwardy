@@ -18,7 +18,7 @@ export default function RewardLists() {
 
   useEffect(() => {
     async function getData() {
-      const rewardDocRef = doc(db, "user_rewards", id);
+      const rewardDocRef = doc(db, "user_challenges", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
       let tempReward = rewardDocSnap.data()
       tempReward.id = rewardDocSnap.id;

@@ -31,10 +31,10 @@ export default function AdminLogin() {
         );
         // Set Cookie for businessid
         const querySnapshot = await getDocs(q);
-        console.log(querySnapshot)
-
         querySnapshot.forEach((doc) => {
           console.log(doc.id, " => ", doc.data());
+          let business = doc.data();
+          setCookie("businessName", business.businessName)
           setCookie("businessId", doc.id);
         });
         // Push to dashboard

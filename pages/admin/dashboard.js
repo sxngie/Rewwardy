@@ -37,7 +37,7 @@ export default function AdminDashboard() {
     async function getData() {
       // Queries
       const businessRewardQuery = query(
-        collection(db, "business_rewards"), /* Change this to business_challenges!! new DB */
+        collection(db, "business_challenges"), /* Change this to business_challenges!! new DB */
         where("businessId", "==", businessid)
       );
       const businessDocRef = doc(db, "business", businessid);
@@ -89,7 +89,7 @@ export default function AdminDashboard() {
               <ol className={styles.lists}>
                 {topCustomers.map((customer) => (
                   <li>
-                    {customer.firstName} {customer.lastName} (customer.visits)
+                    {customer.firstName} {customer.lastName} ({customer.visits})
                   </li>
                 ))}
               </ol>
@@ -107,9 +107,6 @@ export default function AdminDashboard() {
               </ol>
             ) : (
               <p className={styles.lists}>No rewards awarded yet!</p>
-              // <ol>
-              //   <li>Free Cookie (1)</li>
-              // </ol>
             )}
           </div>
           <div className={styles.btnrow}>
