@@ -49,6 +49,7 @@ export default function CreateReward() {
 
   const router = useRouter();
   const businessid = getCookie("businessId");
+  const businessName = getCookie('businessName');
   /* Create for businessName  
   const businessName  
     that is able to get the businessName and pass it to the challenge info, similar to businessid*/

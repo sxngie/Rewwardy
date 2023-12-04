@@ -69,7 +69,9 @@ export default function Home() {
         // Snapshots
         const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
         businessRewardQuerySnapshot.forEach((doc) => {
-          rewards_.push(doc.data());
+          let tempReward = doc.data();
+          tempReward.id = doc.id;
+          rewards_.push(tempReward);
           // console.log(doc.data());
         });
         setRewards(rewards_);
@@ -106,7 +108,7 @@ export default function Home() {
                     description={reward.description}
                     expDate={reward.validUntil}
                     action="Redeem"
-                    to={`/reward/redeem/${5}`}
+                    to={`/reward/redeem/${reward.id}`}
                   />
                 ))}
               </div>

@@ -89,7 +89,7 @@ export default function AdminDashboard() {
               <ol className={styles.lists}>
                 {topCustomers.map((customer) => (
                   <li>
-                    {customer.firstName} {customer.lastName} (customer.visits)
+                    {customer.firstName} {customer.lastName} ({customer.visits})
                   </li>
                 ))}
               </ol>
@@ -107,9 +107,6 @@ export default function AdminDashboard() {
               </ol>
             ) : (
               <p className={styles.lists}>No rewards awarded yet!</p>
-              // <ol>
-              //   <li>Free Cookie (1)</li>
-              // </ol>
             )}
           </div>
           <div className={styles.btnrow}>
