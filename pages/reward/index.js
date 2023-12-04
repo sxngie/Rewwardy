@@ -16,6 +16,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,7 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <img className={styles.picture} src={imageSrc} />
+        <Image className={styles.picture} src={imageSrc} height={275} width={275}/>
       </div>
       <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
@@ -59,7 +60,7 @@ export default function RewardsPage() {
       userDoc.forEach((doc_) => {
         // console.log(doc_.data());
         setUser(doc_.data());
-        let rewards_ = [];
+
         doc_.data()?.businesses.map(async (businessId) => {
         // Queries
         // console.log(businessId);
@@ -69,18 +70,21 @@ export default function RewardsPage() {
         );
         // Snapshots
         const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
+
+        let rewards_ = [];
         businessRewardQuerySnapshot.forEach((doc) => {
-          rewards_.push(doc.data());
-          // console.log(doc.data());
+          let tempReward = doc.data();
+          tempReward.id = doc.id;
+          rewards_.push(tempReward);
         });
         setRewards(rewards_);
       });
       });
-      // setUser(userInfo);
     }
 
     getData();
   }, [userid]);
+
 
   return (
     <>
@@ -104,7 +108,7 @@ export default function RewardsPage() {
                   {rewards.map((reward) => (
                     <CardEntity
                       imageSrc={reward?.imageUrl}
-                      title={reward?.name}
+                      title={reward?.challengeName}
                       businessName={reward?.businessName}
                       description={reward?.description}
                       expDate={reward?.validUntil}
