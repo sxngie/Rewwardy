@@ -17,7 +17,7 @@ import {
 const inter = Inter({ subsets: ["latin"] });
 
 function CardEntity({
-  imageSrc,
+  imageUrl,
   title,
   businessName,
   description,
@@ -28,7 +28,7 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <img className={styles.picture}>{imageSrc}</img>
+        <img className={styles.picture}>{imageUrl}</img>
       </div>
       <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
@@ -64,7 +64,7 @@ export default function Home() {
         // Queries
         // console.log(businessId);
         const businessRewardQuery = query(
-          collection(db, "business_rewards"),
+          collection(db, "business_challenges"),
           where("businessId", "==", businessId)
         );
         // Snapshots
@@ -78,7 +78,6 @@ export default function Home() {
         setRewards(rewards_);
       });
       });
-      // setUser(userInfo);
     }
 
     getData();
@@ -104,12 +103,12 @@ export default function Home() {
               <div className={styles.scrollableContainer}>
                 {rewards.map((reward) => (
                   <CardEntity
-                    title={reward.name}
-                    businessName={reward.businessName}
-                    description={reward.description}
-                    expDate={reward.validUntil}
+                    title={reward?.challengeName}
+                    businessName={reward?.businessName}
+                    description={reward?.description}
+                    expDate={reward?.validUntil}
                     action="Redeem"
-                    to={`/reward/redeem/${reward.id}`}
+                    to={`/reward/redeem/${reward?.id}`}
                   />
                 ))}
               </div>
@@ -125,7 +124,7 @@ export default function Home() {
               <div className={styles.scrollableContainer}>
                 {rewards.map((challenge) => (
                   <CardEntity
-                    title={challenge?.name}
+                    title={challenge?.challengeName}
                     businessName={challenge?.businessName}
                     description={challenge?.description}
                     expDate={challenge?.validUntil}

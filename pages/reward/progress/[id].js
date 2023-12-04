@@ -6,9 +6,10 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { db } from "@/firebase";
-import { collection, doc, getDoc, getDocs, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, where, query, getCountFromServer } from "firebase/firestore";
 import { truncateString } from "@/utils/helpers";
 import { getCookie } from "cookies-next";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,18 +27,18 @@ export default function RewardLists() {
       const rewardDocRef = doc(db, "business_challenges", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
       let tempReward = rewardDocSnap.data();
-      tempReward.id = rewardDocSnap.id;
       // Fetch Scan Amounts
       const userScansQuery = query(
         collection(db, "user_scans"),
         where("userId", "==", userId),
+        where("scannedToBusiness", "==", tempReward.businessId),
         where("status", "==", "NOT_USED"),
         where("usedForReward", "==", "NOT_USED")
       );
-      const userScansSnap = await getDocs(userScansQuery);
+      const userScansSnap = await getCountFromServer(userScansQuery);
       // Set Values
       setReward(tempReward);
-      setScanCount(userScansQuery.data().count);
+      setScanCount(userScansSnap.data().count);
     }
 
     getData();
@@ -58,18 +59,22 @@ export default function RewardLists() {
             <h1>{reward?.challengeName}</h1>
           </div>
           <div className={styles.box}>
+            <div className={styles.imgcanvas}>
+              <Image src={reward?.imageUrl} height={275} width={275}/>
+            </div>
             <h3>Progress</h3>
             <p>
               Visits: (
               {scanCount < reward?.milestoneGoal
                 ? scanCount
-                : reward.milestoneGoal}
+                : reward?.milestoneGoal}
               /{reward?.milestoneGoal})
             </p>
+            <br/>
             <h3>Description</h3>
             <p>{reward?.description}</p>
             <br />
-            <h3>Valid Unitl</h3>
+            <h3>Valid Until</h3>
             <p>{reward?.validUntil}</p>
             <br />
           </div>

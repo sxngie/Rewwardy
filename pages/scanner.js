@@ -46,7 +46,7 @@ export default function Scanner() {
     const userDoc = await getDocs(user_query);
     // Add a new scan to the system
     await addDoc(collection(db, "user_scans"), {
-      userId: user,
+      userId: userid,
       date: new Date(),
       scannedToBusiness: businessId,
       status: 'NOT_USED',
