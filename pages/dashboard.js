@@ -120,15 +120,16 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>In Progress</h2>
-            {inProgress.length > 0 ? (
+            {rewards.length > 0 ? (
               <div className={styles.scrollableContainer}>
-                {inProgress.map((challenge) => (
+                {rewards.map((challenge) => (
                   <CardEntity
                     title={challenge?.name}
                     businessName={challenge?.businessName}
                     description={challenge?.description}
                     expDate={challenge?.validUntil}
                     action="View Progress"
+                    to={`/reward/progress/${challenge.id}`}
                   />
                 ))}
               </div>
