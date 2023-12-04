@@ -23,6 +23,7 @@ function CardEntity({
   description,
   expDate,
   action,
+  to
 }) {
   return (
     <div className={styles.cardEntity}>
@@ -34,7 +35,7 @@ function CardEntity({
       <div className={styles.description}>
         <p>{description}</p>
       </div>
-      <Link href="/">
+      <Link href={to}>
         <button className={styles.pinkButton}>{action}</button>
       </Link>
       <div className={styles.expireDate}>{expDate}</div>
