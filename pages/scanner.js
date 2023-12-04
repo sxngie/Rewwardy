@@ -5,7 +5,24 @@ import { Footer } from "../components";
 import HamburgerMenu from "../components/HamburgerMenu.js";
 import { useZxing } from "react-zxing";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
+import { db } from "@/firebase";
+import {
+  getDoc,
+  getDocs,
+  doc,
+  collection,
+  updateDoc,
+  arrayUnion,
+  collectionGroup,
+  where, 
+  query,
+  getFirestore,
+} from "firebase/firestore";
+import {
+  getAuth,
+} from "firebase/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +34,26 @@ export default function Scanner() {
     },
   });
 
+  const router = useRouter();
   const userid = getCookie("userid");
+
+  const logBusinessInfo = async () => {
+    const user = getAuth().currentUser.uid;
+    console.log(getAuth());
+    const businessId = result;
+    const user_query = query(collection(db, "users"), where('authId', '==', user));
+    const userDoc = await getDocs(user_query);
+    userDoc.forEach((doc_) => {
+      console.log(doc_.ref);
+      updateDoc(doc_.ref, {businesses: arrayUnion(businessId)})
+      .then((data) => {
+        alert(`You logged a new business! View challenge available now.`);
+        router.push("/challenge");
+      })
+      .catch((err) => alert(err.message));
+    })
+
+  };
 
   return (
     <>
@@ -42,7 +78,7 @@ export default function Scanner() {
           className={styles.pinkButton}
           onClick={async () => {
             await fetch(`${result}/${userid}`)
-              .then((res) => console.log(res))
+              .then((res) => logBusinessInfo())
               .catch((err) => console.log(err));
           }}>
           Redeem
