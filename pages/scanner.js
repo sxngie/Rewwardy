@@ -19,6 +19,7 @@ import {
   where, 
   query,
   getFirestore,
+  addDoc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -43,6 +44,14 @@ export default function Scanner() {
     const businessId = result;
     const user_query = query(collection(db, "users"), where('authId', '==', user));
     const userDoc = await getDocs(user_query);
+    // Add a new scan to the system
+    await addDoc(collection(db, "user_scans"), {
+      userId: user,
+      date: new Date(),
+      scannedToBusiness: businessId,
+      status: 'NOT_USED',
+      usedForReward: 'NOT_USED'
+    })
     userDoc.forEach((doc_) => {
       console.log(doc_.ref);
       updateDoc(doc_.ref, {businesses: arrayUnion(businessId)})
