@@ -71,6 +71,10 @@
     text-align: center;
     border-radius: 8px 8px 0px 0px;
   }
+
+  .picture {
+    border-radius: 8px;
+  }
   
   .pill p {
     padding: 8px;

@@ -7,12 +7,7 @@ import HamburgerMenu from "../components/HamburgerMenu.js";
 import { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +18,7 @@ function CardEntity({
   description,
   expDate,
   action,
-  to
+  to,
 }) {
   return (
     <div className={styles.cardEntity}>
@@ -50,33 +45,39 @@ export default function Home() {
   const [inProgress, setInProgress] = useState([]);
 
   const userid = getCookie("userid");
- 
+
   useEffect(() => {
     async function getData() {
       // Fetch User
-      const user_query = query(collection(db, "users"), where('authId', '==', userid));
+      const user_query = query(
+        collection(db, "users"),
+        where("authId", "==", userid)
+      );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
         // console.log(doc_.data());
         setUser(doc_.data());
-        let rewards_ = [];
+
         doc_.data()?.businesses.map(async (businessId) => {
-        // Queries
-        // console.log(businessId);
-        const businessRewardQuery = query(
-          collection(db, "business_challenges"),
-          where("businessId", "==", businessId)
-        );
-        // Snapshots
-        const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
-        businessRewardQuerySnapshot.forEach((doc) => {
-          let tempReward = doc.data();
-          tempReward.id = doc.id;
-          rewards_.push(tempReward);
-          // console.log(doc.data()); 
+          // Queries
+          // console.log(businessId);
+          const businessRewardQuery = query(
+            collection(db, "business_challenges"),
+            where("businessId", "==", businessId)
+          );
+          // Snapshots
+          const businessRewardQuerySnapshot = await getDocs(
+            businessRewardQuery
+          );
+
+          let rewards_ = [];
+          businessRewardQuerySnapshot.forEach((doc) => {
+            let tempReward = doc.data();
+            tempReward.id = doc.id;
+            rewards_.push(tempReward);
+          });
+          setRewards(rewards_);
         });
-        setRewards(rewards_);
-      });
       });
     }
 
@@ -110,7 +111,7 @@ export default function Home() {
                     action="Redeem"
                     to={`/reward/redeem/${reward?.id}`}
                   />
-                ))} 
+                ))}
               </div>
             ) : (
               <div className={styles.norewards}>
@@ -126,7 +127,7 @@ export default function Home() {
                   <CardEntity
                     title={challenge?.challengeName}
                     businessName={challenge?.businessName}
-                    description={challenge?.description} 
+                    description={challenge?.description}
                     expDate={challenge?.validUntil}
                     action="View Progress"
                     to={`/reward/progress/${challenge.id}`}
@@ -140,7 +141,7 @@ export default function Home() {
                 </p>
               </div>
             )}
-          </div> 
+          </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>New Challenges</h2>
             {rewards.length == 1 ? (
@@ -149,7 +150,7 @@ export default function Home() {
                   <CardEntity
                     title={challenge?.challengeName}
                     businessName={challenge?.businessName}
-                    description={challenge?.description} 
+                    description={challenge?.description}
                     expDate={challenge?.validUntil}
                     action="More Info"
                     to={`/reward/more-info/${5}`}

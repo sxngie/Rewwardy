@@ -1,32 +1,49 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import styles from "@/styles/admin/rewards/editreward.module.css";
+import styles from "@/styles/inprogress.module.css";
 import { HamburgerMenu, Footer } from "@/components";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { db } from "@/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, where, query, getCountFromServer } from "firebase/firestore";
 import { truncateString } from "@/utils/helpers";
+import { getCookie } from "cookies-next";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RewardLists() {
   const [reward, setReward] = useState();
+  const [scanCount, setScanCount] = useState(0);
   const router = useRouter();
   const { id } = router.query;
+
+  const userId = getCookie("userid");
 
   useEffect(() => {
     async function getData() {
       const rewardDocRef = doc(db, "user_rewards", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
-      let tempReward = rewardDocSnap.data()
-      tempReward.id = rewardDocSnap.id;
+      let tempReward = rewardDocSnap.data();
+      
+      // Fetch Scan Amounts
+      const userScansQuery = query(
+        collection(db, "user_scans"),
+        where("userId", "==", userId),
+        where("scannedToBusiness", "==", tempReward.businessId),
+        where("status", "==", "NOT_USED"),
+        where("usedForReward", "==", "USED")
+      );
+      const userScansSnap = await getCountFromServer(userScansQuery);
+      // Set Values
       setReward(tempReward);
+      setScanCount(userScansSnap.data().count);
     }
 
     getData();
   }, [id]);
+
 
   return (
     <>
@@ -43,14 +60,21 @@ export default function RewardLists() {
             <h1>Congrats on winning {reward?.name}</h1>
           </div>
           <div className={styles.box}>
-            <h3>Description</h3>
+          <div className={styles.imgcanvas}>
+              <Image alt="Reward image" src={reward?.imageUrl} className={styles.picture} height={275} width={275} />
+            </div>
+            <br/>
+            <div className={styles.info}>
+            <h2>Description</h2>
             <p>{reward?.description}</p>
             <br />
-            <h3>Valid Unitl</h3>
+            <h2>Valid Until</h2>
             <p>{reward?.validUntil}</p>
             <br />
-            <h3>Reward Code</h3>
+            <h2>Reward Code</h2>
             <p style={{ fontSize: '24px'}}>{reward?.id}</p>
+            <p>Show the above code to the cashier upon your next visit!</p>
+          </div>
           </div>
         </div>
       </main>
