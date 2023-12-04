@@ -68,8 +68,8 @@
 
   .pictureFrame {
     position: center;
-    height: 28%; /* set height to 40% of its container */
-    width: 56%;        /* set width to be the same as height */
+    height: 110px; /* set height to 40% of its container */
+    width: 110px;        /* set width to be the same as height */
     margin: 0 auto;
     margin-top: 4%;
     background-color: rgba(var(--callout-rgb), 0.90);
@@ -86,10 +86,10 @@
     margin: 2%;
     height: 100%;
     width: 100%;
-    -webkit-border-radius: 10px;
+    /* -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    -o-border-radius: 10px; */
     display: inline-block;
 }
 
