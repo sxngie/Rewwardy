@@ -35,20 +35,21 @@ export default function RewardLists() {
   useEffect(() => {
     async function getData() {
       // Fetch User Challenge
+      if (id) {
       const rewardDocRef = doc(db, "user_challenges", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
-      let tempReward = rewardDocSnap.data();
+      setReward(rewardDocSnap.data());
+      }
       // Fetch Scan Amounts
       const userScansQuery = query(
         collection(db, "user_scans"),
         where("userId", "==", userId),
-        where("scannedToBusiness", "==", tempReward.businessId),
+        // where("scannedToBusiness", "==", tempReward.businessId),
         where("status", "==", "NOT_USED"),
         where("usedForReward", "==", "NOT_USED")
       );
       const userScansSnap = await getCountFromServer(userScansQuery);
       // Set Values
-      setReward(tempReward);
       setScanCount(userScansSnap.data().count);
     }
 

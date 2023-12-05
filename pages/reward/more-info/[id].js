@@ -30,26 +30,35 @@ export default function RewardLists() {
   const userId = getCookie("userid");
 
   useEffect(() => {
-    async function getData() {
+    async function getChallengeData() {
       // Fetch User Challenge
+      if (id) {
       const rewardDocRef = doc(db, "business_challenges", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
-      let tempReward = rewardDocSnap.data();
+      setReward(rewardDocSnap.data());
+      }
+    }
+
+    getChallengeData();
+  }, [id]);
+
+  useEffect(() => {
+    async function getScanCounter() {
       // Fetch Scan Amounts
       const userScansQuery = query(
         collection(db, "user_scans"),
         where("userId", "==", userId),
-        where("scannedToBusiness", "==", tempReward.businessId),
+        // where("scannedToBusiness", "==", tempReward.businessId),
         where("status", "==", "NOT_USED"),
         where("usedForReward", "==", "NOT_USED")
       );
       const userScansSnap = await getCountFromServer(userScansQuery);
+      console.log(db);
       // Set Values
-      setReward(tempReward);
       setScanCount(userScansSnap.data().count);
     }
 
-    getData();
+    getScanCounter();
   }, [id]);
 
   // Track challenge
