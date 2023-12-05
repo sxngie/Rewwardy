@@ -142,7 +142,7 @@ export default function RewardLists() {
               <p>{reward?.validUntil}</p>
               <br />
               {scanCount >= reward?.milestoneGoal && (
-                <Button variant="contained" onClick={() => redeemReward()}>
+                <Button className={styles.pinkButton} variant="contained" onClick={() => redeemReward()}>
                   {loading ? "Redeeming..." : "Redeem"}
                 </Button>
               )}
