@@ -80,6 +80,16 @@
     padding: 8px;
   }
   
+  .rewardCode p{
+    font-size: 24px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #E3227A;
+    border-radius: 8px;
+    padding: 2%;
+    width: 80%;
+  }
+
   .btnrow {
     width: 100%;
     display: flex;

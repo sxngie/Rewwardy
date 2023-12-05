@@ -16,7 +16,7 @@ import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 
 function CardEntity({
-  imageUrl,
+  imageSrc,
   title,
   businessName,
   description,
@@ -131,7 +131,7 @@ export default function RewardsPage() {
           </div>
         </div>
       </main>
-      <Footer></Footer>
+      <Footer/>
     </>
   );
 }

@@ -86,26 +86,11 @@
     margin: 2%;
     height: 100%;
     width: 100%;
-    /* -webkit-border-radius: 10px;
+    -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
-    -o-border-radius: 10px; */
+    -o-border-radius: 10px;
     display: inline-block;
-}
-
-.picture {
-  position: center;
-  /* border-radius: 10px; */
-  height: 275px;
-  width: 275px;
-  /* margin: 2%;
-  height: 100%;
-  width: 100%;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  display: inline-block; */
 }
 
 h2.cardLabel {
@@ -114,18 +99,20 @@ h2.cardLabel {
   font-size: 22px;
   font-weight: bold;
   margin-top: 4%;
+  margin: 2%;
   display: inline-block; 
 }
 
 h3.business {
   margin: 3%;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   color: #a32e6e;  
-  height: 2%;
+  height: 3%;
 }
 
 .description {
+  padding-top: 2%;
   margin: 1%;
   width: 100%;
   padding-left: 2%;
