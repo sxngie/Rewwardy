@@ -7,12 +7,7 @@ import HamburgerMenu from "../components/HamburgerMenu.js";
 import { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +18,7 @@ function CardEntity({
   description,
   expDate,
   action,
-  to
+  to,
 }) {
   return (
     <div className={styles.cardEntity}>
@@ -54,34 +49,93 @@ export default function Home() {
   useEffect(() => {
     async function getData() {
       // Fetch User
-      const user_query = query(collection(db, "users"), where('authId', '==', userid));
+      const user_query = query(
+        collection(db, "users"),
+        where("authId", "==", userid)
+      );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
         // console.log(doc_.data());
         setUser(doc_.data());
 
         doc_.data()?.businesses.map(async (businessId) => {
-        // Queries
-        // console.log(businessId);
-        const businessRewardQuery = query(
-          collection(db, "business_challenges"),
-          where("businessId", "==", businessId)
-        );
-        // Snapshots
-        const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
+          // Queries
+          // Get Challenges
+          const businessRewardQuery = query(
+            collection(db, "business_challenges"),
+            where("businessId", "==", businessId)
+          );
+          // Snapshots
+          const businessRewardQuerySnapshot = await getDocs(
+            businessRewardQuery
+          );
 
-        let rewards_ = [];
-        businessRewardQuerySnapshot.forEach((doc) => {
-          let tempReward = doc.data();
-          tempReward.id = doc.id;
-          rewards_.push(tempReward);
+          // Fill up lists
+          let challenges_ = [];
+          // Challenges
+          businessRewardQuerySnapshot.forEach((doc) => {
+            let tempChallenges = doc.data();
+            tempChallenges.id = doc.id;
+            challenges_.push(tempChallenges);
+          });
+
+          setChallenges(challenges_);
         });
-        setRewards(rewards_);
-      });
       });
     }
 
     getData();
+  }, [userid]);
+
+  // In Progress
+  useEffect(() => {
+    async function getInProgressData() {
+      // Get In Progress
+      const inProgressQuery = query(
+        collection(db, "user_challenges"),
+        where("status", "==", "progress"),
+        where("userId", "==", userid)
+      );
+      // Snapshots
+      const inProgressQuerySnapshot = await getDocs(inProgressQuery);
+
+      // In Progress
+      let inProgress_ = [];
+      inProgressQuerySnapshot.forEach((doc) => {
+        let tempProgress = doc.data();
+        tempProgress.id = doc.id;
+        inProgress_.push(tempProgress);
+      });
+
+      setInProgress(inProgress_);
+    }
+
+    getInProgressData();
+  }, [userid]);
+
+  // Rewards
+  useEffect(() => {
+    async function getRewardData() {
+      // Get Rewards
+      const rewardsQuery = query(
+        collection(db, "user_rewards"),
+        where("userId", "==", userid)
+      );
+      // Snapshots
+      const rewardsQuerySnapshot = await getDocs(rewardsQuery);
+
+      // Rewards
+      let rewards_ = [];
+      rewardsQuerySnapshot.forEach((doc) => {
+        let tempReward = doc.data();
+        tempReward.id = doc.id;
+        rewards_.push(tempReward);
+      });
+
+      setRewards(rewards_);
+    }
+
+    getRewardData();
   }, [userid]);
 
   return (
@@ -121,16 +175,16 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>In Progress</h2>
-            {rewards.length > 0 ? (
+            {inProgress.length > 0 ? (
               <div className={styles.scrollableContainer}>
-                {rewards.map((challenge) => (
+                {inProgress.map((progress) => (
                   <CardEntity
-                    title={challenge?.challengeName}
-                    businessName={challenge?.businessName}
-                    description={challenge?.description}
-                    expDate={challenge?.validUntil}
+                    title={progress?.challengeName}
+                    businessName={progress?.businessName}
+                    description={progress?.description}
+                    expDate={progress?.validUntil}
                     action="View Progress"
-                    to={`/reward/progress/${challenge.id}`}
+                    to={`/reward/progress/${progress.id}`}
                   />
                 ))}
               </div>
@@ -144,16 +198,16 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>New Challenges</h2>
-            {inProgress.length > 0 ? (
+            {challenges.length > 0 ? (
               <div className={styles.scrollableContainer}>
                 {challenges.map((challenge) => (
                   <CardEntity
-                    title={challenge?.name}
+                    title={challenge?.challengeName}
                     businessName={challenge?.businessName}
                     description={challenge?.description}
-                    expDate={challenge.validUntil}
+                    expDate={challenge?.validUntil}
                     action="More Info"
-                    to={`/reward/more-info/${5}`}
+                    to={`/reward/more-info/${challenge.id}`}
                   />
                 ))}
               </div>

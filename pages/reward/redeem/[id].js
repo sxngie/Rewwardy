@@ -15,7 +15,6 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RewardLists() {
   const [reward, setReward] = useState();
-  const [scanCount, setScanCount] = useState(0);
   const router = useRouter();
   const { id } = router.query;
 
@@ -23,23 +22,12 @@ export default function RewardLists() {
 
   useEffect(() => {
     async function getData() {
-      // Fetch User Challenge
-      const rewardDocRef = doc(db, "business_challenges", id);
+      const rewardDocRef = doc(db, "user_rewards", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
       let tempReward = rewardDocSnap.data();
-      
-      // Fetch Scan Amounts
-      const userScansQuery = query(
-        collection(db, "user_scans"),
-        where("userId", "==", userId),
-        where("scannedToBusiness", "==", tempReward.businessId),
-        where("status", "==", "NOT_USED"),
-        where("usedForReward", "==", "USED")
-      );
-      const userScansSnap = await getCountFromServer(userScansQuery);
+      tempReward.id = rewardDocSnap.id;
       // Set Values
       setReward(tempReward);
-      setScanCount(userScansSnap.data().count);
     }
 
     getData();
@@ -73,7 +61,9 @@ export default function RewardLists() {
             <p>{reward?.validUntil}</p>
             <br />
             <h2>Reward Code</h2>
+            <br/>
             <p style={{ fontSize: '24px'}}>{reward?.id}</p>
+            <br/>
             <p>Show the above code to the cashier upon your next visit!</p>
           </div>
           </div>

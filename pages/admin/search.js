@@ -22,7 +22,7 @@ export default function AdminSearch() {
   // Fetch for Reward
   const searchForReward = async () => {
     // Fetch User Reward
-    const rewardDocRef = doc(db, "user_challenges", rewardCode);
+    const rewardDocRef = doc(db, "user_rewards", rewardCode);
     const rewardDocSnap = await getDoc(rewardDocRef);
     const rewardResult = rewardDocSnap.data();
 

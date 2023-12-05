@@ -177,15 +177,15 @@ export default function CreateReward() {
             className={styles.select}
             onChange={(e) => setMilestoneType(e.target.value)}
           >
-            <MenuItem label="Money Spent" value={"money_spent"}>
+            {/* <MenuItem label="Money Spent" value={"money_spent"}>
               Money Spent
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem label="Visits" value={"visits"}>
               Visits
             </MenuItem>
-            <MenuItem label="Quantity " value={"quantity"}>
+            {/* <MenuItem label="Quantity " value={"quantity"}>
               Quantity
-            </MenuItem>
+            </MenuItem> */}
           </Select>
           <br />
           <FormControl fullWidth sx={{ m: 1 }} variant="standard">

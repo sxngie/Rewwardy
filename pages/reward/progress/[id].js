@@ -6,7 +6,17 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import { db } from "@/firebase";
-import { collection, doc, getDoc, getDocs, where, query, getCountFromServer } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  where,
+  query,
+  getCountFromServer,
+  updateDoc,
+  addDoc,
+} from "firebase/firestore";
 import { truncateString } from "@/utils/helpers";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
@@ -24,7 +34,7 @@ export default function RewardLists() {
   useEffect(() => {
     async function getData() {
       // Fetch User Challenge
-      const rewardDocRef = doc(db, "business_challenges", id);
+      const rewardDocRef = doc(db, "user_challenges", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
       let tempReward = rewardDocSnap.data();
       // Fetch Scan Amounts
@@ -44,6 +54,46 @@ export default function RewardLists() {
     getData();
   }, [id]);
 
+  async function redeemReward() {
+    // Update User Challenges
+    const rewardDocRef = doc(db, "user_challenges", id);
+    await updateDoc(rewardDocRef, {
+      status: "complete",
+    })
+      .then(async () => {
+        // Create Reward
+        await addDoc(collection(db, "user_rewards"), {
+          ...reward,
+          dateReceived: new Date(),
+          awardedAt: null,
+          status: "available",
+        })
+          .then(async (data) => {
+            // Look for X amount of scans
+            const q = query(
+              collection(db, "userScans"),
+              where("userId", "==", userId),
+              where("scannedToBusiness", "==", reward.businessId),
+              where("status", "==", "NOT_USED"),
+              where("usedForReward", "==", "NOT_USED")
+            );
+            const userScansSnapshot = await getDocs(q);
+            // change 'status' and 'usedForReward'
+            userScansSnapshot.forEach(async (doc) => {
+              let tempScan = doc.data();
+              await updateDoc(doc.id, {
+                status: "USED",
+                usedForReward: data.id,
+              });
+            });
+            router.push("/dashboard");
+          })
+
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <>
       <Head>
@@ -60,25 +110,33 @@ export default function RewardLists() {
           </div>
           <div className={styles.box}>
             <div className={styles.imgcanvas}>
-              <Image alt="Reward image" src={reward?.imageUrl} height={275} width={275} />
+              <Image
+                alt="Reward image"
+                src={reward?.imageUrl}
+                height={275}
+                width={275}
+              />
             </div>
-            <br/>
+            <br />
             <div className={styles.info}>
-            <h2>Progress</h2>
-            <p>
-              Visits: (
-              {scanCount < reward?.milestoneGoal
-                ? scanCount
-                : reward?.milestoneGoal}
-              /{reward?.milestoneGoal})
-            </p>
-            <br/>
-            <h2>Description</h2>
-            <p>{reward?.description}</p>
-            <br />
-            <h2>Valid Until</h2>
-            <p>{reward?.validUntil}</p>
-            <br />
+              <h2>Progress</h2>
+              <p>
+                Visits: (
+                {scanCount < reward?.milestoneGoal
+                  ? scanCount - 1
+                  : reward?.milestoneGoal}
+                /{reward?.milestoneGoal})
+              </p>
+              <br />
+              <h2>Description</h2>
+              <p>{reward?.description}</p>
+              <br />
+              <h2>Valid Until</h2>
+              <p>{reward?.validUntil}</p>
+              <br />
+              {scanCount >= reward?.milestoneGoal && (
+                <Button variant="contained" onClick={() => redeemReward()}>Redeem</Button>
+              )}
             </div>
           </div>
         </div>
