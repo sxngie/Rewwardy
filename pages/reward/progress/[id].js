@@ -56,13 +56,14 @@ export default function RewardLists() {
 
   async function redeemReward() {
     // Update User Challenges
-    await updateDoc(id, {
+    const rewardDocRef = doc(db, "user_challenges", id);
+    await updateDoc(rewardDocRef, {
       status: "complete",
     })
       .then(async () => {
         // Create Reward
         await addDoc(collection(db, "user_rewards"), {
-          ...tempReward,
+          ...reward,
           dateReceived: new Date(),
           awardedAt: null,
           status: "available",
@@ -72,7 +73,7 @@ export default function RewardLists() {
             const q = query(
               collection(db, "userScans"),
               where("userId", "==", userId),
-              where("scannedToBusiness", "==", tempReward.businessId),
+              where("scannedToBusiness", "==", reward.businessId),
               where("status", "==", "NOT_USED"),
               where("usedForReward", "==", "NOT_USED")
             );
@@ -133,8 +134,8 @@ export default function RewardLists() {
               <h2>Valid Until</h2>
               <p>{reward?.validUntil}</p>
               <br />
-              {scanCount < reward?.milestoneGoal && (
-                <Button onClick={() => redeemReward()}>Redeem</Button>
+              {scanCount >= reward?.milestoneGoal && (
+                <Button variant="contained" onClick={() => redeemReward()}>Redeem</Button>
               )}
             </div>
           </div>

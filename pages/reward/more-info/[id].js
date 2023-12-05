@@ -56,7 +56,7 @@ export default function RewardLists() {
   // Track challenge
   async function trackChallenge() {
     await addDoc(collection(db, "user_challenges"), {
-      ...tempReward,
+      ...reward,
       userId: userId,
       status: "progress",
     })
@@ -98,7 +98,9 @@ export default function RewardLists() {
               <h2>Valid Until</h2>
               <p>{reward?.validUntil}</p>
               <br />
-              <Button onClick={() => trackChallenge()}>Track</Button>
+              <Button variant="contained"  onClick={() => trackChallenge()}>
+                Track
+              </Button>
             </div>
           </div>
         </div>

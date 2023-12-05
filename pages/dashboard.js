@@ -70,25 +70,7 @@ export default function Home() {
             businessRewardQuery
           );
 
-          // Get In Progress
-          const inProgressQuery = query(
-            collection(db, "user_challenges"),
-            where("userId", "==", userid)
-          );
-          // Snapshots
-          const inProgressQuerySnapshot = await getDocs(inProgressQuery);
-
-          // Get Rewards
-          const rewardsQuery = query(
-            collection(db, "user_challenges"),
-            where("userId", "==", userid)
-          );
-          // Snapshots
-          const rewardsQuerySnapshot = await getDocs(rewardsQuery);
-
           // Fill up lists
-          let rewards_ = [];
-          let inProgress_ = [];
           let challenges_ = [];
           // Challenges
           businessRewardQuerySnapshot.forEach((doc) => {
@@ -96,27 +78,64 @@ export default function Home() {
             tempChallenges.id = doc.id;
             challenges_.push(tempChallenges);
           });
-          // In Progress
-          inProgressQuerySnapshot.forEach((doc) => {
-            let tempProgress = doc.data();
-            tempProgress.id = doc.id;
-            inProgress_.push(tempProgress);
-          });
-          // Rewards
-          rewardsQuerySnapshot.forEach((doc) => {
-            let tempReward = doc.data();
-            tempReward.id = doc.id;
-            rewards_.push(tempReward);
-          });
 
           setChallenges(challenges_);
-          setInProgress(inProgress_);
-          setRewards(rewards_);
         });
       });
     }
 
     getData();
+  }, [userid]);
+
+  // In Progress
+  useEffect(() => {
+    async function getInProgressData() {
+      // Get In Progress
+      const inProgressQuery = query(
+        collection(db, "user_challenges"),
+        where("status", "==", "progress"),
+        where("userId", "==", userid)
+      );
+      // Snapshots
+      const inProgressQuerySnapshot = await getDocs(inProgressQuery);
+
+      // In Progress
+      let inProgress_ = [];
+      inProgressQuerySnapshot.forEach((doc) => {
+        let tempProgress = doc.data();
+        tempProgress.id = doc.id;
+        inProgress_.push(tempProgress);
+      });
+
+      setInProgress(inProgress_);
+    }
+
+    getInProgressData();
+  }, [userid]);
+
+  // Rewards
+  useEffect(() => {
+    async function getRewardData() {
+      // Get Rewards
+      const rewardsQuery = query(
+        collection(db, "user_rewards"),
+        where("userId", "==", userid)
+      );
+      // Snapshots
+      const rewardsQuerySnapshot = await getDocs(rewardsQuery);
+
+      // Rewards
+      let rewards_ = [];
+      rewardsQuerySnapshot.forEach((doc) => {
+        let tempReward = doc.data();
+        tempReward.id = doc.id;
+        rewards_.push(tempReward);
+      });
+
+      setRewards(rewards_);
+    }
+
+    getRewardData();
   }, [userid]);
 
   return (
@@ -156,7 +175,7 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>In Progress</h2>
-            {inProgress.length > 1 ? (
+            {inProgress.length > 0 ? (
               <div className={styles.scrollableContainer}>
                 {inProgress.map((progress) => (
                   <CardEntity
@@ -179,7 +198,7 @@ export default function Home() {
           </div>
           <div className={styles.section}>
             <h2 className={styles.sectionHead}>New Challenges</h2>
-            {challenges.length == 1 ? (
+            {challenges.length > 0 ? (
               <div className={styles.scrollableContainer}>
                 {challenges.map((challenge) => (
                   <CardEntity
