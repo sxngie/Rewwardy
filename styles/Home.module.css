@@ -74,12 +74,13 @@ h2.sectionHead {
   font-size: 22px;
   font-weight: bold;
   margin-top: 10%;
+  margin: 2%;
 }
 
 .business {
   margin: 0.5rem;
   padding: 4%;
-  font-size: 14px;
+  font-size: 19.5px;
   font-weight: bold;
   color: #a32e6e;
   height: 5%;

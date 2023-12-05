@@ -99,18 +99,20 @@ h2.cardLabel {
   font-size: 22px;
   font-weight: bold;
   margin-top: 4%;
+  margin: 2%;
   display: inline-block; 
 }
 
 h3.business {
   margin: 3%;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   color: #a32e6e;  
-  height: 2%;
+  height: 3%;
 }
 
 .description {
+  padding-top: 2%;
   margin: 1%;
   width: 100%;
   padding-left: 2%;
