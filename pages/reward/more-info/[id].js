@@ -98,6 +98,7 @@ export default function RewardLists() {
               <p>{reward?.validUntil}</p>
               <br />
             </div>
+            <br />
             <Button className={styles.pinkButton} variant="contained"  onClick={() => trackChallenge()}>
               Track
             </Button>
