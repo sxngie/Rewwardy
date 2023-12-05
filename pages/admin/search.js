@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { db } from "@/firebase";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, query, collection, where, getDocs} from "firebase/firestore";
 import { getCookie } from "cookies-next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function AdminSearch() {
   const router = useRouter();
   const [rewardCode, searchRewardCode] = useState("");
-  const [recipient, setRecipient] = useState("");
+  // const [recipient, setRecipient] = useState("");
   const [reward, setReward] = useState("");
 
   const businessId = getCookie("businessId");
@@ -26,12 +26,16 @@ export default function AdminSearch() {
     const rewardDocSnap = await getDoc(rewardDocRef);
     const rewardResult = rewardDocSnap.data();
 
+    /*    User ID can be found with this:
+     const user_id = rewardDocSnap.data().userId; */
+
     // Fetch Receipient Data
-    const recipientDocRef = doc(db, "users", rewardResult.owner);
-    const recipientDocSnap = await getDoc(recipientDocRef);
-    const recipientResult = recipientDocSnap.data();
+
+    // const recipientDocRef = doc(db, "users", rewardResult.owner);
+    // const recipientDocSnap = await getDoc(recipientDocRef);
+    // const recipientResult = recipientDocSnap.data();
     setReward(rewardResult);
-    setRecipient(recipientResult);
+    // setRecipient(userResult);
   };
 
   // Change Status to Redeemed
@@ -80,22 +84,13 @@ export default function AdminSearch() {
             {/* Reward Details */}
             <div>
               <h2>Reward:</h2>
-              <h3>{reward ? reward.reward_name : "Enter Code..."}</h3>
+              <h3>{reward ? reward.challengeName : "Enter Code..."}</h3>
               <h2>Description:</h2>
               <p>
                 {reward
                   ? reward.description
                   : "Here goes the Reward Description"}
               </p>
-
-              <h2>Actions</h2>
-              <Button
-                variant="contained"
-                className={styles.btn}
-                onClick={() => redeemReward()}
-              >
-                Award Receipient
-              </Button>
             </div>
             <div>
               <h2>Valid Until:</h2>
@@ -104,13 +99,23 @@ export default function AdminSearch() {
               <h3>{reward ? reward.status : "Unknown"}</h3>
             </div>
             {/* User Receiving Award Details */}
-            <div>
+            {/* <div>
               <h2>Reward Receipient:</h2>
               <h3>
                 {recipient
                   ? `${recipient.firstName} ${recipient.lastName}`
                   : "User's Name"}
               </h3>
+            </div> */}
+            <div>
+            <h2>Actions</h2>
+              <Button
+                variant="contained"
+                className={styles.btn}
+                onClick={() => redeemReward()}  style={{ margin: "0% 50px 0% 0px" }}
+              >
+                Award Receipient
+              </Button>
             </div>
           </div>
         </div>
