@@ -13,6 +13,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,12 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <img className={styles.picture} src={imageSrc} />
+      <Image
+          className={styles.picture}
+          src={imageSrc}
+          height={275}
+          width={275}
+        />
       </div>
       <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
@@ -52,33 +58,69 @@ export default function Challenge() {
   useEffect(() => {
     async function getData() {
       // Fetch User
-      const user_query = query(collection(db, "users"), where('authId', '==', userid));
+      const user_query = query(
+        collection(db, "users"),
+        where("authId", "==", userid)
+      );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
         // console.log(doc_.data());
         setUser(doc_.data());
-        let challenges_ = [];
+
         doc_.data()?.businesses.map(async (businessId) => {
-        // Queries
-        // console.log(businessId);
-        const businessRewardQuery = query(
-          collection(db, "business_challenges"),
-          where("businessId", "==", businessId)
-        );
-        // Snapshots
-        const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
-        businessRewardQuerySnapshot.forEach((doc) => {
-          challenges_.push(doc.data());
-          // console.log(doc.data());
+          // Queries
+          // Get Challenges
+          const businessRewardQuery = query(
+            collection(db, "business_challenges"),
+            where("businessId", "==", businessId)
+          );
+          // Snapshots
+          const businessRewardQuerySnapshot = await getDocs(
+            businessRewardQuery
+          );
+
+          // Fill up lists
+          let challenges_ = [];
+          // Challenges
+          businessRewardQuerySnapshot.forEach((doc) => {
+            let tempChallenges = doc.data();
+            tempChallenges.id = doc.id;
+            challenges_.push(tempChallenges);
+          });
+
+          setChallenges(challenges_);
         });
-        setChallenges(challenges_);
       });
-      });
-      // setUser(userInfo);
     }
 
     getData();
   }, [userid]);
+
+    // In Progress
+    useEffect(() => {
+      async function getInProgressData() {
+        // Get In Progress
+        const inProgressQuery = query(
+          collection(db, "user_challenges"),
+          where("status", "==", "progress"),
+          where("userId", "==", userid)
+        );
+        // Snapshots
+        const inProgressQuerySnapshot = await getDocs(inProgressQuery);
+  
+        // In Progress
+        let inProgress_ = [];
+        inProgressQuerySnapshot.forEach((doc) => {
+          let tempProgress = doc.data();
+          tempProgress.id = doc.id;
+          inProgress_.push(tempProgress);
+        });
+  
+        setInProgress(inProgress_);
+      }
+  
+      getInProgressData();
+    }, [userid]);
 
   return (
     <>
@@ -101,8 +143,8 @@ export default function Challenge() {
                 <div className={styles.scrollableContainer}>
                   {challenges.map((challenge) => (
                     <CardEntity
-                      imageSrc={challenge?.imageSrc}
-                      title={challenge?.name}
+                      imageSrc={challenge?.imageUrl}
+                      title={challenge?.challengeName}
                       businessName={challenge?.businessName}
                       description={challenge?.description}
                       expDate={challenge.validUntil}

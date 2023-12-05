@@ -10,7 +10,6 @@ import {
   collection,
   doc,
   getDoc,
-  getDocs,
   where,
   query,
   getCountFromServer,
@@ -82,10 +81,10 @@ export default function RewardLists() {
           <div className={styles.box}>
             <div className={styles.imgcanvas}>
               <Image
+                className={styles.picture}
                 alt="Reward image"
                 src={reward?.imageUrl}
-                height={275}
-                width={275}
+                height={275} width={275}
               />
             </div>
             <br />
@@ -98,10 +97,11 @@ export default function RewardLists() {
               <h2>Valid Until</h2>
               <p>{reward?.validUntil}</p>
               <br />
-              <Button variant="contained"  onClick={() => trackChallenge()}>
-                Track
-              </Button>
             </div>
+            <br />
+            <Button className={styles.pinkButton} variant="contained"  onClick={() => trackChallenge()}>
+              Track
+            </Button>
           </div>
         </div>
       </main>

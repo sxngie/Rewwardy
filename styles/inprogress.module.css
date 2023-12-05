@@ -87,7 +87,7 @@
     background-color: #E3227A;
     border-radius: 8px;
     padding: 2%;
-    width: 80%;
+    width: 350px;
   }
 
   .btnrow {
@@ -99,16 +99,17 @@
     padding-top: 1rem;
   }
   
-  .btn {
-    background-color: #9b1250;
-    color: #FFFFFF;
-  }
-  
-  .btn:hover {
+  .pinkButton {
     background-color: #E3227A;
+    color: #FFFFFF;
+    width: 40%;
   }
   
-  .btn:focus {
+  .pinkButton:hover {
+    background-color: #9b1250;
+  }
+  
+  .pinkButton:focus {
     background-color: #D1196D;
   }
   
