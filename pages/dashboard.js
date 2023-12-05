@@ -184,7 +184,7 @@ export default function Home() {
                     description={progress?.description}
                     expDate={progress?.validUntil}
                     action="View Progress"
-                    to={`/reward/progress/${progress.id}`}
+                    to={`/reward/progress/${progress?.id}`}
                   />
                 ))}
               </div>
@@ -207,7 +207,7 @@ export default function Home() {
                     description={challenge?.description}
                     expDate={challenge?.validUntil}
                     action="More Info"
-                    to={`/reward/more-info/${challenge.id}`}
+                    to={`/reward/more-info/${challenge?.id}`}
                   />
                 ))}
               </div>
