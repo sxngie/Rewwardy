@@ -86,26 +86,11 @@
     margin: 2%;
     height: 100%;
     width: 100%;
-    /* -webkit-border-radius: 10px;
+    -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
-    -o-border-radius: 10px; */
+    -o-border-radius: 10px;
     display: inline-block;
-}
-
-.picture {
-  position: center;
-  /* border-radius: 10px; */
-  height: 275px;
-  width: 275px;
-  /* margin: 2%;
-  height: 100%;
-  width: 100%;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
-  display: inline-block; */
 }
 
 h2.cardLabel {

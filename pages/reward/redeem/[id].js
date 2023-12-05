@@ -54,18 +54,22 @@ export default function RewardLists() {
             </div>
             <br/>
             <div className={styles.info}>
-            <h2>Description</h2>
-            <p>{reward?.description}</p>
-            <br />
-            <h2>Valid Until</h2>
-            <p>{reward?.validUntil}</p>
-            <br />
-            <h2>Reward Code</h2>
+              <h2>Description</h2>
+              <p>{reward?.description}</p>
+              <br />
+              <h2>Valid Until</h2>
+              <p>{reward?.validUntil}</p>
+              <br />
+              <h2>Reward Code</h2>
+            </div>
             <br/>
-            <p style={{ fontSize: '24px'}}>{reward?.id}</p>
-            <br/>
-            <p>Show the above code to the cashier upon your next visit!</p>
-          </div>
+            <div className={styles.rewardCode}>
+              <p>{reward?.id}</p>
+            </div>
+            <div className={styles.info}>
+              <br/>
+              <p>Show the above code to the cashier upon your next visit!</p>
+            </div>
           </div>
         </div>
       </main>
