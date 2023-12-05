@@ -53,42 +53,29 @@ export default function RewardsPage() {
 
   const userid = getCookie("userid");
 
+  // Rewards
   useEffect(() => {
-    async function getData() {
-      // Fetch User
-      const user_query = query(
-        collection(db, "users"),
-        where("authId", "==", userid)
+    async function getRewardData() {
+      // Get Rewards
+      const rewardsQuery = query(
+        collection(db, "user_rewards"),
+        where("userId", "==", userid)
       );
-      const userDoc = await getDocs(user_query);
-      userDoc.forEach((doc_) => {
-        // console.log(doc_.data());
-        setUser(doc_.data());
+      // Snapshots
+      const rewardsQuerySnapshot = await getDocs(rewardsQuery);
 
-        doc_.data()?.businesses.map(async (businessId) => {
-          // Queries
-          // console.log(businessId);
-          const businessRewardQuery = query(
-            collection(db, "business_challenges"),
-            where("businessId", "==", businessId)
-          );
-          // Snapshots
-          const businessRewardQuerySnapshot = await getDocs(
-            businessRewardQuery
-          );
-
-          let rewards_ = [];
-          businessRewardQuerySnapshot.forEach((doc) => {
-            let tempReward = doc.data();
-            tempReward.id = doc.id;
-            rewards_.push(tempReward);
-          });
-          setRewards(rewards_);
-        });
+      // Rewards
+      let rewards_ = [];
+      rewardsQuerySnapshot.forEach((doc) => {
+        let tempReward = doc.data();
+        tempReward.id = doc.id;
+        rewards_.push(tempReward);
       });
+
+      setRewards(rewards_);
     }
 
-    getData();
+    getRewardData();
   }, [userid]);
 
   return (
