@@ -40,7 +40,7 @@
 .scrollableContainer {
   display: flex;
   flex-direction: row;
-  height: 420px;
+  height: 450px;
   min-width: 350px; 
   width: 100%;
  /* set to the desired width, can be in px, em, rem, %, etc. */
