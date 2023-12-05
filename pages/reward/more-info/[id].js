@@ -37,14 +37,6 @@ export default function RewardLists() {
       const rewardDocSnap = await getDoc(rewardDocRef);
       setReward(rewardDocSnap.data());
       }
-    }
-
-    getChallengeData();
-  }, [id]);
-
-  useEffect(() => {
-    async function getScanCounter() {
-      // Fetch Scan Amounts
       const userScansQuery = query(
         collection(db, "user_scans"),
         where("userId", "==", userId),
@@ -53,13 +45,32 @@ export default function RewardLists() {
         where("usedForReward", "==", "NOT_USED")
       );
       const userScansSnap = await getCountFromServer(userScansQuery);
-      console.log(db);
+      console.log(userScansSnap.data().count);
       // Set Values
       setScanCount(userScansSnap.data().count);
     }
 
-    getScanCounter();
+    getChallengeData();
   }, [id]);
+
+  // useEffect(() => {
+  //   async function getScanCounter() {
+  //     // Fetch Scan Amounts
+  //     const userScansQuery = query(
+  //       collection(db, "user_scans"),
+  //       where("userId", "==", userId),
+  //       // where("scannedToBusiness", "==", tempReward.businessId),
+  //       where("status", "==", "NOT_USED"),
+  //       where("usedForReward", "==", "NOT_USED")
+  //     );
+  //     const userScansSnap = await getCountFromServer(userScansQuery);
+  //     console.log(userScansSnap.data().count);
+  //     // Set Values
+  //     setScanCount(userScansSnap.data().count);
+  //   }
+
+  //   getScanCounter();
+  // }, [id]);
 
   // Track challenge
   async function trackChallenge() {
@@ -98,7 +109,7 @@ export default function RewardLists() {
             </div>
             <br />
             <div className={styles.info}>
-              <h2>Current Visits: {scanCount}</h2>
+              <h2>Current Visits: {scanCount > 0 ? scanCount-1 : 0 }</h2>
               <br />
               <h2>Description</h2>
               <p>{reward?.description}</p>

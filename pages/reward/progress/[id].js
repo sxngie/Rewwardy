@@ -44,11 +44,11 @@ export default function RewardLists() {
       const userScansQuery = query(
         collection(db, "user_scans"),
         where("userId", "==", userId),
-        // where("scannedToBusiness", "==", tempReward.businessId),
         where("status", "==", "NOT_USED"),
         where("usedForReward", "==", "NOT_USED")
       );
       const userScansSnap = await getCountFromServer(userScansQuery);
+      console.log(userScansSnap.data().count);
       // Set Values
       setScanCount(userScansSnap.data().count);
     }
