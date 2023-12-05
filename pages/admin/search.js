@@ -41,7 +41,8 @@ export default function AdminSearch() {
   // Change Status to Redeemed
   const redeemReward = async () => {
     // Reward Reference
-    const rewardDocRef = doc(db, "user_challenges", rewardCode);
+    const rewardDocRef = doc(db, "user_rewards", rewardCode);
+
     // Update Status
     await updateDoc(rewardDocRef, { status: "redeemed", awardedAt: new Date() })
       .then(() => alert("Reward Redeemed!"))
