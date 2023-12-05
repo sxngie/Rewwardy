@@ -26,6 +26,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RewardLists() {
   const [reward, setReward] = useState();
   const [scanCount, setScanCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -55,6 +56,7 @@ export default function RewardLists() {
   }, [id]);
 
   async function redeemReward() {
+    setLoading(true);
     // Update User Challenges
     const rewardDocRef = doc(db, "user_challenges", id);
     await updateDoc(rewardDocRef, {
@@ -67,28 +69,31 @@ export default function RewardLists() {
           dateReceived: new Date(),
           awardedAt: null,
           status: "available",
-        })
-          .then(async (data) => {
-            // Look for X amount of scans
-            const q = query(
-              collection(db, "userScans"),
-              where("userId", "==", userId),
-              where("scannedToBusiness", "==", reward.businessId),
-              where("status", "==", "NOT_USED"),
-              where("usedForReward", "==", "NOT_USED")
-            );
-            const userScansSnapshot = await getDocs(q);
-            // change 'status' and 'usedForReward'
-            userScansSnapshot.forEach(async (doc) => {
-              let tempScan = doc.data();
-              await updateDoc(doc.id, {
-                status: "USED",
-                usedForReward: data.id,
-              });
-            });
-            router.push("/dashboard");
-          })
+        }).then(async (newReward) => {
+          // Look for X amount of scans
+          const q = query(
+            collection(db, "user_scans"),
+            where("userId", "==", userId),
+            where("scannedToBusiness", "==", reward.businessId),
+            where("status", "==", "NOT_USED"),
+            where("usedForReward", "==", "NOT_USED")
+          );
+          const userScansSnapshot = await getDocs(q);
+          // change 'status' and 'usedForReward'
+          console.log(userScansSnapshot);
 
+          userScansSnapshot.forEach(async (doc) => {
+            // let tempScan = doc.ref;
+            // tempScan.id = doc.id
+            // console.log(doc.id)
+            await updateDoc(doc.ref, {
+              status: "USED",
+              usedForReward: newReward.id,
+            });
+          });
+        });
+        setLoading(false)
+          .then(() => router.push("/dashboard"))
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
@@ -123,7 +128,9 @@ export default function RewardLists() {
               <p>
                 Visits: (
                 {scanCount < reward?.milestoneGoal
-                  ? scanCount - 1
+                  ? scanCount == 0
+                    ? 0
+                    : scanCount - 1
                   : reward?.milestoneGoal}
                 /{reward?.milestoneGoal})
               </p>
@@ -135,7 +142,9 @@ export default function RewardLists() {
               <p>{reward?.validUntil}</p>
               <br />
               {scanCount >= reward?.milestoneGoal && (
-                <Button variant="contained" onClick={() => redeemReward()}>Redeem</Button>
+                <Button variant="contained" onClick={() => redeemReward()}>
+                  {loading ? "Redeeming..." : "Redeem"}
+                </Button>
               )}
             </div>
           </div>
