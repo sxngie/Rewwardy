@@ -30,6 +30,7 @@ function CardEntity({
       <div className={styles.pictureFrame}>
       <Image
           className={styles.picture}
+          alt="Reward image"
           src={imageSrc}
           height={275}
           width={275}

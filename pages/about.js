@@ -15,6 +15,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { setCookie } from "cookies-next";
+import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default function About() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.pictureBox}>
-            <img src="/Images/Rewwardy-Icon.png" alt="Rewwardy Icon" className={styles.picture}/>
+            <Image src="/Images/Rewwardy-Icon.png" alt="Rewwardy Icon" className={styles.picture}/>
         </div>
         <div className={styles.row}>
           <h1 className={styles.header}>Rewwardy</h1>

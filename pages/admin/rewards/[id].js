@@ -42,7 +42,7 @@ export default function RewardLists() {
           </div>
           <div className={styles.box}>
             <div className={styles.imgcanvas}>
-              <Image src={reward?.imageUrl} height={275} width={275}/>
+              <Image src={reward?.imageUrl} alt="Reward image" height={275} width={275}/>
             </div>
             <h2>Description</h2>
             <p>{reward?.description}</p>
