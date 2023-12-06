@@ -46,8 +46,10 @@ export default function QRCodePage() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.container}>
           <div className={styles.header}>
-            <h1>Scan or Download QR Code</h1>
+            <h1>Here's your QR Code</h1>
           </div>
+          <p>Print this out so your customers can scan it and start earning rewards!</p>
+          <br/>
           <div className={styles.box}>
             {businessId ? (
               <QRCode value={businessId} ref={qrCodeRef} />
