@@ -48,6 +48,7 @@ export default function Home() {
 
   useEffect(() => {
     async function getData() {
+      console.log("hi!");
       // Fetch User
       const user_query = query(
         collection(db, "users"),
@@ -55,11 +56,8 @@ export default function Home() {
       );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
-        // console.log(doc_.data());
-        setUser(doc_.data());
 
-
-        setChallenges([]);
+        console.log(doc_.data()?.businesses);
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
           // Get Challenges
@@ -77,7 +75,10 @@ export default function Home() {
           let challenges_ = [];
           // Challenges
           businessRewardQuerySnapshot.forEach((doc) => {
-            challenges_.push(doc.data());
+            let tempChallenge = doc.data();
+            tempChallenge.id = doc.id;
+            challenges_.push(tempChallenge);
+            console.log(doc.data());
           });
           setChallenges((challenges) => [...challenges,...challenges_]);
 

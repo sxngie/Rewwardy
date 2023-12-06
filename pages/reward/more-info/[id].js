@@ -33,21 +33,23 @@ export default function RewardLists() {
     async function getChallengeData() {
       // Fetch User Challenge
       if (id) {
-      const rewardDocRef = doc(db, "business_challenges", id);
-      const rewardDocSnap = await getDoc(rewardDocRef);
-      setReward(rewardDocSnap.data());
+        const rewardDocRef = doc(db, "business_challenges", id);
+        const rewardDocSnap = await getDoc(rewardDocRef);
+        setReward(rewardDocSnap.data());
+
+        const userScansQuery = query(
+          collection(db, "user_scans"),
+          where("userId", "==", userId),
+          where("scannedToBusiness", "==", rewardDocSnap.data().businessId),
+          where("status", "==", "NOT_USED"),
+          where("usedForReward", "==", "NOT_USED")
+        );
+        const userScansSnap = await getCountFromServer(userScansQuery);
+        console.log(userScansSnap.data().count);
+        // Set Values
+        setScanCount(userScansSnap.data().count);
       }
-      const userScansQuery = query(
-        collection(db, "user_scans"),
-        where("userId", "==", userId),
-        // where("scannedToBusiness", "==", tempReward.businessId),
-        where("status", "==", "NOT_USED"),
-        where("usedForReward", "==", "NOT_USED")
-      );
-      const userScansSnap = await getCountFromServer(userScansQuery);
-      console.log(userScansSnap.data().count);
-      // Set Values
-      setScanCount(userScansSnap.data().count);
+
     }
 
     getChallengeData();
