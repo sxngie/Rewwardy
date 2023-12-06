@@ -39,10 +39,9 @@ export default function Scanner() {
   const userid = getCookie("userid");
 
   const logBusinessInfo = async () => {
-    const user = getAuth().currentUser.uid;
     console.log(getAuth());
     const businessId = result;
-    const user_query = query(collection(db, "users"), where('authId', '==', user));
+    const user_query = query(collection(db, "users"), where('authId', '==', userid));
     const userDoc = await getDocs(user_query);
     // Add a new scan to the system
     await addDoc(collection(db, "user_scans"), {
@@ -53,7 +52,6 @@ export default function Scanner() {
       usedForReward: 'NOT_USED'
     })
     userDoc.forEach((doc_) => {
-      console.log(doc_.ref);
       updateDoc(doc_.ref, {businesses: arrayUnion(businessId)})
       .then((data) => {
         alert(`Successfully scanned QR Code! Redirecting to Dashboard.`);

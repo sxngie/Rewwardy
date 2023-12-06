@@ -58,9 +58,12 @@ export default function Home() {
         // console.log(doc_.data());
         setUser(doc_.data());
 
+
+        setChallenges([]);
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
           // Get Challenges
+          console.log(businessId);
           const businessRewardQuery = query(
             collection(db, "business_challenges"),
             where("businessId", "==", businessId)
@@ -74,12 +77,10 @@ export default function Home() {
           let challenges_ = [];
           // Challenges
           businessRewardQuerySnapshot.forEach((doc) => {
-            let tempChallenges = doc.data();
-            tempChallenges.id = doc.id;
-            challenges_.push(tempChallenges);
+            challenges_.push(doc.data());
           });
+          setChallenges((challenges) => [...challenges,...challenges_]);
 
-          setChallenges(challenges_);
         });
       });
     }
