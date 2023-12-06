@@ -1,7 +1,7 @@
 
 # Project Webpage
 
-### [This link](https://rewwardy-capstone.web.app/About) is to access the project webpage, where one can use the project without downloads nor local hosting.
+### [This link](https://rewwardy-capstone.web.app/About) is to access the project webpage, where one can run the project without downloads nor local hosting.
 Said link redirects to the project's About page, where one can find: 
 - Elevator Pitch Video
 - Presentation Slides
@@ -20,7 +20,7 @@ In order to proceed, the recommended route is the following:
 - Take a picture on your mobile device of the QR code (or print it out at home, whichever you prefer!)
   
 ### Next steps:
-- Open the [User Login](https://rewwardy-capstone.web.app/) (preferrably in a different tab-- It will be helpful later!) and select Create an Account.
+- Open the [User Login](https://rewwardy-capstone.web.app/) (preferrably in a different tab-- It will be helpful later!) and select Create an Account (or Sign in with Google!).
 - Once in the page, fill the information necessary to create an account.
 - Proceed to login as a User.
 - Navigate to the QR Scanner page using the hamburger menu on the top right corner.
