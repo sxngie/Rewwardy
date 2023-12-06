@@ -48,7 +48,7 @@ export default function RewardLists() {
         where("usedForReward", "==", "NOT_USED")
       );
       const userScansSnap = await getCountFromServer(userScansQuery);
-      console.log(userScansSnap.data().count);
+      // console.log(userScansSnap.data().count);
       // Set Values
       setScanCount(userScansSnap.data().count);
     }
@@ -81,7 +81,7 @@ export default function RewardLists() {
           );
           const userScansSnapshot = await getDocs(q);
           // change 'status' and 'usedForReward'
-          console.log(userScansSnapshot);
+          // console.log(userScansSnapshot);
 
           userScansSnapshot.forEach(async (doc) => {
             // let tempScan = doc.ref;
