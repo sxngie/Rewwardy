@@ -97,7 +97,10 @@ export default function AdminDashboard() {
   }, [businessid]);
 
   // Scans Today
-  useEffect(async () => {
+  // const todaysScans = async() = {
+
+  // }
+  useEffect( () => {
     async function getTodayUserScans() {
       if (businessid) {
         let startOfDay = new Date();
