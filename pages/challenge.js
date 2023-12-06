@@ -64,12 +64,11 @@ export default function Challenge() {
       );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
-        // console.log(doc_.data());
-        setUser(doc_.data());
 
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
           // Get Challenges
+          console.log(businessId);
           const businessRewardQuery = query(
             collection(db, "business_challenges"),
             where("businessId", "==", businessId)
@@ -83,18 +82,20 @@ export default function Challenge() {
           let challenges_ = [];
           // Challenges
           businessRewardQuerySnapshot.forEach((doc) => {
-            let tempChallenges = doc.data();
-            tempChallenges.id = doc.id;
-            challenges_.push(tempChallenges);
+            let tempChallenge = doc.data();
+            tempChallenge.id = doc.id;
+            challenges_.push(tempChallenge);
+            console.log(doc.data());
           });
+          setChallenges((challenges) => [...challenges,...challenges_]);
 
-          setChallenges(challenges_);
         });
       });
     }
 
     getData();
   }, [userid]);
+
 
     // In Progress
     useEffect(() => {
