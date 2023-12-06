@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+      margin: 0;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #463489;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 18px;
+      color: white;
+      background-color: #F72585;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #9B2C6B;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Good news, {{user_name}}!</h1>
+    <p>You've earned a reward with Rewwardy!</p>
+    <p>Your support for local businesses is making a difference, and now it's time to treat yourself.</p>
+    
+    <!-- Include any details about the reward here -->
+    <p>Your reward: <strong>{{reward_details}}</strong></p>
+    
+    <a href="{{reward_link}}" class="button">Redeem Your Reward</a>
+    
+    <div class="footer">
+      <p>If you have any questions, please feel free to contact us at support@rewwardy.com.</p>
+      <p>Thank you for your loyalty!</p>
+    </div>
+  </div>
+</body>
+</html>
+

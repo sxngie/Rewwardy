@@ -1,0 +1,90 @@
+<html>
+
+  <head>
+    <meta />
+    <meta content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        background-color: #463489;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-align: center;
+      }
+
+      .content {
+        padding: 20px;
+        text-align: left;
+      }
+
+      .footer {
+        background-color: #463489;
+        color: #ffffff;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 1px 3% 1px 3%;
+        margin-top: 20px;
+        font-size: 18px;
+        color: white;
+        background-color: #F72585;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #9B2C6B;
+      }
+
+      a {
+        color: #ffffff;
+      }
+
+      a:hover {
+        color: #463489;
+      }
+    </style>
+  </head>
+
+  <div class="container">
+    <div class="header">
+      <h1>Welcome to Rewwardy!</h1>
+    </div>
+    <div class="content">
+      <h3>Hello {{user_name}},</h3><br />
+      <h4>We're thrilled to have you on board!<br /> Ready to unlock exclusive rewards and discover great local businesses right here in Puerto Rico?</h4>
+      <p>Start exploring today and see what's waiting for you.<br /> Every purchase brings you closer to amazing rewards!<br /><br /></p>
+      <p>Get rewarded for your loyalty.</p>
+      <p>The Rewwardy Team
+      </p>
+        <a href="{{app_link}}" target="_blank" class="button">
+          <h3>Start Now</h3>
+        </a>
+    </div>
+    <div class="footer">
+      <p>If you have any questions, feel free to contact us at <a href="mailto:support@rewwardy.com">support@rewwardy.com</a>.</p>
+      <p>Follow us on <a href="{{social_media_link}}">Social Media</a></p>
+    </div>
+  </div>
+
+</html>
