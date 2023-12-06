@@ -80,22 +80,9 @@ export default function AdminDashboard() {
       setPopularRewards(awardResult);
       setAllAwards(userAwardsSnap.data().count);
     }
-    async function getAwardsTodayData() {
-      // let startOfDay = new Date();
-      // startOfDay.setHours(0, 0, 0, 0);
-      // // Queries
-      // const userScansQuery = query(
-      //   collection(db, "user_rewards"),
-      //   where("date", ">=", startOfDay),
-      //   where("businessId", "==", businessid)
-      //   // where("status", "==", "redeemed")
-      // );
-      // const userScansSnap = await getCountFromServer(userScansQuery);
-      // setAwardedToday(userScansSnap.data().count);
+    async function getAwardedTodayData() {
         let startOfDay = new Date();
-        let endOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
-        endOfDay.setHours(23, 59, 59, 999);
         const todayAwardedQuery = query(
           collection(db, "user_rewards"),
           // where("awardedAt", ">=", startOfDay),
@@ -109,14 +96,10 @@ export default function AdminDashboard() {
         setAwardedToday(todayAwardedSnap.data().count);
     }
 
-    getAwardsTodayData();
+    getAwardedTodayData();
     getAwardData();
   }, [businessid]);
 
-  // Scans Today
-  // const todaysScans = async() = {
-
-  // }
   useEffect( () => {
     async function getTodayUserScans() {
       if (businessid) {
@@ -127,7 +110,7 @@ export default function AdminDashboard() {
         const todayUserScansQuery = query(
           collection(db, "user_scans"),
           where("date", ">=", startOfDay),
-          // where("date", "<=", endOfDay),
+          where("date", "<=", endOfDay),
           where("scannedToBusiness", "==", businessid)
         );
         const todayUserScansSnap = await getCountFromServer(
