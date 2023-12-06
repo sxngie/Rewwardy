@@ -9,7 +9,6 @@ import { db } from "@/firebase";
 import { collection, doc, getDoc, getDocs, where, query, getCountFromServer } from "firebase/firestore";
 import { truncateString } from "@/utils/helpers";
 import { getCookie } from "cookies-next";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,7 +49,7 @@ export default function RewardLists() {
           </div>
           <div className={styles.box}>
           <div className={styles.imgcanvas}>
-              <Image alt="Reward image" src={reward?.imageUrl} className={styles.picture} height={275} width={275} />
+              <img alt="Reward image" src={reward?.imageUrl} className={styles.picture} height={275} width={275} />
             </div>
             <br/>
             <div className={styles.info}>

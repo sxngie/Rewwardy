@@ -4,14 +4,12 @@ import styles from "@/styles/Reward.module.css";
 import Link from "next/link";
 import { Footer } from "../../components";
 import HamburgerMenu from "../../components/HamburgerMenu.js";
-import { useRouter } from "next/router";
 import fs from "fs";
 import path from "path";
 import { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +25,7 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <Image
+        <img
           className={styles.picture}
           src={imageSrc}
           alt="Reward image"

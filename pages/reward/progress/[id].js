@@ -18,7 +18,6 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { getCookie } from "cookies-next";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -124,7 +123,7 @@ export default function RewardLists() {
           </div>
           <div className={styles.box}>
             <div className={styles.imgcanvas}>
-              <Image className={styles.picture}
+              <img className={styles.picture}
                 alt="Reward image"
                 src={reward?.imageUrl}
                 height={275}

@@ -8,11 +8,11 @@ import { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
 function CardEntity({
+  id,
   imageSrc,
   title,
   businessName,
@@ -23,7 +23,7 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <Image
+        <img
           className={styles.picture}
           alt="Reward image"
           src={imageSrc}
@@ -36,7 +36,7 @@ function CardEntity({
       <div className={styles.description}>
         <p>{description}</p>
       </div>
-      <Link href="/">
+      <Link href={`/reward/more-info/${id}`}>
         <button className={styles.pinkButton}>{action}</button>
       </Link>
       <div className={styles.expireDate}>{expDate}</div>
@@ -45,7 +45,6 @@ function CardEntity({
 }
 
 export default function Challenge() {
-  const [user, setUser] = useState();
   const [challenges, setChallenges] = useState([]);
   const [inProgress, setInProgress] = useState([]);
 
@@ -138,6 +137,7 @@ export default function Challenge() {
                   {challenges.map((challenge, key) => (
                     <CardEntity
                       key={key}
+                      id={challenge.id}
                       imageSrc={challenge?.imageUrl}
                       title={challenge?.challengeName}
                       businessName={challenge?.businessName}

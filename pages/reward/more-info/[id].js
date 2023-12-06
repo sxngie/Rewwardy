@@ -15,9 +15,7 @@ import {
   getCountFromServer,
   addDoc,
 } from "firebase/firestore";
-import { truncateString } from "@/utils/helpers";
 import { getCookie } from "cookies-next";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -83,7 +81,7 @@ export default function RewardLists() {
           </div>
           <div className={styles.box}>
             <div className={styles.imgcanvas}>
-              <Image
+              <img
                 className={styles.picture}
                 alt="Reward image"
                 src={reward?.imageUrl}
