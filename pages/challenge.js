@@ -57,7 +57,6 @@ export default function Challenge() {
 
   useEffect(() => {
     async function getData() {
-      console.log("hi!");
       // Fetch User
       const user_query = query(
         collection(db, "users"),
@@ -66,7 +65,6 @@ export default function Challenge() {
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
 
-        console.log(doc_.data()?.businesses);
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
           // Get Challenges
