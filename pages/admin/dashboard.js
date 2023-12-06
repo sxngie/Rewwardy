@@ -12,6 +12,7 @@ import {
   where,
   getDocs,
   getDoc,
+  getCountFromServer,
   doc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -25,7 +26,7 @@ export default function AdminDashboard() {
   const [rewards, setRewards] = useState([]);
   const [business, setBusiness] = useState();
   const [awardedToday, setAwardedToday] = useState(0);
-  const [recurringCustomers, setRecurringCustomers] = useState(0);
+  const [allAwards, setAllAwards] = useState(0);
   const [topCustomers, setTopCustomers] = useState([]);
   const [popularRewards, setPopularRewards] = useState([]);
   const [todayScans, setTodayScans] = useState(0);
@@ -35,25 +36,131 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     async function getData() {
-      // Queries
-      const businessRewardQuery = query(
-        collection(db, "business_challenges"), /* Change this to business_challenges!! new DB */
-        where("businessId", "==", businessid)
-      );
       const businessDocRef = doc(db, "business", businessid);
       const businessDocSnap = await getDoc(businessDocRef);
-      // Snapshots
-      const businessRewardQuerySnapshot = await getDocs(businessRewardQuery);
-      let rewards = [];
-      businessRewardQuerySnapshot.forEach((doc) => {
-        rewards.push(doc.data());
-      });
-      setRewards(rewards);
       setBusiness(businessDocSnap.data());
     }
-
     getData();
   }, [businessid]);
+
+  // Get Rewards Awarded All Time
+  useEffect(() => {
+    async function getAwardData() {
+      // Queries
+      const userAwardsQuery = query(
+        collection(db, "user_rewards"),
+        where("businessId", "==", businessid)
+      );
+      const userAwardsSnap = await getCountFromServer(userAwardsQuery);
+      const awardSnapshot = await getDocs(userAwardsQuery);
+      const awardCounts = {};
+      awardSnapshot.forEach((doc) => {
+        let tempAward = doc.data();
+        // Count for Award
+        if (awardCounts[tempAward?.challengeName]) {
+          awardCounts[tempAward?.challengeName]++;
+        } else {
+          awardCounts[tempAward?.challengeName] = 1;
+        }
+        // Count for Users
+        // if (userCounts[tempAward?.userId]) {
+        //   userCounts[tempAward?.userId]++;
+        // } else {
+        //   userCounts[tempAward?.userId] = 1;
+        // }
+      });
+
+      // Converting to an array of objects
+      const awardResult = Object.keys(awardCounts).map((key) => {
+        return { name: key, timesAwarded: awardCounts[key] };
+      });
+
+      // was here
+      setPopularRewards(awardResult);
+      setAllAwards(userAwardsSnap.data().count);
+    }
+    async function getAwardsTodayData() {
+      let startOfDay = new Date();
+      startOfDay.setHours(0, 0, 0, 0);
+      // Queries
+      const userScansQuery = query(
+        collection(db, "user_rewards"),
+        where("date", ">=", startOfDay),
+        where("businessId", "==", businessid)
+      );
+      const userScansSnap = await getCountFromServer(userScansQuery);
+      setAllAwards(userScansSnap.data().count);
+    }
+
+    getAwardsTodayData();
+    getAwardData();
+  }, [businessid]);
+
+  // Scans Today
+  useEffect(async () => {
+    async function getTodayUserScans() {
+      if (businessid) {
+        let startOfDay = new Date();
+        let endOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+        endOfDay.setHours(23, 59, 59, 999);
+        const todayUserScansQuery = query(
+          collection(db, "user_scans"),
+          where("date", ">=", startOfDay),
+          // where("date", "<=", endOfDay),
+          where("scannedToBusiness", "==", businessid)
+        );
+        const todayUserScansSnap = await getCountFromServer(
+          todayUserScansQuery
+        );
+        setTodayScans(todayUserScansSnap.data().count);
+      }
+    }
+
+    async function getUserScans() {
+      const userScansQuery = query(
+        collection(db, "user_scans"),
+        where("scannedToBusiness", "==", businessid)
+      );
+      const userScansSnap = await getCountFromServer(userScansQuery);
+      // Add Here
+      const userVisits = await getDocs(userScansQuery);
+      const userCounts = {};
+
+      userVisits.forEach(doc => {
+        let tempVisit = doc.data()
+        // Count for Users
+        if (userCounts[tempVisit?.userId]) {
+          userCounts[tempVisit?.userId]++;
+        } else {
+          userCounts[tempVisit?.userId] = 1;
+        }
+      })
+      const userResultPromise = Promise.all(
+        Object.keys(userCounts).map(async (key) => {
+          let q = query(collection(db, "users"), where("authId", "==", key));
+          let userList = [];
+          const userDataDocSnap = await getDocs(q);
+          userDataDocSnap.forEach((doc) => {
+            let tempUser = doc.data();
+            userList.push(tempUser);
+          });
+          return {
+            name: `${userList[0]?.firstName} ${userList[0]?.lastName}`,
+            visits: userCounts[key],
+          };
+        })
+      );
+      userResultPromise.then((userResult) => {
+        // userResult is now an array of results
+        setTopCustomers(userResult);
+      });
+      setAllScans(userScansSnap.data().count);
+    }
+
+    getUserScans();
+    getTodayUserScans();
+  }, []);
 
   return (
     <>
@@ -73,8 +180,8 @@ export default function AdminDashboard() {
             <div>
               <h2>Rewards Awarded (Today)</h2>
               <h3>{awardedToday}</h3>
-              <h2>Daily Recurring Customers</h2>
-              <h3>{recurringCustomers}</h3>
+              <h2>Rewards Awarded (All Time)</h2>
+              <h3>{allAwards}</h3>
             </div>
             <div>
               <h2>Scans (Today)</h2>
@@ -89,7 +196,7 @@ export default function AdminDashboard() {
               <ol className={styles.lists}>
                 {topCustomers.map((customer) => (
                   <li>
-                    {customer.firstName} {customer.lastName} ({customer.visits})
+                    {customer.name} ({customer.visits})
                   </li>
                 ))}
               </ol>
