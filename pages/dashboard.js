@@ -193,7 +193,7 @@ export default function Home() {
             ) : (
               <div className={styles.norewards}>
                 <p>
-                  Still haven't started a challenge? Go visit you local shop.
+                  Still haven&apos;t started a challenge? Go visit you local shop.
                 </p>
               </div>
             )}
@@ -216,7 +216,7 @@ export default function Home() {
             ) : (
               <div className={styles.norewards}>
                 <p>
-                  Still haven't started a challenge? Go visit you local shop.
+                  Still haven&apos;t started a challenge? Go visit you local shop.
                 </p>
               </div>
             )}

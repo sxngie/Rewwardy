@@ -46,7 +46,7 @@ export default function QRCodePage() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.container}>
           <div className={styles.header}>
-            <h1>Here's your QR Code</h1>
+            <h1>Here&apos;s your QR Code</h1>
           </div>
           <p>Print this out so your customers can scan it and start earning rewards!</p>
           <br/>
@@ -59,13 +59,6 @@ export default function QRCodePage() {
           </div>
           <br />
           <div className={styles.btnrow}>
-            {/* <Button
-              className={styles.btn}
-              variant="contained"
-              onClick={() => downloadQRCode()}
-            >
-              Download
-            </Button> */}
           </div>
         </div>
       </main>

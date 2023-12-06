@@ -46,7 +46,7 @@ export default function RewardLists() {
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.container}>
           <div className={styles.header}>
-            <h1>Here's your reward!</h1>
+            <h1>Here&apos;s your reward!</h1>
           </div>
           <div className={styles.box}>
           <div className={styles.imgcanvas}>
