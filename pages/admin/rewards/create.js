@@ -238,13 +238,13 @@ export default function CreateReward() {
           </label>
           <br />
           <div className={styles.btnrow}>
-            <Button
+            <button
               variant="contained"
               className={styles.btn}
               onClick={() => createReward()}
             >
               Create Reward
-            </Button>
+            </button>
           </div>
           <Snackbar
             open={showSuccessAlert}

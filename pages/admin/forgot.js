@@ -41,7 +41,7 @@ import Script from "next/script";
                 onChange={(e) => setEmail(e.target.value)}
             />
           <br />
-             <Button
+             <button
                className={styles.button}
                variant="contained"
                onClick={async () =>
@@ -57,23 +57,23 @@ import Script from "next/script";
                }
              >
                Send Email
-             </Button>
+             </button>
              <br />
-             <Button
+             <button
                className={styles.textbutton}
                id="standard-basic"
                variant="standard"
              >
                <Link href="/admin">Login</Link>
-             </Button>
-             <Button
+             </button>
+             <button
                className={styles.textbutton}
                id="standard-basic"
                variant="standard"
                onClick={() => router.push("/admin/register")}
              >
                Create an Account
-             </Button>
+             </button>
            </div>
        </main>
        <AdminFooter />

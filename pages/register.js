@@ -148,23 +148,23 @@ export default function CreateUser() {
               <MenuItem value={"Prefer not to say"}>Prefer not to say</MenuItem>
             </Select>
             <br />
-            <Button
+            <button
               className={styles.clickText}
               id="standard-basic"
               variant="standard"
               onClick={toggleTermsModal}
             >
               Terms and Conditions
-            </Button>
+            </button>
             <TermsModal show={showTermsModal} onClose={toggleTermsModal} />
             <br />
-            <Button
+            <button
               className={styles.pinkButton}
               variant="contained"
               onClick={() => createUserAccount()}
             >
               Submit
-            </Button>
+            </button>
           </div>
         </div>
       </main>

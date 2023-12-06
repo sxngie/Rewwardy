@@ -32,50 +32,50 @@ export default function About() {
         <br/>
         <div className={styles.form}>
             <br/>
-            <Button
+            <button
               className={styles.purpleButton}
               id="standard-basic"
               variant="standard"
               onClick={() => router.push("https://youtu.be/EwiUtPBRCUA")}
             >
               Elevator Pitch Video
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               className={styles.purpleButton}
               id="standard-basic"
               variant="standard"
               onClick={() => router.push("https://www.canva.com/design/DAFzn4PS5xs/8Gauc0ShPuF16YtnNLtdfQ/edit?utm_content=DAFzn4PS5xs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton ")}
             >
               Presentation Slides
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               className={styles.purpleButton}
               id="standard-basic"
               variant="standard"
               onClick={() => router.push("https://github.com/sxngie/Rewwardy")}
             >
               GitHub Repository
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               className={styles.pinkButton}
               id="standard-basic"
               variant="standard"
               onClick={() => router.push("https://rewwardy-capstone.web.app/admin")}
             >
               Admin Login
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               className={styles.pinkButton}
               id="standard-basic"
               variant="standard"
               onClick={() => router.push("https://rewwardy-capstone.web.app/")}
             >
               User Login
-            </Button>
+            </button>
           </div>
         </main>
       <Footer />

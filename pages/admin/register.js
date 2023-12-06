@@ -157,13 +157,13 @@ export default function AdminLogin() {
             </Select>
           </FormControl>
           <br />
-          <Button
+          <button
             variant="contained"
             className={styles.btn}
             onClick={() => createBusinessAccount()}
           >
             Create Account
-          </Button>
+          </button>
         </div>
       </main>
       <AdminFooter />

@@ -76,30 +76,30 @@ export default function AdminLogin() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <Button
+          <button
             className={styles.textbutton}
             id="standard-basic"
             variant="standard"
           >
             <Link href="/admin/forgot">Forgot password?</Link>
-          </Button>
+          </button>
           <br />
-          <Button
+          <button
             variant="contained"
             className={styles.button}
             onClick={() => login()}
           >
             Login
-          </Button>
+          </button>
           <br />
-          <Button
+          <button
             className={styles.textbutton}
             id="standard-basic"
             variant="standard"
             onClick={() => router.push("/admin/register")}
           >
             Create an Account
-          </Button>
+          </button>
         </div>
       </main>
       <AdminFooter />

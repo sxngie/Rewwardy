@@ -74,31 +74,31 @@ export default function UserLogin() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <br />
-            <Button
+            <button
               className={styles.clickText}
               id="standard-basic"
               variant="standard"
             >
               <Link href="/forgot">Forgot password?</Link>
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               className={styles.pinkButton}
               variant="contained"
               onClick={login}
             >
               Submit
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               className={styles.clickText}
               id="standard-basic"
               variant="standard"
               onClick={() => router.push("/register")}
             >
               Create an Account
-            </Button>
-            <Button
+            </button>
+            <button
               className={styles.clickText}
               id="standard-basic"
               variant="standard"
@@ -122,7 +122,7 @@ export default function UserLogin() {
               }}
             >
               Sign in with Google
-            </Button>
+            </button>
           </div>
         </div>
       </main>

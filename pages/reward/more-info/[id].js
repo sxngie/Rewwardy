@@ -100,9 +100,9 @@ export default function RewardLists() {
               <br />
             </div>
             <br />
-            <Button className={styles.pinkButton} variant="contained"  onClick={() => trackChallenge()}>
+            <button className={styles.pinkButton} variant="contained"  onClick={() => trackChallenge()}>
               Track
-            </Button>
+            </button>
           </div>
         </div>
       </main>

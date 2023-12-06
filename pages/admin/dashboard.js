@@ -220,21 +220,21 @@ export default function AdminDashboard() {
             )}
           </div>
           <div className={styles.btnrow}>
-            <Button
+            <button
               variant="contained"
               className={styles.btn}
               onClick={() => router.push("/admin/rewards/create")}
             >
               Create Reward
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               variant="contained"
               className={styles.btn}
               onClick={() => router.push("/admin/rewards")}
             >
               View All Rewards
-            </Button>
+            </button>
           </div>
         </div>
       </main>

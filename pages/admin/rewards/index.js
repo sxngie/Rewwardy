@@ -73,13 +73,13 @@ export default function RewardLists() {
             ))}
           </div>
           <br />
-          <Button
+          <button
             className={styles.btn}
             variant="contained"
             onClick={() => router.push("/admin/dashboard")}
           >
             Go to Dashboard
-          </Button>
+          </button>
         </div>
       </main>
       <AdminFooter />

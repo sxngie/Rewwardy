@@ -47,7 +47,7 @@ export default function UserLogin() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <br />
-            <Button
+            <button
               className={styles.pinkButton}
               variant="contained"
               onClick={async () =>
@@ -63,23 +63,23 @@ export default function UserLogin() {
               }
             >
               Send Email
-            </Button>
+            </button>
             <br />
-            <Button
+            <button
               className={styles.clickText}
               id="standard-basic"
               variant="standard"
             >
               <Link href="/">Login</Link>
-            </Button>
-            <Button
+            </button>
+            <button
               className={styles.clickText}
               id="standard-basic"
               variant="standard"
               onClick={() => router.push("/register")}
             >
               Create an Account
-            </Button>
+            </button>
           </div>
         </div>
       </main>

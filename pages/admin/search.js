@@ -71,13 +71,13 @@ export default function AdminSearch() {
                 value={rewardCode}
                 onChange={(e) => searchRewardCode(e.target.value)}
               />
-              <Button
+              <button
                 variant="contained"
                 className={styles.searchbtn}
                 onClick={() => searchForReward()}
               >
                 Search
-              </Button>
+              </button>
             </div>
           </div>
 
@@ -110,13 +110,13 @@ export default function AdminSearch() {
             </div> */}
             <div>
             <h2>Actions</h2>
-              <Button
+              <button
                 variant="contained"
                 className={styles.btn}
                 onClick={() => redeemReward()}  style={{ margin: "0% 50px 0% 0px" }}
               >
                 Award Recipient
-              </Button>
+              </button>
             </div>
           </div>
         </div>
