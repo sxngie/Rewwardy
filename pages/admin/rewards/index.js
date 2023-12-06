@@ -9,7 +9,7 @@ import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { truncateString } from "@/utils/helpers";
-import Link from 'next/link';
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,13 +54,12 @@ export default function RewardLists() {
           </div>
           <div className={styles.list}>
             {rewards.map((reward, key) => (
-              <Link href={`/admin/rewards/${reward.id}`}>
-                <div className={styles.reward} key={key}>
+              <Link href={`/admin/rewards/${reward.id}`} key={key}>
+                <div className={styles.reward}>
                   <div className={styles.rewardrow}>
                     <h2 className={styles.name}>{reward.challengeName}</h2>
                     <p>
-                      Valid After: {reward.milestoneGoal}{" "}
-                      {reward.milestoneType}
+                      Valid After: {reward.milestoneGoal} {reward.milestoneType}
                     </p>
                   </div>
                   <div className={styles.rewardrow}>

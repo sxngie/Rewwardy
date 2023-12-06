@@ -7,12 +7,7 @@ import HamburgerMenu from "../components/HamburgerMenu.js";
 import { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,7 +23,7 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-      <Image
+        <Image
           className={styles.picture}
           alt="Reward image"
           src={imageSrc}
@@ -65,7 +60,6 @@ export default function Challenge() {
       );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
-
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
           // Get Challenges
@@ -88,8 +82,7 @@ export default function Challenge() {
             challenges_.push(tempChallenge);
             console.log(doc.data());
           });
-          setChallenges((challenges) => [...challenges,...challenges_]);
-
+          setChallenges((challenges) => [...challenges, ...challenges_]);
         });
       });
     }
@@ -97,32 +90,31 @@ export default function Challenge() {
     getData();
   }, [userid]);
 
+  // In Progress
+  useEffect(() => {
+    async function getInProgressData() {
+      // Get In Progress
+      const inProgressQuery = query(
+        collection(db, "user_challenges"),
+        where("status", "==", "progress"),
+        where("userId", "==", userid)
+      );
+      // Snapshots
+      const inProgressQuerySnapshot = await getDocs(inProgressQuery);
 
-    // In Progress
-    useEffect(() => {
-      async function getInProgressData() {
-        // Get In Progress
-        const inProgressQuery = query(
-          collection(db, "user_challenges"),
-          where("status", "==", "progress"),
-          where("userId", "==", userid)
-        );
-        // Snapshots
-        const inProgressQuerySnapshot = await getDocs(inProgressQuery);
-  
-        // In Progress
-        let inProgress_ = [];
-        inProgressQuerySnapshot.forEach((doc) => {
-          let tempProgress = doc.data();
-          tempProgress.id = doc.id;
-          inProgress_.push(tempProgress);
-        });
-  
-        setInProgress(inProgress_);
-      }
-  
-      getInProgressData();
-    }, [userid]);
+      // In Progress
+      let inProgress_ = [];
+      inProgressQuerySnapshot.forEach((doc) => {
+        let tempProgress = doc.data();
+        tempProgress.id = doc.id;
+        inProgress_.push(tempProgress);
+      });
+
+      setInProgress(inProgress_);
+    }
+
+    getInProgressData();
+  }, [userid]);
 
   return (
     <>
@@ -138,13 +130,14 @@ export default function Challenge() {
           <br />
           <HamburgerMenu className={styles.shapingBar} />
         </div>
-          <div className="row">
-            <div id="SectionDiv" className="column">
-              <div className="container">
-                {inProgress.length > 0 ? (
+        <div className="row">
+          <div id="SectionDiv" className="column">
+            <div className="container">
+              {inProgress.length > 0 ? (
                 <div className={styles.scrollableContainer}>
-                  {challenges.map((challenge) => (
+                  {challenges.map((challenge, key) => (
                     <CardEntity
+                      key={key}
                       imageSrc={challenge?.imageUrl}
                       title={challenge?.challengeName}
                       businessName={challenge?.businessName}
@@ -158,13 +151,14 @@ export default function Challenge() {
               ) : (
                 <div className={styles.norewards}>
                   <p>
-                    Still haven&apos;t started a challenge? Go visit you local shop.
+                    Still haven&apos;t started a challenge? Go visit you local
+                    shop.
                   </p>
                 </div>
               )}
-              </div>
             </div>
           </div>
+        </div>
       </main>
       <Footer></Footer>
     </>

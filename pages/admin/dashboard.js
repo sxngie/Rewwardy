@@ -197,8 +197,8 @@ export default function AdminDashboard() {
             <h4>Top Loyal Customers (Visits)</h4>
             {topCustomers.length > 0 ? (
               <ol className={styles.lists}>
-                {topCustomers.map((customer) => (
-                  <li>
+                {topCustomers.map((customer, key) => (
+                  <li key={key}>
                     {customer.name} ({customer.visits})
                   </li>
                 ))}
@@ -209,8 +209,8 @@ export default function AdminDashboard() {
             <h4>Popular Rewards (Redeemed)</h4>
             {popularRewards.length > 0 ? (
               <ol className={styles.lists}>
-                {popularRewards.map((reward) => (
-                  <li>
+                {popularRewards.map((reward, key) => (
+                  <li key={key}>
                     {reward.name} ({reward.timesAwarded})
                   </li>
                 ))}

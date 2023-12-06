@@ -98,8 +98,9 @@ export default function RewardsPage() {
             <div className={styles.container}>
               {rewards.length > 0 ? (
                 <div className={styles.scrollableContainer}>
-                  {rewards.map((reward) => (
+                  {rewards.map((reward, key) => (
                     <CardEntity
+                      key={key}
                       imageSrc={reward?.imageUrl}
                       title={reward?.challengeName}
                       businessName={reward?.businessName}
@@ -119,7 +120,7 @@ export default function RewardsPage() {
           </div>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 }
