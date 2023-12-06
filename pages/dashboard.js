@@ -1,100 +1,229 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import { Footer } from "../components";
-import HamburgerMenu, { Links } from '../components/HamburgerMenu.js'
-import { useRouter } from "next/router";
+import HamburgerMenu from "../components/HamburgerMenu.js";
+import { useState, useEffect } from "react";
+import { getCookie } from "cookies-next";
+import { db } from "@/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
-function CardEntity({ imageSrc, title, businessName, description, expDate }) {
-    return (
-        <div className={styles.cardEntity}>
-            <div className={styles.pictureFrame}><img src={imageSrc} className={styles.picture}/></div> {}
-            <h2 className={styles.sectionHead}>{title}</h2>
-            <h3 className={styles.business}>{businessName}</h3>
-            <div className={styles.description}>
-                <p>{description}</p>
-            </div>
-            <Link href="/">
-                <button className={styles.pinkButton}>Redeem</button>
-            </Link>
-            <div className={styles.expireDate}>{expDate}</div>
-        </div>
-    );
-  }
+function CardEntity({
+  imageUrl,
+  title,
+  businessName,
+  description,
+  expDate,
+  action,
+  to,
+}) {
+  return (
+    <div className={styles.cardEntity}>
+      <div className={styles.pictureFrame}>
+        <img className={styles.picture}>{imageUrl}</img>
+      </div>
+      <h2 className={styles.cardLabel}>{title}</h2>
+      <h3 className={styles.business}>{businessName}</h3>
+      <div className={styles.description}>
+        <p>{description}</p>
+      </div>
+      <Link href={to}>
+        <button className={styles.pinkButton}>{action}</button>
+      </Link>
+      <div className={styles.expireDate}>{expDate}</div>
+    </div>
+  );
+}
 
 export default function Home() {
+  const [user, setUser] = useState();
+  const [rewards, setRewards] = useState([]);
+  const [challenges, setChallenges] = useState([]);
+  const [inProgress, setInProgress] = useState([]);
+
+  const userid = getCookie("userid");
+
+  useEffect(() => {
+    async function getData() {
+      // Fetch User
+      const user_query = query(
+        collection(db, "users"),
+        where("authId", "==", userid)
+      );
+      const userDoc = await getDocs(user_query);
+      userDoc.forEach((doc_) => {
+
+        // console.log(doc_.data()?.businesses);
+        doc_.data()?.businesses.map(async (businessId) => {
+          // Queries
+          // Get Challenges
+          console.log(businessId);
+          const businessRewardQuery = query(
+            collection(db, "business_challenges"),
+            where("businessId", "==", businessId)
+          );
+          // Snapshots
+          const businessRewardQuerySnapshot = await getDocs(
+            businessRewardQuery
+          );
+
+          // Fill up lists
+          let challenges_ = [];
+          // Challenges
+          businessRewardQuerySnapshot.forEach((doc) => {
+            let tempChallenge = doc.data();
+            tempChallenge.id = doc.id;
+            challenges_.push(tempChallenge);
+            // console.log(doc.data());
+          });
+          setChallenges((challenges) => [...challenges,...challenges_]);
+
+        });
+      });
+    }
+
+    getData();
+  }, [userid]);
+
+  // In Progress
+  useEffect(() => {
+    async function getInProgressData() {
+      // Get In Progress
+      const inProgressQuery = query(
+        collection(db, "user_challenges"),
+        where("status", "==", "progress"),
+        where("userId", "==", userid)
+      );
+      // Snapshots
+      const inProgressQuerySnapshot = await getDocs(inProgressQuery);
+
+      // In Progress
+      let inProgress_ = [];
+      inProgressQuerySnapshot.forEach((doc) => {
+        let tempProgress = doc.data();
+        tempProgress.id = doc.id;
+        inProgress_.push(tempProgress);
+      });
+
+      setInProgress(inProgress_);
+    }
+
+    getInProgressData();
+  }, [userid]);
+
+  // Rewards
+  useEffect(() => {
+    async function getRewardData() {
+      // Get Rewards
+      const rewardsQuery = query(
+        collection(db, "user_rewards"),
+        where("userId", "==", userid)
+      );
+      // Snapshots
+      const rewardsQuerySnapshot = await getDocs(rewardsQuery);
+
+      // Rewards
+      let rewards_ = [];
+      rewardsQuerySnapshot.forEach((doc) => {
+        let tempReward = doc.data();
+        tempReward.id = doc.id;
+        rewards_.push(tempReward);
+      });
+
+      setRewards(rewards_);
+    }
+
+    getRewardData();
+  }, [userid]);
+
   return (
     <>
       <Head>
-        <title>Rewwardy</title>
+        <title>Rewwardy: Home</title>
         <meta name="description" content="Generated by create next app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Images/Rewwardy-Icon.png" />
       </Head>
+      <HamburgerMenu className={styles.shapingBar} />
       <main className={`${styles.main} ${inter.className}`}>
-        <div className="row">
-            <h2 className={styles.header}>Home</h2>
-            <br/>
-            <HamburgerMenu className={styles.shapingBar}/>
-        </div>
-        <div className="row">
-          <div id = "SectionDiv" className = "column" >
-            <h2 className ={styles.sectionHead}>New Challenges</h2>
-            <div className="row">
-                <div id = "SectionDiv" className = "column" >
-                    <div className='container'>
-                        <div className={styles.scrollableContainer}>
-                            <CardEntity title='Free Cookie' businessName='Friends Cafe' description='Unlock with 4 visits!' expDate='January 20th, 2024'></CardEntity>
-                            <CardEntity title='Bubble Tea 8oz' businessName='Bubble Tea Yum' description='Buy two, get one free!' expDate='April 29th, 2024'></CardEntity>
-                            <CardEntity title='1 Free Latte' businessName='Shaktea' description='Unlock after 3 visits! ' expDate='March 12th, 2024'></CardEntity>
-                            <CardEntity title='Half-Off Pizza' businessName='Papas Pizza' description='Spend $25 or more.' expDate='January 5th, 2024'></CardEntity>
-                            <CardEntity title='Sweet Treat' businessName='Twin Rolls' description='Unlock after 8 visits!' expDate='February 10th, 2024'></CardEntity>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className={styles.body}>
+          <div className={styles.header}>
+            <h1>Home</h1>
           </div>
-          <div className="row">
-          <h2 className ={styles.sectionHead}>Rewards Available</h2>
-          <div id = "SectionDiv" className = "column" >
-            <div className='container'>
+          <div className={styles.section}>
+            <h2 className={styles.sectionHead}>Rewards Available</h2>
+            {rewards.length > 0 ? (
               <div className={styles.scrollableContainer}>
-                <CardEntity title='Free Chai Latte' businessName='Friends Cafe' description='$25 worth of purchases.' expDate='March 29th, 2024'></CardEntity>
-                <CardEntity title='Free Pastry' businessName='Cabra Tosta' description='Visited 6/6 times!' expDate='December 10th, 2023'></CardEntity>
-                <CardEntity title='Milkshake 50%' businessName='Rex Cream' description='Completed $10 purchase.' expDate='February 3rd, 2024'></CardEntity>
-                <CardEntity title='Free Ice Cream' businessName='Rex Cream' description='Visited 4/4 times!.' expDate='April 6th, 2024'></CardEntity>
-                <CardEntity title='Free 8oz Latte' businessName='Friends Cafe' description='Visited 8/8 times!' expDate='February 17th, 2024'></CardEntity>
-                </div>
-            </div>
+                {rewards.map((reward) => (
+                  <CardEntity
+                    title={reward?.challengeName}
+                    businessName={reward?.businessName}
+                    description={reward?.description}
+                    expDate={reward?.validUntil}
+                    action="Redeem"
+                    to={`/reward/redeem/${reward?.id}`}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.norewards}>
+                <p>Still no rewards. Go visit you local shop.</p>
+              </div>
+            )}
           </div>
-        </div>
-        <br/>
-        <div className="row">
-          <h2 className ={styles.sectionHead}>In Progress</h2>
-          <div id = "SectionDiv" className = "column" >
-            <div className='container'>
+          <div className={styles.section}>
+            <h2 className={styles.sectionHead}>In Progress</h2>
+            {inProgress.length > 0 ? (
               <div className={styles.scrollableContainer}>
-                    <CardEntity title='Free Iced Coffee' businessName='Friends Cafe' description='Visited 0/8 times!' expDate='March 29th, 2024'></CardEntity>
-                    <CardEntity title='Free Tequila Shot' businessName='Off the Wall' description='Visited 2/6 times!' expDate='December 10th, 2023'></CardEntity>
-                    <CardEntity title='Bubble Tea 8oz' businessName='Bubble Tea Yum' description='Complete $10 purchase.' expDate='February 3rd, 2024'></CardEntity>
-                    <CardEntity title='Sweet Treat' businessName='Friends Cafe' description='Visited 8/10 times!' expDate='February 17th, 2024'></CardEntity>
-                    <CardEntity title='Side of Fries' businessName='Jarana' description='Visited 2/4 times!' expDate='February 17th, 2024'></CardEntity>
-                </div>
-            </div>
+                {inProgress.map((progress) => (
+                  <CardEntity
+                    title={progress?.challengeName}
+                    businessName={progress?.businessName}
+                    description={progress?.description}
+                    expDate={progress?.validUntil}
+                    action="View Progress"
+                    to={`/reward/progress/${progress?.id}`}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.norewards}>
+                <p>
+                  Still haven't started a challenge? Go visit you local shop.
+                </p>
+              </div>
+            )}
           </div>
-        </div>
-          <Link href="/scanner">
-            <button
-            className={styles.pinkButton}>
-              Scan QR
-            </button>
-          </Link>
+          <div className={styles.section}>
+            <h2 className={styles.sectionHead}>New Challenges</h2>
+            {challenges.length > 0 ? (
+              <div className={styles.scrollableContainer}>
+                {challenges.map((challenge) => (
+                  <CardEntity
+                    title={challenge?.challengeName}
+                    businessName={challenge?.businessName}
+                    description={challenge?.description}
+                    expDate={challenge?.validUntil}
+                    action="More Info"
+                    to={`/reward/more-info/${challenge?.id}`}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.norewards}>
+                <p>
+                  Still haven't started a challenge? Go visit you local shop.
+                </p>
+              </div>
+            )}
+          </div>
+          <br />
         </div>
       </main>
-      <Footer></Footer>
+      <Footer />
     </>
-  )
+  );
 }

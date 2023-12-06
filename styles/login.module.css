@@ -1,29 +1,57 @@
 .main {
-    background-color: #552CB4;
-    height: 100vh;
-    width: 100%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  padding: 24px;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
   }
   
   .header {
-    color: white;
-    padding-bottom: 3%;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 36px;
+    font-family: sans-serif;
+    padding-top: 25%;
   }
   
   .form {
     width: 350px;
-    height: 200px;
+    /* height: 420px; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
   }
+ 
+.inputField {
+  background-color: white;
+  border-radius: var(--border-radius);
+  border-color: #F72585;
+}
+
+.clickText {
+  color: #F9D7E3;
+  font-size: 18;
+  border: white;
+  text-transform: none;
+  display: inline-block;
+}
+
+.row {
+  display: table-row;
+  max-width: var(--max-width);
+  padding-top: 10%;
+}
+
+.column {
+  display: table-column;
+  max-width: var(--max-height);
+}
 
   .pinkButton {
-    background-color: #F72585;
+    background-color: #9B2C6B;
     color: #FFFFFF;
     text-transform: none;
     font-size: 18;
@@ -38,18 +66,4 @@
   
   .pinkButton:focus {
     background-color: #D1196D;
-  }
-  
-.inputField {
-
-    background-color: white;
-    border-radius: var(--border-radius);
-    border-color: #F72585;
-}
-
-.clickText {
-    color: #F72585;
-    font-size: 18;
-    border: white;
-    text-transform: none;
   }

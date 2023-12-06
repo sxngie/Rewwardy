@@ -15,9 +15,14 @@
   font-size: 42px;
 }
 
+.subheader {
+  color: #552CB4;
+  font-size: 25px;
+}
+
 .form {
   width: 350px;
-  height: 420px;
+  /* height: 420px; */
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -26,4 +31,12 @@
 .btn {
   background-color: #552CB4;
   width: 100%;
+}
+
+.btn:hover {
+  background-color: #442390;
+}
+
+.btn:focus {
+  background-color: #3B1E7E;
 }

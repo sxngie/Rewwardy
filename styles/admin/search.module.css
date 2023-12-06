@@ -1,0 +1,102 @@
+.main {
+  background-color: white;
+  height: 90vh;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.box {
+  max-width: 1160px;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.header {
+  color: #552cb4;
+  font-family: "Open Sans";
+  font-size: 36px;
+}
+
+.searchTitle h1 {
+  color: #552cb4;
+  font-size: 32px;
+  font-family: sans-serif;
+  padding-top: 4rem;
+}
+
+.data {
+  background-color: #463489;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  row-gap: 1rem;
+}
+
+.data h2 {
+  color: #fff;
+  font-size: 24px;
+  font-family: sans-serif;
+  margin-bottom: 8px;
+}
+
+.data h3 {
+  color:  #fab2d3;
+  font-size: 28px;
+  margin-bottom: 1rem;
+  font-family: sans-serif;
+}
+
+.data p {
+  margin-bottom: 1rem;
+  font-family: sans-serif;
+}
+
+.inputField {
+  background-color: white;
+  border-radius: var(--border-radius);
+  width: 350px;
+}
+
+.btn {
+  background-color: #fdebf4;
+  color: #180f14;
+}
+
+.btn:hover {
+  background-color: #fcd8e9  ;  
+}
+
+.btn:focus {
+  background-color: #FBC5DE;
+}
+
+
+.searchbtn { 
+  width: 350px;
+  background-color: #463489;
+}
+
+.searchbtn:hover {
+  background-color: #31245f;  
+}
+
+.searchbtn:focus {
+  background-color: #1c1436;
+}
+
+
+.searchbox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}

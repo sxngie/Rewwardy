@@ -1,135 +1,145 @@
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: auto;
-  text-align: left;
-  color: #FFFFFF;
+  width: 100%;
+}
+
+.header h1 {
+  color: #ffffff;
   font-weight: bold;
   font-size: 36px;
-  padding: 8%;
 }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(25%, auto));
-    max-width: var(--max-width);
-    width: 100%;
-  }
 
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 4rem 0;
-  }
 
-  .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6rem;
-    min-height: 100vh;
-    /* background-color: #552CB4; */
-  }
-
-  .container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    flex-flow: center;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .scrollableContainer {
-    width: 1000px;       /* set to the desired width, can be in px, em, rem, %, etc. */
-    height: 400px;    /* set to the desired height */
-    margin: 20px auto;/* optional: centers the box if it's smaller than its container */
-    padding: 10px;    /* optional: gives some space inside the scrollable box */
-    overflow-x: auto; /* allows horizontal scrolling */
-    overflow-y: hidden; /* prevents vertical scrolling */
-    white-space: nowrap;
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1160px;
 }
 
-  .cardEntity {
-    flex-grow: 1;
-    flex-shrink: 1;
-    align-self: auto;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
-    height: 100%;
-    width: 25%;
-    text-align: center;
-    border-radius: 16px;
-    overflow: hidden;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 20px;
-    /* Additional styling if needed */
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+  min-height: 100vh;
 }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 350px;
+}
+
+.scrollableContainer {
+  display: flex;
+  flex-direction: row;
+  height: 450px;
+  min-width: 350px; 
+  width: 100%;
+ /* set to the desired width, can be in px, em, rem, %, etc. */
+  padding: 1rem 0rem; /* optional: gives some space inside the scrollable box */
+  overflow-x: scroll; /* allows horizontal scrolling */
+  column-gap: 1rem;
+}
+
+.cardEntity {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  height: 375px; 
+  min-width: 275px!important;
+  text-align: center;
+  border-radius: 16px;
+}
+
 
 h2.sectionHead {
-  color: #FFFFFF;
+  color: #ffffff;
   font-weight: lighter;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 24px;
-  margin: 2px;
-  padding-top: 30px;
+  padding-top: 2rem;
+  font-weight: bold;
 }
 
-h3.business {
-  position: top;
-  padding: 0.5rem;
-  margin: 5px;
-  margin-bottom: 15px;
-  font-size: 14px;
+.cardLabel {
+  color: #3a0ca3;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 22px;
   font-weight: bold;
-  color: #e8f77e;
+  margin-top: 10%;
+  margin: 2%;
+}
+
+.business {
+  margin: 0.5rem;
+  padding: 4%;
+  font-size: 19.5px;
+  font-weight: bold;
+  color: #a32e6e;
+  height: 5%;
 }
 
 .description {
-  position: relative;
-  align-items: center;
-  margin: auto;
-  width: 94%;
-  height: 20%;
-  padding: 2%;
-  padding-top: 23px;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border-radius: var(--border-radius);
-  background-color: #FFFFFF;
-  align-self: center;
-}
-
-.pinkButton {
-  background-color: #F72585;
-  color: #FFFFFF;
-  font-family: 'arial';
-  font-size: 16px;
-  width: 84px;
-  height: 42px;
-  border-radius: var(--border-radius);
-  border: 1px solid white;
-  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
-  position: relative;
-  margin: auto;
-  margin-top: 20px;
-}
-
-.pinkButton:hover {
-  background-color: #E3227A;
-}
-
-.pinkButton:focus {
-  background-color: #D1196D;
+  margin: 5%;
+  width: 90%;
+  height: 30%;
+  text-wrap: wrap;
+  padding-top: 10%;
 }
 
 .expireDate {
-  color: #FFFFFF;
-  font-weight: lighter;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color: #ad0051;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 12px;
-  margin: 10px;
-  word-wrap: break-word;
+  font-weight: bold;
+  margin-top: 10%;
+  flex-wrap: wrap;
+  width: 100%;
+  position: center;
+}
+
+.norewards {
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  min-width: 350px; 
+  width: 100%;
+ /* set to the desired width, can be in px, em, rem, %, etc. */
+  padding: 1rem 0rem; /* optional: gives some space inside the scrollable box */
+  overflow-x: scroll; /* allows horizontal scrolling */
+  column-gap: 1rem;
+}
+
+.norewards p {
+  width: 100%;
+  font-size: 18px;
+  color: #b0b0b0;
+  text-align: center;
+}
+
+.pinkButton {
+  background-color: #a32e6e;
+  color: #ffffff;
+  font-family: "arial";
+  font-size: 16px;
+  width: 84px;
+  height: 11%;
+  border-radius: var(--border-radius);
+  border: white;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.pinkButton:hover {
+  background-color: #e3227a;
+}
+
+.pinkButton:focus {
+  background-color: #d1196d;
 }

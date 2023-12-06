@@ -11,11 +11,20 @@
 
 .header {
   color: #552cb4;
-  font-family: 'Space Grotesk';
+  font-family: sans-serif;
+  margin-bottom: 1%;
 }
 
 .button {
   background-color: #552cb4;
+}
+
+.button:hover {
+  background-color: #4C27A2;
+}
+
+.button:focus {
+  background-color: #442390;
 }
 
 .textbutton {

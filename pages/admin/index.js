@@ -1,40 +1,49 @@
 import Head from "next/head";
 import styles from "@/styles/admin/login.module.css";
 import Link from "next/link";
-import { TopNavbar, Footer } from "../../components";
+import { TopNavbar, AdminFooter } from "../../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import { setCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs, limit } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-const space_grotesk = Space_Grotesk({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const login = async () => {
-    // Check if user exists
-    const q = query(
-      collection(db, "business"),
-      where("email", "==", email),
-      where("password", "==", password),
-      limit(1)
-    );
+    const auth = getAuth();
 
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-      setCookie("businessid", doc.id);
-      router.push("/admin/dashboard");
-    });
-
-    // await getDocs(q).then(data => console.log(data.data()))
-
-    // console.log(querySnapshot)
+    await signInWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        // query for business with uid
+        const q = query(
+          collection(db, "business"),
+          where("owner", "==", user.uid),
+          limit(1)
+        );
+        // Set Cookie for businessid
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+          let business = doc.data();
+          setCookie("businessName", business.businessName)
+          setCookie("businessId", doc.id);
+        });
+        // Push to dashboard
+        router.push("/admin/dashboard");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
@@ -47,12 +56,12 @@ export default function AdminLogin() {
       </Head>
       {/* <TopNavbar/> */}
       <main className={`${styles.main} `}>
-        <h2 className={`${styles.header} ${space_grotesk.className}`}>
+        <h1 className={`${styles.header}`}>
           Login Business
-        </h2>
+        </h1>
+        <br/>
         <div className={styles.form}>
           <TextField
-            id="standard-basic"
             label="Email"
             variant="standard"
             value={email}
@@ -60,12 +69,20 @@ export default function AdminLogin() {
           />
           <br />
           <TextField
-            id="standard-basic"
             label="Password"
             variant="standard"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <br />
+          <Button
+            className={styles.textbutton}
+            id="standard-basic"
+            variant="standard"
+          >
+            <Link href="/admin/forgot">Forgot password?</Link>
+          </Button>
           <br />
           <Button
             variant="contained"
@@ -75,13 +92,17 @@ export default function AdminLogin() {
             Login
           </Button>
           <br />
-          <Button variant="text" className={styles.textbutton}>
-            Create Account
+          <Button
+            className={styles.textbutton}
+            id="standard-basic"
+            variant="standard"
+            onClick={() => router.push("/admin/register")}
+          >
+            Create an Account
           </Button>
         </div>
-        <p className={styles.footer}>Rewwardy 2023</p>
       </main>
-      <Footer />
+      <AdminFooter />
     </>
   );
 }

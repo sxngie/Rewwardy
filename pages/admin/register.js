@@ -2,36 +2,70 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/admin/register.module.css";
 import Link from "next/link";
-import { TopNavbar, Footer, AdminFooter } from "../../components";
+import { TopNavbar, AdminFooter } from "../../components";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { Button, TextField } from "@mui/material";
+import {
+  Button,
+  Select,
+  TextField,
+  FormControl,
+  InputLabel,
+  MenuItem,
+} from "@mui/material";
 import { db } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { municipalities } from "../../utils/lists";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function AdminLogin() {
+  const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [businessName, setBusinessName] = useState("");
   const [password, setPassword] = useState("");
+  const [businessType, setBusinessType] = useState("");
+  const [municipality, setMunicipality] = useState("");
 
   const createBusinessAccount = async () => {
-    await addDoc(collection(db, "business"), {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      phone: phone,
-      businessName: businessName,
-    })
-      .then((data) =>
-        alert(`You have created a Business!\nBusiness ID: ${data.id}`)
-      )
-      .catch((err) => alert(err.message));
+    const auth = getAuth();
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        // Create Business
+        await addDoc(collection(db, "business"), {
+          businessName: businessName,
+          rewards: [],
+          owner: user.uid,
+          dateCreated: new Date(),
+        })
+          .then(
+            async (data) =>
+              // Create user that has access to the businessd
+              await addDoc(collection(db, "users"), {
+                firstName: firstName,
+                lastName: lastName,
+                authId: user.uid,
+                email: email,
+                role: "OWNER",
+                dateCreated: new Date(),
+              })
+                .then((data) => router.push("/admin"))
+                .catch((err) => alert(err.message))
+            // alert(`You have created a Business!\nBusiness ID: ${data.id}`)
+          )
+          .catch((err) => alert(err.message));
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(error.message);
+      });
   };
 
   return (
@@ -44,29 +78,31 @@ export default function AdminLogin() {
       </Head>
       {/* <TopNavbar/> */}
       <main className={`${styles.main} ${inter.className}`}>
-        <h2 className={styles.header}>Create Business Account</h2>
+        <h1 className={styles.header}>Create Business Account</h1>
         <div className={styles.form}>
+          <br />
+          <h2 className={styles.subheader}>Admin User Info</h2>
           <TextField
-            id="standard-basic"
             label="First Name"
             variant="standard"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
+          <br />
           <TextField
-            id="standard-basic"
             label="Last Name"
             variant="standard"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
+          <br />
           <TextField
-            id="standard-basic"
             label="Email"
             variant="standard"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <br />
           <TextField
             id="standard-basic"
             label="Phone"
@@ -74,21 +110,52 @@ export default function AdminLogin() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
+          <br />
           <TextField
-            id="standard-basic"
             label="Password"
             variant="standard"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <br />
+          <h2 className={styles.subheader}>Business Info</h2>
           <TextField
-            id="standard-basic"
             label="Business Name"
             variant="standard"
             value={businessName}
             onChange={(e) => setBusinessName(e.target.value)}
           />
+          <br />
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Business Type</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={businessType}
+              label="businessType"
+              onChange={(e) => setBusinessType(e.target.value)}
+            >
+              <MenuItem value={"COFFEE_SHOP"}>Coffee Shop</MenuItem>
+              <MenuItem value={"RESTAURANT"}>Restaurant</MenuItem>
+              <MenuItem value={"BAR"}>Bar</MenuItem>
+            </Select>
+          </FormControl>{" "}
+          <br />
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Municipality</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={municipality}
+              label="municipality"
+              onChange={(e) => setMunicipality(e.target.value)}
+            >
+              {municipalities?.map((mun, i) => (
+                <MenuItem key={i} value={`${mun}`}>{mun}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <br />
           <Button
             variant="contained"

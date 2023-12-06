@@ -17,13 +17,19 @@
     "cookies-next": "^4.0.0",
     "firebase": "^10.5.0",
     "next": "^13.4.7",
+    "next-images": "^1.8.5",
+    "qrcode": "^1.5.3",
     "react": "latest",
     "react-burger-menu": "^3.0.9",
     "react-dom": "latest",
+    "react-qr-code": "^2.0.12",
+    "react-zxing": "^2.0.0",
     "sass": "^1.68.0",
-    "styled-components": "^6.0.9"
+    "styled-components": "^6.0.9",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/firebase": "^3.2.1",
     "eslint": "latest",
     "eslint-config-next": "latest"
   }
