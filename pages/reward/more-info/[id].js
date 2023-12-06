@@ -30,27 +30,49 @@ export default function RewardLists() {
   const userId = getCookie("userid");
 
   useEffect(() => {
-    async function getData() {
+    async function getChallengeData() {
       // Fetch User Challenge
-      const rewardDocRef = doc(db, "business_challenges", id);
-      const rewardDocSnap = await getDoc(rewardDocRef);
-      let tempReward = rewardDocSnap.data();
-      // Fetch Scan Amounts
-      const userScansQuery = query(
-        collection(db, "user_scans"),
-        where("userId", "==", userId),
-        where("scannedToBusiness", "==", tempReward.businessId),
-        where("status", "==", "NOT_USED"),
-        where("usedForReward", "==", "NOT_USED")
-      );
-      const userScansSnap = await getCountFromServer(userScansQuery);
-      // Set Values
-      setReward(tempReward);
-      setScanCount(userScansSnap.data().count);
+      if (id) {
+        const rewardDocRef = doc(db, "business_challenges", id);
+        const rewardDocSnap = await getDoc(rewardDocRef);
+        setReward(rewardDocSnap.data());
+
+        const userScansQuery = query(
+          collection(db, "user_scans"),
+          where("userId", "==", userId),
+          where("scannedToBusiness", "==", rewardDocSnap.data().businessId),
+          where("status", "==", "NOT_USED"),
+          where("usedForReward", "==", "NOT_USED")
+        );
+        const userScansSnap = await getCountFromServer(userScansQuery);
+        console.log(userScansSnap.data().count);
+        // Set Values
+        setScanCount(userScansSnap.data().count);
+      }
+
     }
 
-    getData();
+    getChallengeData();
   }, [id]);
+
+  // useEffect(() => {
+  //   async function getScanCounter() {
+  //     // Fetch Scan Amounts
+  //     const userScansQuery = query(
+  //       collection(db, "user_scans"),
+  //       where("userId", "==", userId),
+  //       // where("scannedToBusiness", "==", tempReward.businessId),
+  //       where("status", "==", "NOT_USED"),
+  //       where("usedForReward", "==", "NOT_USED")
+  //     );
+  //     const userScansSnap = await getCountFromServer(userScansQuery);
+  //     console.log(userScansSnap.data().count);
+  //     // Set Values
+  //     setScanCount(userScansSnap.data().count);
+  //   }
+
+  //   getScanCounter();
+  // }, [id]);
 
   // Track challenge
   async function trackChallenge() {
@@ -89,7 +111,7 @@ export default function RewardLists() {
             </div>
             <br />
             <div className={styles.info}>
-              <h2>Current Visits: {scanCount}</h2>
+              <h2>Current Visits: {scanCount > 0 ? scanCount-1 : 0 }</h2>
               <br />
               <h2>Description</h2>
               <p>{reward?.description}</p>

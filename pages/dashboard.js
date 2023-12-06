@@ -48,6 +48,7 @@ export default function Home() {
 
   useEffect(() => {
     async function getData() {
+      console.log("hi!");
       // Fetch User
       const user_query = query(
         collection(db, "users"),
@@ -55,12 +56,12 @@ export default function Home() {
       );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
-        // console.log(doc_.data());
-        setUser(doc_.data());
 
+        console.log(doc_.data()?.businesses);
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
           // Get Challenges
+          console.log(businessId);
           const businessRewardQuery = query(
             collection(db, "business_challenges"),
             where("businessId", "==", businessId)
@@ -74,12 +75,13 @@ export default function Home() {
           let challenges_ = [];
           // Challenges
           businessRewardQuerySnapshot.forEach((doc) => {
-            let tempChallenges = doc.data();
-            tempChallenges.id = doc.id;
-            challenges_.push(tempChallenges);
+            let tempChallenge = doc.data();
+            tempChallenge.id = doc.id;
+            challenges_.push(tempChallenge);
+            console.log(doc.data());
           });
+          setChallenges((challenges) => [...challenges,...challenges_]);
 
-          setChallenges(challenges_);
         });
       });
     }
@@ -184,7 +186,7 @@ export default function Home() {
                     description={progress?.description}
                     expDate={progress?.validUntil}
                     action="View Progress"
-                    to={`/reward/progress/${progress.id}`}
+                    to={`/reward/progress/${progress?.id}`}
                   />
                 ))}
               </div>
@@ -207,7 +209,7 @@ export default function Home() {
                     description={challenge?.description}
                     expDate={challenge?.validUntil}
                     action="More Info"
-                    to={`/reward/more-info/${challenge.id}`}
+                    to={`/reward/more-info/${challenge?.id}`}
                   />
                 ))}
               </div>

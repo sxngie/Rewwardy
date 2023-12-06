@@ -22,12 +22,12 @@ export default function RewardLists() {
 
   useEffect(() => {
     async function getData() {
+      if (id) {
       const rewardDocRef = doc(db, "user_rewards", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
-      let tempReward = rewardDocSnap.data();
-      tempReward.id = rewardDocSnap.id;
       // Set Values
-      setReward(tempReward);
+      setReward(rewardDocSnap.data());
+      }
     }
 
     getData();
@@ -64,7 +64,7 @@ export default function RewardLists() {
             </div>
             <br/>
             <div className={styles.rewardCode}>
-              <p>{reward?.id}</p>
+              <p>{id}</p>
             </div>
             <div className={styles.info}>
               <br/>
