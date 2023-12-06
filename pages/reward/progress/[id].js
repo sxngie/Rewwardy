@@ -48,9 +48,16 @@ export default function RewardLists() {
         where("usedForReward", "==", "NOT_USED")
       );
       const userScansSnap = await getCountFromServer(userScansQuery);
-      // console.log(userScansSnap.data().count);
+
+      
       // Set Values
+      if ((userScansSnap.data().count == 0)){
+        setScanCount(0)
+      }
+      else {
       setScanCount(userScansSnap.data().count -1);
+      }
+      // console.log(userScansSnap.data().count);
       }
 
     }
@@ -130,9 +137,7 @@ export default function RewardLists() {
               <p>
                 Visits: (
                 {(scanCount < reward?.milestoneGoal)
-                  ? scanCount == 0
-                    ? 0
-                    : scanCount
+                  ?  scanCount
                   : reward?.milestoneGoal}
                 /{reward?.milestoneGoal})
               </p>
