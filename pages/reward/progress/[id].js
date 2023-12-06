@@ -17,7 +17,6 @@ import {
   updateDoc,
   addDoc,
 } from "firebase/firestore";
-import { truncateString } from "@/utils/helpers";
 import { getCookie } from "cookies-next";
 import Image from "next/image";
 
@@ -39,18 +38,21 @@ export default function RewardLists() {
       const rewardDocRef = doc(db, "user_challenges", id);
       const rewardDocSnap = await getDoc(rewardDocRef);
       setReward(rewardDocSnap.data());
-      }
+
       // Fetch Scan Amounts
       const userScansQuery = query(
         collection(db, "user_scans"),
         where("userId", "==", userId),
+        where("scannedToBusiness", "==", rewardDocSnap.data().businessId),
         where("status", "==", "NOT_USED"),
         where("usedForReward", "==", "NOT_USED")
       );
       const userScansSnap = await getCountFromServer(userScansQuery);
       // console.log(userScansSnap.data().count);
       // Set Values
-      setScanCount(userScansSnap.data().count);
+      setScanCount(userScansSnap.data().count -1);
+      }
+
     }
 
     getData();
@@ -92,8 +94,7 @@ export default function RewardLists() {
               usedForReward: newReward.id,
             });
           });
-        });
-        setLoading(false)
+        })
           .then(() => router.push("/dashboard"))
           .catch((err) => console.log(err));
       })
@@ -128,10 +129,10 @@ export default function RewardLists() {
               <h2>Progress</h2>
               <p>
                 Visits: (
-                {scanCount < reward?.milestoneGoal
+                {(scanCount < reward?.milestoneGoal)
                   ? scanCount == 0
                     ? 0
-                    : scanCount - 1
+                    : scanCount
                   : reward?.milestoneGoal}
                 /{reward?.milestoneGoal})
               </p>
@@ -144,7 +145,7 @@ export default function RewardLists() {
               <br />
               {scanCount >= reward?.milestoneGoal && (
                 <Button className={styles.pinkButton} variant="contained" onClick={() => redeemReward()}>
-                  {loading ? "Redeeming..." : "Redeem"}
+                  {"Redeem"}
                 </Button>
               )}
             </div>

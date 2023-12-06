@@ -57,6 +57,9 @@ export default function RewardLists() {
               <h2>Description</h2>
               <p>{reward?.description}</p>
               <br />
+              <h2>Status</h2>
+              <p>{reward?.status}</p>
+              <br/>
               <h2>Valid Until</h2>
               <p>{reward?.validUntil}</p>
               <br />
