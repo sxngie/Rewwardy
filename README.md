@@ -1,7 +1,7 @@
 
 # Project Webpage
 
-### [This link](https://rewwardy-capstone.web.app/About) is to access the project webpage, where one can run the project without downloads nor local hosting.
+### [This link](https://rewwardy-capstone.web.app/about) is to access the project webpage, where one can run the project without downloads nor local hosting.
 Said link redirects to the project's About page, where one can find: 
 - Elevator Pitch Video
 - Presentation Slides
