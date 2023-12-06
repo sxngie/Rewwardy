@@ -49,7 +49,8 @@ export default function AdminDashboard() {
       // Queries
       const userAwardsQuery = query(
         collection(db, "user_rewards"),
-        where("businessId", "==", businessid)
+        where("businessId", "==", businessid),
+        where("status", "==", "redeemed")
       );
       const userAwardsSnap = await getCountFromServer(userAwardsQuery);
       const awardSnapshot = await getDocs(userAwardsQuery);
@@ -80,16 +81,32 @@ export default function AdminDashboard() {
       setAllAwards(userAwardsSnap.data().count);
     }
     async function getAwardsTodayData() {
-      let startOfDay = new Date();
-      startOfDay.setHours(0, 0, 0, 0);
-      // Queries
-      const userScansQuery = query(
-        collection(db, "user_rewards"),
-        where("date", ">=", startOfDay),
-        where("businessId", "==", businessid)
-      );
-      const userScansSnap = await getCountFromServer(userScansQuery);
-      setAllAwards(userScansSnap.data().count);
+      // let startOfDay = new Date();
+      // startOfDay.setHours(0, 0, 0, 0);
+      // // Queries
+      // const userScansQuery = query(
+      //   collection(db, "user_rewards"),
+      //   where("date", ">=", startOfDay),
+      //   where("businessId", "==", businessid)
+      //   // where("status", "==", "redeemed")
+      // );
+      // const userScansSnap = await getCountFromServer(userScansQuery);
+      // setAwardedToday(userScansSnap.data().count);
+        let startOfDay = new Date();
+        let endOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+        endOfDay.setHours(23, 59, 59, 999);
+        const todayAwardedQuery = query(
+          collection(db, "user_rewards"),
+          // where("awardedAt", ">=", startOfDay),
+          // where("date", "<=", endOfDay),
+          where("businessId", "==", businessid),
+          where("status", "==", "redeemed")
+        );
+        const todayAwardedSnap = await getCountFromServer(
+          todayAwardedQuery
+        );
+        setAwardedToday(todayAwardedSnap.data().count);
     }
 
     getAwardsTodayData();
