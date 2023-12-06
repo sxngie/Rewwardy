@@ -1,21 +1,10 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/about.module.css";
-import Link from "next/link";
 import { Footer } from "../components";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { Button, TextField } from "@mui/material";
-import { auth } from "@/firebase";
-import { collection, query, where, getDocs, limit } from "firebase/firestore";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
-import { setCookie } from "cookies-next";
-import Image from "next/image";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +22,7 @@ export default function About() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.pictureBox}>
-            <Image src="/Images/Rewwardy-Icon.png" alt="Rewwardy Icon" className={styles.picture}/>
+            <img src="/Images/Rewwardy-Icon.png" alt="Rewwardy Icon" className={styles.picture}/>
         </div>
         <div className={styles.row}>
           <h1 className={styles.header}>Rewwardy</h1>

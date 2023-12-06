@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
 import { db } from "@/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +23,7 @@ function CardEntity({
   return (
     <div className={styles.cardEntity}>
       <div className={styles.pictureFrame}>
-        <Image className={styles.picture}>{imageUrl}</Image>
+        <img className={styles.picture} src={imageUrl} />
       </div>
       <h2 className={styles.cardLabel}>{title}</h2>
       <h3 className={styles.business}>{businessName}</h3>
@@ -56,7 +55,6 @@ export default function Home() {
       );
       const userDoc = await getDocs(user_query);
       userDoc.forEach((doc_) => {
-
         // console.log(doc_.data()?.businesses);
         doc_.data()?.businesses.map(async (businessId) => {
           // Queries
@@ -80,8 +78,7 @@ export default function Home() {
             challenges_.push(tempChallenge);
             // console.log(doc.data());
           });
-          setChallenges((challenges) => [...challenges,...challenges_]);
-
+          setChallenges((challenges) => [...challenges, ...challenges_]);
         });
       });
     }
@@ -158,8 +155,9 @@ export default function Home() {
             <h2 className={styles.sectionHead}>Rewards Available</h2>
             {rewards.length > 0 ? (
               <div className={styles.scrollableContainer}>
-                {rewards.map((reward) => (
+                {rewards.map((reward, key) => (
                   <CardEntity
+                    key={key}
                     title={reward?.challengeName}
                     businessName={reward?.businessName}
                     description={reward?.description}
@@ -179,8 +177,9 @@ export default function Home() {
             <h2 className={styles.sectionHead}>In Progress</h2>
             {inProgress.length > 0 ? (
               <div className={styles.scrollableContainer}>
-                {inProgress.map((progress) => (
+                {inProgress.map((progress, key) => (
                   <CardEntity
+                    key={key}
                     title={progress?.challengeName}
                     businessName={progress?.businessName}
                     description={progress?.description}
@@ -193,7 +192,8 @@ export default function Home() {
             ) : (
               <div className={styles.norewards}>
                 <p>
-                  Still haven&apos;t started a challenge? Go visit you local shop.
+                  Still haven&apos;t started a challenge? Go visit you local
+                  shop.
                 </p>
               </div>
             )}
@@ -202,8 +202,9 @@ export default function Home() {
             <h2 className={styles.sectionHead}>New Challenges</h2>
             {challenges.length > 0 ? (
               <div className={styles.scrollableContainer}>
-                {challenges.map((challenge) => (
+                {challenges.map((challenge, key) => (
                   <CardEntity
+                  key={key}
                     title={challenge?.challengeName}
                     businessName={challenge?.businessName}
                     description={challenge?.description}
@@ -216,7 +217,8 @@ export default function Home() {
             ) : (
               <div className={styles.norewards}>
                 <p>
-                  Still haven&apos;t started a challenge? Go visit you local shop.
+                  Still haven&apos;t started a challenge? Go visit you local
+                  shop.
                 </p>
               </div>
             )}
