@@ -49,7 +49,8 @@ export default function AdminDashboard() {
       // Queries
       const userAwardsQuery = query(
         collection(db, "user_rewards"),
-        where("businessId", "==", businessid)
+        where("businessId", "==", businessid),
+        where("status", "==", "redeemed")
       );
       const userAwardsSnap = await getCountFromServer(userAwardsQuery);
       const awardSnapshot = await getDocs(userAwardsQuery);
@@ -79,27 +80,26 @@ export default function AdminDashboard() {
       setPopularRewards(awardResult);
       setAllAwards(userAwardsSnap.data().count);
     }
-    async function getAwardsTodayData() {
-      let startOfDay = new Date();
-      startOfDay.setHours(0, 0, 0, 0);
-      // Queries
-      const userScansQuery = query(
-        collection(db, "user_rewards"),
-        where("date", ">=", startOfDay),
-        where("businessId", "==", businessid)
-      );
-      const userScansSnap = await getCountFromServer(userScansQuery);
-      setAllAwards(userScansSnap.data().count);
+    async function getAwardedTodayData() {
+        let startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+        const todayAwardedQuery = query(
+          collection(db, "user_rewards"),
+          // where("awardedAt", ">=", startOfDay),
+          // where("date", "<=", endOfDay),
+          where("businessId", "==", businessid),
+          where("status", "==", "redeemed")
+        );
+        const todayAwardedSnap = await getCountFromServer(
+          todayAwardedQuery
+        );
+        setAwardedToday(todayAwardedSnap.data().count);
     }
 
-    getAwardsTodayData();
+    getAwardedTodayData();
     getAwardData();
   }, [businessid]);
 
-  // Scans Today
-  // const todaysScans = async() = {
-
-  // }
   useEffect( () => {
     async function getTodayUserScans() {
       if (businessid) {
@@ -110,7 +110,7 @@ export default function AdminDashboard() {
         const todayUserScansQuery = query(
           collection(db, "user_scans"),
           where("date", ">=", startOfDay),
-          // where("date", "<=", endOfDay),
+          where("date", "<=", endOfDay),
           where("scannedToBusiness", "==", businessid)
         );
         const todayUserScansSnap = await getCountFromServer(
