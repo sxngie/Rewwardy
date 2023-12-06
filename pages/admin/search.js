@@ -115,7 +115,7 @@ export default function AdminSearch() {
                 className={styles.btn}
                 onClick={() => redeemReward()}  style={{ margin: "0% 50px 0% 0px" }}
               >
-                Award Receipient
+                Award Recipient
               </Button>
             </div>
           </div>
