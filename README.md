@@ -46,7 +46,8 @@ In order to proceed, the recommended route is the following:
 - On the Admin Dashboard tab, navigate towards "Search for Rewards".
 - Once there, paste the code provided from the User Reward and click the "Search" button.
 - Validate the status for the reward is "available". If so, click the "Award Recipient" button. (This will refresh the page.)
-- On the User tab, refresh it to view your reward status updated to "redeemed".
+- You can paste the code again and click the "Search" button to be able to validate the reward status updated to "redeemed".
+- On the User tab, navigate to the Rewards page using the Hamburger Menu. Click "Redeem" on the reward: you will be able to view your reward status updated to "redeemed".
 - On the Admin tab, navigate towards the Dashboard and view the updated statistics. 
 
 Happy Rewwarding! :) 
